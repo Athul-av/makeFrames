@@ -36,7 +36,7 @@ TextEditingController otpController =TextEditingController();
         notifyListeners();  
           
        }else if(value==false){ 
-              CustomSnackBar().snackBar(context, 'email already taken',const  Color.fromARGB(255, 27, 32, 130));
+              CustomSnackBar().snackBar(context, 'email already taken',const  Color.fromARGB(255, 27, 32, 130)); 
        }else{ 
         CustomSnackBar().snackBar(context, 'otp verification failed', const Color.fromARGB(255, 130, 34, 27));
        }

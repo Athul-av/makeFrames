@@ -22,7 +22,7 @@ class ApiService{
       if(response.data["isuser"] == true && response.data["isPass"] == true){     
         return true;
       }else{ 
-        return false;   
+        return false ;   
       }
     
   }on DioError catch (e) {
@@ -47,9 +47,9 @@ class ApiService{
     if(response.statusCode == 200 || response.statusCode==201){
       log(response.data.toString()); 
       if(response.data["is"]==true){
-        return false; 
+        return false;  
       }else if(response.data["is"]== false && response.data["serverOtp"]==true){
-        return true;
+        return true; 
       }else{ 
 
       }
