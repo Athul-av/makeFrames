@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:makeframes/provider/signinProvdr.dart';
+import 'package:makeframes/provider/loginProvider.dart';
+import 'package:makeframes/provider/signUpProvdr.dart';
 import 'package:makeframes/provider/splashpro.dart';
 import 'package:makeframes/splash/splash.dart';
 import 'package:provider/provider.dart';
 
-void main(){
-
+void main() {
   runApp(MyApp());
 }
 
@@ -14,16 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
+    return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ((context) => splashProvider())) ,
-        ChangeNotifierProvider(create: ((context) => SignInProvdr())) ,
-    
+        ChangeNotifierProvider(create: ((context) => splashProvider())),
+        ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
+        ChangeNotifierProvider(create: ((context) => LoginProvider())), 
       ],
-      child:const MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Splash(),
       ),
     );
-  } 
+  }
 }
