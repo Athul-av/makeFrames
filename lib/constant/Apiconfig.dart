@@ -3,6 +3,7 @@ class Apiconfig {
   static const loginApi = "/user/login";
   static const signupApi = "/user/signup";
   static const otp = "/user/otp";
+  static const loginCheck = "/user/loginCheck"; 
 }
 
 class ApiQueryParameter {

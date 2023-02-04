@@ -6,7 +6,7 @@ import 'package:makeframes/splash/splash.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ((context) => splashProvider())),
+        ChangeNotifierProvider(create: ((context) => SplashProvider())),
         ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
         ChangeNotifierProvider(create: ((context) => LoginProvider())), 
       ],

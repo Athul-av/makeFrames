@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:makeframes/Services/api_service.dart';
-import 'package:makeframes/constant/snackbar.dart';
 import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/models/login_request_model.dart';
 import 'package:makeframes/provider/loginProvider.dart';
-import 'package:makeframes/screens/home/homesccreen.dart';
 import 'package:makeframes/screens/login/signupScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +17,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
   final provider = Provider.of<LoginProvider>(context,listen: false);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false, 
       backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 10,
@@ -42,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 35),
                       child: Text(
-                        '" To be an artist is ',
+                        '" To be an artist is ', 
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -133,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                     )),
               ),
               SizedBox(
-                height: height(context, 0.140),
+                height: height(context, 0.149 ),
               ),
               ElevatedButton(
                   onPressed: () {
@@ -155,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     )),
               const SizedBox(
-                height: 21,
+                height: 12,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,7 +173,7 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 21,
+                height: 12 ,
               ),
               ElevatedButton(
                   onPressed: () {

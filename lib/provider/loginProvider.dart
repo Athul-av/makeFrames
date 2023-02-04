@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/api_service.dart';
 import 'package:makeframes/constant/snackbar.dart';
 import 'package:makeframes/models/login_request_model.dart';
@@ -9,6 +10,8 @@ class LoginProvider with ChangeNotifier{
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
 bool isload =false;
+
+FlutterSecureStorage storage = const FlutterSecureStorage();
 
 Future<void> loginButtonclicked(context) async {
    isload =true;
@@ -21,6 +24,8 @@ Future<void> loginButtonclicked(context) async {
     await ApiService().login(loguser).then((value) => {
           if (value!.isPass == true)
             {
+               storage.write(key: 'token', value: value.token), 
+               
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => HomeScreen()),
                   (route) => false)

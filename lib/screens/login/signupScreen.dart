@@ -59,10 +59,10 @@ class SignupScreen extends StatelessWidget {
                 )
               ],
             )),
-      ),
+      ), 
       body: Padding(
         padding:
-            const EdgeInsets.only(left: 32, right: 32, top: 25, bottom: 15),
+            const EdgeInsets.only(left: 32, right: 32, top: 30 , bottom: 15),
         child: Form(
           key: formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -132,8 +132,8 @@ class SignupScreen extends StatelessWidget {
                 cursorColor: color1(),
                 obscureText: true,
                 validator: ((value) {
-                  if (value!.isEmpty) {
-                    return "enter your password";
+                  if (value!.isEmpty || value.length < 6) {
+                    return "Password must have atleast 6 character"; 
                   } else {
                     return null;
                   }
@@ -212,7 +212,7 @@ class SignupScreen extends StatelessWidget {
                     },
                   )),
               const SizedBox(
-                height: 21,
+                height: 12,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,12 +234,13 @@ class SignupScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 21,
+                height: 12,
               ),
               ElevatedButton(
                   onPressed: () async {
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (_) => LoginScreen()));
+                        provider.disposeTextfield(); 
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/api_service.dart';
 import 'package:makeframes/constant/snackbar.dart';
 import 'package:makeframes/models/signup_request_model.dart';
@@ -13,6 +14,7 @@ class SignUpProvdr with ChangeNotifier {
   final userNameController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isLoading = false;
+  FlutterSecureStorage storage = const FlutterSecureStorage();
 
 //otp calling function
   void getotp(context) async {
@@ -52,17 +54,34 @@ class SignUpProvdr with ChangeNotifier {
     SignupReqModel model = SignupReqModel(
         email: email, firstName: username, password: password, otp: otp);
 
-    await ApiService().signup(model).then((value) {
-      if (value!.signupResIs == false && value.serverOtp == true) {
-        log(value.toString());
-        goToHome(context);
-        CustomSnackBar().snackBar(context, 'account successfully created',
-            const Color.fromARGB(255, 160, 45, 37));
-        notifyListeners();
+     ApiService().signup(model).then((value) {
+      if (value!.signupResIs == false && value.serverOtp == true ) {
+       
+        log(value.serverOtp. toString());
+        log(value.token. toString());
+        log(value.signupResIs. toString()); 
+       
+
+         storage.write(key: 'token', value: value.token); 
+       
+        disposeTextfield(); 
+         goToHome(context);
+
       } else if (value.signupResIs == true) {
+
+        log(value.serverOtp. toString());
+        log(value.token. toString());
+        log(value.signupResIs. toString());
+
         CustomSnackBar().snackBar(context, 'email already taken',
             const Color.fromARGB(255, 160, 45, 37));
+
       } else {
+
+        log(value.serverOtp. toString());
+        log(value.token. toString());
+        log(value.signupResIs. toString());
+         
         CustomSnackBar().snackBar(context, 'otp verification failed',
             const Color.fromARGB(255, 160, 45, 37));
       }
@@ -74,6 +93,15 @@ class SignUpProvdr with ChangeNotifier {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
     notifyListeners();
+  }
+
+
+  void disposeTextfield() {
+    emailController.clear();
+    userNameController.clear();
+    passwordController.clear();
+    repasswordController.clear();
+
   }
 
 }

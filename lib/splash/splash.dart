@@ -8,7 +8,7 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<splashProvider>(context, listen: false).timer(context);
+    Provider.of<SplashProvider>(context, listen: false).timer(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
