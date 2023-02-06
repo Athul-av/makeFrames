@@ -55,11 +55,7 @@ class SignUpProvdr with ChangeNotifier {
         email: email, firstName: username, password: password, otp: otp);
 
      ApiService().signup(model).then((value) {
-      if (value!.signupResIs == false && value.serverOtp == true ) {
-       
-        log(value.serverOtp. toString());
-        log(value.token. toString());
-        log(value.signupResIs. toString()); 
+      if (value!.signupResIs == false && value.serverOtp == true ) { 
        
 
          storage.write(key: 'token', value: value.token); 
@@ -69,21 +65,13 @@ class SignUpProvdr with ChangeNotifier {
 
       } else if (value.signupResIs == true) {
 
-        log(value.serverOtp. toString());
-        log(value.token. toString());
-        log(value.signupResIs. toString());
-
         CustomSnackBar().snackBar(context, 'email already taken',
             const Color.fromARGB(255, 160, 45, 37));
 
       } else {
 
-        log(value.serverOtp. toString());
-        log(value.token. toString());
-        log(value.signupResIs. toString());
-         
-        CustomSnackBar().snackBar(context, 'otp verification failed',
-            const Color.fromARGB(255, 160, 45, 37));
+        // CustomSnackBar().snackBar(context, 'otp verification failed',
+        //     const Color.fromARGB(255, 160, 45, 37));
       }
     });
   }

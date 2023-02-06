@@ -71,7 +71,7 @@ class SignupScreen extends StatelessWidget {
               TextFormField(
                 controller: provider.userNameController,
                 cursorColor: color1(),
-                keyboardType: TextInputType.emailAddress,
+              
                 validator: ((value) {
                   if (value!.isEmpty) {
                     return "enter username";
@@ -101,6 +101,7 @@ class SignupScreen extends StatelessWidget {
               TextFormField(
                 controller: provider.emailController,
                 cursorColor: color1(),
+                  keyboardType: TextInputType.emailAddress,  
                 validator: ((value) {
                   if (value!.isEmpty) {
                     return "enter your email";

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/api_service.dart';
@@ -18,14 +17,15 @@ class SplashProvider with ChangeNotifier {
 
      // checking the token valid or  not
       ApiService().checktoken(logincheck!).then((value) {
-
-      if(value!.user==true){ 
+      
+      if(value!.user==true){   
          Navigator.of(context)
-           .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen())); 
+           .pushReplacement(MaterialPageRoute(builder: (_) =>const HomeScreen())); 
       }else{
          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> LoginScreen())); 
       }
-     });
+     }
+     );
        },
     );
   }

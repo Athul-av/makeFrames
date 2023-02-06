@@ -38,11 +38,13 @@ Future<void> displayTextInputDialog(BuildContext context) async {
                     onPressed: () {
                       if (key.currentState!.validate()) {
                         Provider.of<SignUpProvdr>(context, listen: false)
-                            .signupButtonPress(context);
-                        Navigator.of(context).pop();
-                        Provider.of<SignUpProvdr>(context, listen: false)
                             .otpController
                             .clear();
+                             Navigator.of(context).pop();  
+                        Provider.of<SignUpProvdr>(context, listen: false)
+                            .signupButtonPress(context);
+                       
+                        
                       }
                     }),
               )
