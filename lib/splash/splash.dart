@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/provider/splashpro.dart';
+import 'package:makeframes/controller/splashProvder/splashpro.dart';
 import 'package:provider/provider.dart';
 
 class Splash extends StatelessWidget {

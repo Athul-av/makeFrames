@@ -1,11 +1,10 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/api_service.dart';
+import 'package:makeframes/Services/signin&signup/signup_signin_service.dart';
 import 'package:makeframes/constant/snackbar.dart';
-import 'package:makeframes/models/signup_request_model.dart';
-import 'package:makeframes/screens/home/homesccreen.dart';
-import 'package:makeframes/screens/login/otp_popup.dart';
+import 'package:makeframes/models/signup/signup_request_model.dart';
+import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
+import 'package:makeframes/screens/signin&signup/otp_popup.dart';
 
 class SignUpProvdr with ChangeNotifier {
   final emailController = TextEditingController();
@@ -14,6 +13,7 @@ class SignUpProvdr with ChangeNotifier {
   final userNameController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isLoading = false;
+  bool obscure = true;
   FlutterSecureStorage storage = const FlutterSecureStorage();
 
 //otp calling function
@@ -43,7 +43,6 @@ class SignUpProvdr with ChangeNotifier {
     notifyListeners();
   }
 
-
 //signin function on the otp submit button
   void signupButtonPress(context) async {
     final email = emailController.text.trim();
@@ -54,42 +53,44 @@ class SignUpProvdr with ChangeNotifier {
     SignupReqModel model = SignupReqModel(
         email: email, firstName: username, password: password, otp: otp);
 
-     ApiService().signup(model).then((value) {
-      if (value!.signupResIs == false && value.serverOtp == true ) { 
-       
+    ApiService().signup(model).then((value) {
+      if (value!.signupResIs == false && value.serverOtp == true) {
+        storage.write(key: 'token', value: value.token);
 
-         storage.write(key: 'token', value: value.token); 
-       
-        disposeTextfield(); 
-         goToHome(context);
-
+        goToHome(context);
       } else if (value.signupResIs == true) {
-
         CustomSnackBar().snackBar(context, 'email already taken',
             const Color.fromARGB(255, 160, 45, 37));
-
+        Navigator.of(context).pop();
+        otpController.clear();
       } else {
-
-        // CustomSnackBar().snackBar(context, 'otp verification failed',
-        //     const Color.fromARGB(255, 160, 45, 37));
+        CustomSnackBar().snackBar(context, 'otp verification failed',
+            const Color.fromARGB(255, 160, 45, 37));
+        Navigator.of(context).pop();
+        otpController.clear();
       }
     });
   }
 
-
   void goToHome(context) {
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
     notifyListeners();
   }
-
 
   void disposeTextfield() {
     emailController.clear();
     userNameController.clear();
     passwordController.clear();
     repasswordController.clear();
-
   }
 
+  void visibility() {
+    if (obscure == true) {
+      obscure = false;
+    } else {
+      obscure = true;
+    }
+    notifyListeners();
+  }
 }

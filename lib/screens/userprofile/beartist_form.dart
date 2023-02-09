@@ -1,0 +1,214 @@
+import 'package:flutter/material.dart';
+import 'package:makeframes/constant/widgets.dart';
+
+class BeAnartistForm extends StatefulWidget {
+  const BeAnartistForm({super.key});
+
+  @override
+  State<BeAnartistForm> createState() => _BeAnartistFormState();
+}
+
+class _BeAnartistFormState extends State<BeAnartistForm> {
+  GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController skillcontroller = TextEditingController();
+  TextEditingController experiencecontroller = TextEditingController();
+  TextEditingController aboutcontroller = TextEditingController();
+
+  String? dropdownvalue;
+
+  var items = [
+    'Actor',
+    'Actress',
+    'Director',
+    'Producer',
+    'Singer',
+    'cinematographer',
+    'editor'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea( 
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                height:height(context, 0.08),
+           
+                child: IconButton(
+                  icon:const Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white ,),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },),
+              ),
+            ),
+            Expanded(
+             
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Be an artist !',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(
+                    height: height(context, 0.013),
+                  ),
+                  const Text(
+                    'please fill the form to be an artist ',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 113, 113, 113), fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 5 ,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 32, right: 32, bottom: 15),
+                child: Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: formKey,
+                  child: ListView(
+                    children: [
+                      DropdownButtonFormField(
+                        menuMaxHeight: 260,
+                        hint: const Text(
+                          'select category',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 187, 187, 187)),
+                        ),
+                        dropdownColor: const Color.fromARGB(255, 77, 77, 77),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newvalue) {
+                          setState(() {
+                            dropdownvalue = newvalue!;
+                          });
+                        },
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          labelStyle: const TextStyle(
+                              fontSize: 14,
+                              color: Color.fromARGB(255, 190, 190, 190)),
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 38, 38, 38),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height(context, 0.02),
+                      ),
+                      TextFormField(
+                        controller: skillcontroller,
+                        cursorColor: color1(),
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelText: 'Additional skills   (optional)',
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          labelStyle: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 190, 190, 190)),
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 38, 38, 38),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height(context, 0.02),
+                      ),
+                      TextFormField(
+                        controller: experiencecontroller,
+                        cursorColor: color1(),
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelText: 'Experience   (optional)',
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          labelStyle: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 190, 190, 190)),
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 38, 38, 38),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height(context, 0.02),
+                      ),
+                      TextFormField(
+                        controller: aboutcontroller,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 4,
+                        cursorColor: color1(),
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(25),
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelText: 'About your self   (optional)',
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          labelStyle: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 190, 190, 190)),
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 38, 38, 38),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height(context, 0.119),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {}
+                          },
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(color1()),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(20)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)))),
+                          child: const Text('Submit')),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

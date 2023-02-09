@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/provider/signUpProvdr.dart';
+import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
 import 'package:provider/provider.dart';
 
 Future<void> displayTextInputDialog(BuildContext context) async {
@@ -38,13 +40,8 @@ Future<void> displayTextInputDialog(BuildContext context) async {
                     onPressed: () {
                       if (key.currentState!.validate()) {
                         Provider.of<SignUpProvdr>(context, listen: false)
-                            .otpController
-                            .clear();
-                             Navigator.of(context).pop();  
-                        Provider.of<SignUpProvdr>(context, listen: false)
                             .signupButtonPress(context);
-                       
-                        
+                        log('hiii');
                       }
                     }),
               )
