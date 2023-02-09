@@ -5,9 +5,8 @@ import 'package:makeframes/controller/loginprovider/loginprovider.dart';
 import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
 import 'package:makeframes/controller/splashProvder/splashpro.dart';
 import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
-import 'package:makeframes/screens/homescreen/homesccreen.dart';
-import 'package:makeframes/screens/userprofile/beartist_form.dart';
 import 'package:makeframes/splash/splash.dart';
+
 
 import 'package:provider/provider.dart';
 
@@ -33,9 +32,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => LoginProvider())), 
         ChangeNotifierProvider(create: (context)=> BottomNavProvider()) 
       ],
-      child:   MaterialApp(
+      child: MaterialApp(
+        theme: ThemeData(
+        primarySwatch:Colors.blueGrey,     
+        ), 
         debugShowCheckedModeBanner: false,
-        home:BottomNavigationScreen()  ,    
+        home:const Splash(),       
       ),
     );
   }

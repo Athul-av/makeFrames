@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:makeframes/constant/snackbar.dart';
 import 'package:makeframes/constant/widgets.dart';
+import 'package:makeframes/screens/userprofile/artist_profile.dart';
 
 class BeAnartistForm extends StatefulWidget {
   const BeAnartistForm({super.key});
@@ -187,9 +189,13 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {}
+                            if(dropdownvalue == null){  
+                              CustomSnackBar().snackBar(context, 'category is mandatory ! ',const  Color.fromARGB(255, 154, 51, 44));   
+                            }else{
+                                 Navigator.of(context).pushReplacement (MaterialPageRoute(builder: (_)=>const ArtistProfileScreen()));  
+                            }
                           },
-                          style: ButtonStyle(
+                          style: ButtonStyle( 
                               backgroundColor:
                                   MaterialStateProperty.all(color1()),
                               padding: MaterialStateProperty.all(

@@ -20,14 +20,16 @@ class SearchScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/Makeframes2.png'))),
         ),), 
-body:const  Padding(
+body: const Padding(
   padding:  EdgeInsets.all(13.0),
   child:   CupertinoSearchTextField(
   backgroundColor:  Color.fromARGB(255, 38, 38, 38),
     placeholder: 'search',
     placeholderStyle: TextStyle(color: Color.fromARGB(255, 172, 172, 172),fontSize: 15),
-    itemColor: Colors.white,
-    padding: EdgeInsets.all(10),
+    itemColor: Color.fromARGB(255, 180, 180, 180),
+   
+    padding: EdgeInsets.all(13),
+   
     style: TextStyle(color: Colors.white), 
 
   

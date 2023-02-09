@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: ((context) => const NormalUser())));
+                        builder: ((context) => const NormalUserProfile()))); 
                   },
                   icon: const Icon(CupertinoIcons.person_alt_circle_fill))),
           Padding(

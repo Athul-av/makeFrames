@@ -6,6 +6,7 @@ import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
 import 'package:makeframes/screens/signin&signup/loginscreen.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
 

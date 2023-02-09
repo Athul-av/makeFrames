@@ -25,4 +25,4 @@ Widget hsizedbox(context, size) {
   );
 }
 
-Color scaffoldback = const Color.fromARGB(255, 12, 12, 12);
+Color scaffoldback = const Color.fromARGB(255, 15, 15, 15 );

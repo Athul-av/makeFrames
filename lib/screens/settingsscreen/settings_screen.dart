@@ -4,6 +4,7 @@ import 'package:makeframes/constant/widgets.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
 import 'package:makeframes/screens/signin&signup/loginscreen.dart';
 
+// ignore: must_be_immutable
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
 

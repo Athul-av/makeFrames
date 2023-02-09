@@ -6,6 +6,7 @@ import 'package:makeframes/screens/search/searchscreen.dart';
 import 'package:makeframes/screens/settingsscreen/settings_screen.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class BottomNavigationScreen extends StatelessWidget {
   BottomNavigationScreen({super.key});
 

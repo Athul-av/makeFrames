@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/constant/widgets.dart';
+import 'package:makeframes/screens/userprofile/artist_profile.dart';
 import 'package:makeframes/screens/userprofile/beartist_form.dart';
 
-class NormalUser extends StatelessWidget {
-  const NormalUser({super.key});
+class NormalUserProfile extends StatelessWidget {
+  const NormalUserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class NormalUser extends StatelessWidget {
           children: [
             Expanded(
                 child: Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(15.0),
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
@@ -47,7 +48,9 @@ class NormalUser extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(color1())),
-                        onPressed: () {},
+                        onPressed: () {
+                       
+                        },
                         child: const Padding(
                           padding: EdgeInsets.only(
                               left: 30.0, right: 30, top: 14, bottom: 14),

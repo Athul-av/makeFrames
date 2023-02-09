@@ -4,7 +4,6 @@ import 'package:makeframes/Services/signin&signup/signup_signin_service.dart';
 import 'package:makeframes/constant/snackbar.dart';
 import 'package:makeframes/models/signin/login_request_model.dart';
 import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
-import 'package:makeframes/screens/homescreen/homesccreen.dart';
 
 class LoginProvider with ChangeNotifier {
   final emailController = TextEditingController();
