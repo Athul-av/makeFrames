@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:makeframes/constant/apiconfig.dart';
-import 'package:makeframes/models/signin/login_request_model.dart';
-import 'package:makeframes/models/signin/login_response_model.dart';
-import 'package:makeframes/models/signin/logincheck_respons.dart';
-import 'package:makeframes/models/signup/signup_request_model.dart';
-import 'package:makeframes/models/signup/signup_response.dart';
+import 'package:makeframes/core/api/apiconfig.dart';
+import 'package:makeframes/authentication/signin/model/login_request_model.dart';
+import 'package:makeframes/authentication/signin/model/login_response_model.dart';
+import 'package:makeframes/authentication/signin/model/logincheck_respons.dart';
+import 'package:makeframes/authentication/signup/model/signup_request_model.dart';
+import 'package:makeframes/authentication/signup/model/signup_response.dart';
 
 class ApiService {
     var dio = Dio();

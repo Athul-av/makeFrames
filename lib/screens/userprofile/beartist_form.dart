@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:makeframes/constant/snackbar.dart';
-import 'package:makeframes/constant/widgets.dart';
+import 'package:makeframes/core/snackbar.dart';
+import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/artist_profile.dart';
 
 class BeAnartistForm extends StatefulWidget {

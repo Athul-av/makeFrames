@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/constant/widgets.dart';
+import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
-import 'package:makeframes/screens/signin&signup/loginscreen.dart';
+import 'package:makeframes/screens/splash/view/splash.dart';
 
 // ignore: must_be_immutable
 class SettingsScreen extends StatelessWidget {
@@ -121,11 +123,12 @@ class SettingsScreen extends StatelessWidget {
                                     TextButton(
                                       onPressed: () async {
                                         await storage.deleteAll();
-                                        Navigator.of(context)
+                                        log(storage.toString()); 
+                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        LoginScreen()),
+                                                      const  Splash()),
                                                 (route) => false);
                                       },
                                       child: const Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makeframes/constant/widgets.dart';
+import 'package:makeframes/core/const.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
-
-class ArtistProfileScreen extends StatelessWidget {
-  const ArtistProfileScreen({super.key});
+ 
+class ArtistProfileScreen2 extends StatelessWidget {
+  const ArtistProfileScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +20,7 @@ class ArtistProfileScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back_ios_new_rounded)),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Row( 
-          children:const [
-           Icon(Icons.add,size: 16,),  
-            Text(' Post',style: TextStyle(fontWeight: FontWeight.bold ),),
-
-          ],
-        ),
-        backgroundColor:color1(),   
-        elevation: 5 ,
-       
-       
-        onPressed: () {
-      },
-      ), 
+      
       body: ListView( 
         shrinkWrap: true, 
         children: [
@@ -49,8 +35,8 @@ class ArtistProfileScreen extends StatelessWidget {
                   children: [
                      Padding(
                        padding: const EdgeInsets.only(top: 10),
-                       child: Stack(
-                        alignment: Alignment.bottomRight, 
+                       child: Stack( 
+                        alignment: Alignment.topRight,  
                          children: [  const 
                          CircleAvatar(
                           radius: 67,
@@ -63,10 +49,9 @@ class ArtistProfileScreen extends StatelessWidget {
                          
                            },
                           child:const CircleAvatar(
-                            radius: 23,  
-                            backgroundColor: Color.fromARGB(255, 29, 29, 29), 
-                            foregroundColor: Colors.white, 
-                            child: Icon(Icons.add_a_photo),
+                            radius: 20,  
+                           backgroundColor:  Color.fromARGB(255, 155, 35, 27),
+                           child: Text("0",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                         )
                     ] ),
@@ -94,7 +79,7 @@ class ArtistProfileScreen extends StatelessWidget {
                           child: const Padding(
                             padding: EdgeInsets.only(
                                 left: 30.0, right: 30, top: 11, bottom: 11),
-                            child: Text('To stage ',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold)),
+                            child: Text('Give hype ',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold)),
                           )), 
                         ElevatedButton(
                           style: ButtonStyle(
@@ -104,7 +89,7 @@ class ArtistProfileScreen extends StatelessWidget {
                           child: const Padding(
                             padding: EdgeInsets.only(
                                 left: 30.0, right: 30, top: 11, bottom: 11), 
-                            child: Text('Message',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                            child: Text(' Message ',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
 
                           )), 
                         

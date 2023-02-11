@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/screens/userprofile/artist_profile.dart';
+import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/beartist_form.dart';
 
 class NormalUserProfile extends StatelessWidget {

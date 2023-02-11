@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/controller/loginprovider/loginprovider.dart';
-import 'package:makeframes/screens/signin&signup/signup_screen.dart';
+import 'package:makeframes/core/const.dart';
+import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
+import 'package:makeframes/authentication/signup/view/signup_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {

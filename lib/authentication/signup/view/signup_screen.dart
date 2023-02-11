@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
-import 'package:makeframes/screens/signin&signup/loginscreen.dart';
+import 'package:makeframes/core/const.dart';
+import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
+import 'package:makeframes/authentication/signin/view/loginscreen.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -513,6 +513,7 @@ class SignupScreen extends StatelessWidget {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (_) => LoginScreen()));
+                                            provider.disposeTextfield(); 
                                   },
                                   child: const Text(
                                     'Sign in',

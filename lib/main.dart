@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:makeframes/controller/bottomnav/bottomnav_provdr.dart';
-import 'package:makeframes/controller/loginprovider/loginprovider.dart';
-import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
-import 'package:makeframes/controller/splashProvder/splashpro.dart';
-import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
-import 'package:makeframes/splash/splash.dart';
-
+import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
+import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
+import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
+import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
+import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/screens/splash/view/splash.dart';
 
 import 'package:provider/provider.dart';
 
 void main() {
-
- 
   runApp(const MyApp());
 }
 
@@ -22,22 +19,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]); 
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => SplashProvider())),
         ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
-        ChangeNotifierProvider(create: ((context) => LoginProvider())), 
-        ChangeNotifierProvider(create: (context)=> BottomNavProvider()) 
+        ChangeNotifierProvider(create: ((context) => LoginProvider())),
+        ChangeNotifierProvider(create: (context) => BottomNavProvider())
       ],
       child: MaterialApp(
         theme: ThemeData(
-        primarySwatch:Colors.blueGrey,     
-        ), 
+          primarySwatch: Colors.blueGrey,
+        ),
         debugShowCheckedModeBanner: false,
-        home:const Splash(),       
+        home:  BottomNavigationScreen(), 
       ),
     );
   }

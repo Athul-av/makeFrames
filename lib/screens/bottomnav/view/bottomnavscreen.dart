@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makeframes/controller/bottomnav/bottomnav_provdr.dart';
-import 'package:makeframes/screens/homescreen/homesccreen.dart';
+import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
+import 'package:makeframes/screens/homescreen/view/homesccreen.dart';
 import 'package:makeframes/screens/search/searchscreen.dart';
 import 'package:makeframes/screens/settingsscreen/settings_screen.dart';
 import 'package:provider/provider.dart';
@@ -83,10 +83,3 @@ class BottomNavigationScreen extends StatelessWidget {
     });
   }
 }
-
-  // selectedIndex: value.currentIndex, 
-  //                         onTabChange: (index) {
-  //                           currentIndex =index;
-  //                           value.currentIndex = currentIndex;
-
-  //                         },

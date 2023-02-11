@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/signin&signup/signup_signin_service.dart';
-import 'package:makeframes/constant/snackbar.dart';
-import 'package:makeframes/models/signup/signup_request_model.dart';
-import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
-import 'package:makeframes/screens/signin&signup/otp_popup.dart';
+import 'package:makeframes/core/snackbar.dart';
+import 'package:makeframes/authentication/signup/model/signup_request_model.dart';
+import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
+import 'package:makeframes/authentication/signup/view/otp_popup.dart';
 
 class SignUpProvdr with ChangeNotifier {
   final emailController = TextEditingController();

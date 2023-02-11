@@ -4,6 +4,7 @@ class Apiconfig {
   static const signupApi = "/user/signup";
   static const otp = "/user/otp";
   static const loginCheck = "/user/loginCheck";
+  static const checkartist = "/user/checkArtist"; 
 }
 
 class ApiQueryParameter {

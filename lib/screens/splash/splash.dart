@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/controller/splashProvder/splashpro.dart';
-import 'package:provider/provider.dart';
+import 'package:makeframes/core/const.dart';
+import 'package:makeframes/screens/splash/provider/splashpro.dart';
 
+import 'package:provider/provider.dart';
+ 
 class Splash extends StatelessWidget {
   const Splash({super.key});
 

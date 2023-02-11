@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:makeframes/constant/widgets.dart';
-import 'package:makeframes/controller/signUpprovider/signup_provdr.dart';
+import 'package:makeframes/core/const.dart';
+import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:provider/provider.dart';
 
 Future<void> displayTextInputDialog(BuildContext context) async {

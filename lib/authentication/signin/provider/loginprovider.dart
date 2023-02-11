@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/signin&signup/signup_signin_service.dart';
-import 'package:makeframes/constant/snackbar.dart';
-import 'package:makeframes/models/signin/login_request_model.dart';
-import 'package:makeframes/screens/bottomnav/bottomnavscreen.dart';
+import 'package:makeframes/core/snackbar.dart';
+import 'package:makeframes/authentication/signin/model/login_request_model.dart';
+import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 
 class LoginProvider with ChangeNotifier {
   final emailController = TextEditingController();
@@ -20,14 +22,17 @@ class LoginProvider with ChangeNotifier {
     final password = passwordController.text.trim();
 
     final loguser = LoginreqModel(email: email, password: password);
-
+    log("hi");
     await ApiService().login(loguser).then((value) => {
+          log("message"),
           if (value!.isPass == true)
             {
               storage.write(key: 'token', value: value.token),
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => BottomNavigationScreen()),
-                  (route) => false)
+
+                  (route) => false),
+                  disposeTextfieldLogin() 
             }
           else
             {
@@ -46,5 +51,10 @@ class LoginProvider with ChangeNotifier {
       obscure = true;
     }
     notifyListeners();
+  }
+
+  void disposeTextfieldLogin(){
+    emailController.clear();
+    passwordController.clear(); 
   }
 }
