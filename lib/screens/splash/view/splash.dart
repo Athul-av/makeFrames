@@ -13,10 +13,10 @@ class Splash extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(''), 
-            Container( 
+            const Text(''),
+            Container(
               height: height(context, 0.13),
               width: width(context, 0.87),
               decoration: const BoxDecoration(
@@ -24,8 +24,13 @@ class Splash extends StatelessWidget {
                       image: AssetImage('assets/images/Makeframes.png'),
                       fit: BoxFit.cover)),
             ),
-             SizedBox(height: 38,width: 38  ,
-            child: CircularProgressIndicator(color:color1(),), )
+            SizedBox(
+              height: 38,
+              width: 38,
+              child: CircularProgressIndicator(
+                color: color1(),
+              ),
+            )
           ],
         ),
       ),

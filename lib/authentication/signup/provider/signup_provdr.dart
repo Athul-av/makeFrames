@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/signin&signup/signup_signin_service.dart';
+import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/authentication/signup/model/signup_request_model.dart';
-import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signup/view/otp_popup.dart';
+import 'package:makeframes/screens/splash/view/splash.dart';
 
 class SignUpProvdr with ChangeNotifier {
   final emailController = TextEditingController();
@@ -16,7 +16,7 @@ class SignUpProvdr with ChangeNotifier {
   bool obscure = true;
   FlutterSecureStorage storage = const FlutterSecureStorage();
 
-//otp calling function
+//OTP CALLING FUNCTION
   void getotp(context) async {
     isLoading = true;
     notifyListeners();
@@ -25,7 +25,7 @@ class SignUpProvdr with ChangeNotifier {
     final password = passwordController.text.trim();
     final repassword = repasswordController.text.trim();
 
-    await ApiService().otpGet(email).then((value) {
+    await AuthApiService().otpGet(email).then((value) {
       if (value != null && value == true && password == repassword) {
         displayTextInputDialog(context);
       } else if (password != repassword) {
@@ -43,7 +43,7 @@ class SignUpProvdr with ChangeNotifier {
     notifyListeners();
   }
 
-//signin function on the otp submit button
+//SIGNUP ON THE OTP BUTTON PRESSED
   void signupButtonPress(context) async {
     final email = emailController.text.trim();
     final username = userNameController.text.trim();
@@ -53,7 +53,7 @@ class SignUpProvdr with ChangeNotifier {
     SignupReqModel model = SignupReqModel(
         email: email, firstName: username, password: password, otp: otp);
 
-    ApiService().signup(model).then((value) {
+    AuthApiService().signup(model).then((value) {
       if (value!.signupResIs == false && value.serverOtp == true) {
         storage.write(key: 'token', value: value.token);
 
@@ -74,10 +74,11 @@ class SignUpProvdr with ChangeNotifier {
 
   void goToHome(context) {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
+        MaterialPageRoute(builder: (_) =>const Splash())); 
     notifyListeners();
   }
 
+//CLEAR THE TEXT FIELD
   void disposeTextfield() {
     emailController.clear();
     userNameController.clear();
@@ -85,6 +86,8 @@ class SignUpProvdr with ChangeNotifier {
     repasswordController.clear();
   }
 
+
+//PASSWORD VISIBILITY FUNCTION
   void visibility() {
     if (obscure == true) {
       obscure = false;

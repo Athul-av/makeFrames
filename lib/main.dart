@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
-import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
 
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         debugShowCheckedModeBanner: false,
-        home:  BottomNavigationScreen(), 
+        home: const Splash(),  
       ),
     );
   }

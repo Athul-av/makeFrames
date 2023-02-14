@@ -7,7 +7,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: scaffoldback,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -19,22 +19,20 @@ class SearchScreen extends StatelessWidget {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/Makeframes2.png'))),
-        ),), 
-body: const Padding(
-  padding:  EdgeInsets.all(13.0),
-  child:   CupertinoSearchTextField(
-  backgroundColor:  Color.fromARGB(255, 38, 38, 38),
-    placeholder: 'search',
-    placeholderStyle: TextStyle(color: Color.fromARGB(255, 172, 172, 172),fontSize: 15),
-    itemColor: Color.fromARGB(255, 180, 180, 180),
-   
-    padding: EdgeInsets.all(13),
-   
-    style: TextStyle(color: Colors.white), 
-
-  
-  ),
-)  ,
+        ),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(13.0),
+        child: CupertinoSearchTextField(
+          backgroundColor: Color.fromARGB(255, 38, 38, 38),
+          placeholder: 'search',
+          placeholderStyle: TextStyle(
+              color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
+          itemColor: Color.fromARGB(255, 180, 180, 180),
+          padding: EdgeInsets.all(13),
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';

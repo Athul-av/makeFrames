@@ -8,10 +8,10 @@ import 'package:makeframes/authentication/signin/model/logincheck_respons.dart';
 import 'package:makeframes/authentication/signup/model/signup_request_model.dart';
 import 'package:makeframes/authentication/signup/model/signup_response.dart';
 
-class ApiService {
+class AuthApiService {
     var dio = Dio();
 
-// login service 
+// LOGIN API SERVICE
     Future<LoginResp?> login(LoginreqModel model) async {
     String path = Apiconfig.baseUrl + Apiconfig.loginApi;
 
@@ -33,7 +33,7 @@ class ApiService {
 
 
 
-//signup service
+//SIGNUP API SERVICE
   Future<SignupRes?> signup(SignupReqModel model) async {
     String path = Apiconfig.baseUrl + Apiconfig.signupApi;
 
@@ -56,7 +56,7 @@ class ApiService {
 
 
 
-// otp getting service
+// API SERVICE FOR OTP TO THE EMAIL
   Future<bool?> otpGet(String email) async {
     try {
       final Response response =
@@ -78,7 +78,7 @@ class ApiService {
 
 
 
-//checking the token 
+// CHECKING TOKEN VALID OR NOT API SERVICE 
   Future<LoginCheckResp?> checktoken (String token ) async{
     try {
       final response = await dio.post(Apiconfig.baseUrl+Apiconfig.loginCheck,

@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
+import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class SettingsScreen extends StatelessWidget {
@@ -15,10 +17,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:scaffoldback,
-       appBar: AppBar(
+      backgroundColor: scaffoldback,
+      appBar: AppBar(
         backgroundColor: Colors.black,
-  
         title: const Padding(
           padding: EdgeInsets.only(left: 5.0),
           child: Text(
@@ -28,7 +29,6 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-      
       ),
       body: SafeArea(
         child: Column(
@@ -122,14 +122,20 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () async {
+
+                                    //DELETING THE TOKEN    
                                         await storage.deleteAll();
-                                        log(storage.toString()); 
+                                   
+                                   //NAVIGATING TO SIGN IN
                                          Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                      const  Splash()),
+                                                        const Splash()),
                                                 (route) => false);
+
+                                  //BOTTOMNAV CHANGING TO HOMESCREEN
+                                        Provider.of<BottomNavProvider>(context, listen: false) .currentIndex = 0;
                                       },
                                       child: const Text(
                                         'continue',

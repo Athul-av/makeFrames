@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
-import 'package:makeframes/screens/userprofile/view/artist_profile2.dart';
 
-Widget topartistContainer(context) {
+Widget stageShowlist(context) {
   return Container(
-    width: width(context, 0.32),
     decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 25, 25, 25),
+        color: Color.fromARGB(255, 24, 24, 24),
         borderRadius: BorderRadius.all(Radius.circular(8))),
     child: Padding(
       padding: const EdgeInsets.all(6.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const CircleAvatar(
-            radius: 36,
-            backgroundColor: Color.fromARGB(255, 25, 25, 25),
-            backgroundImage: AssetImage('assets/images/user2.png'),
+          Container(
+            height: 95,
+            width: 135,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                image: DecorationImage(
+                    image: AssetImage('assets/images/stage.jpg'))),
           ),
           const Text(
             'Name',
@@ -28,14 +29,11 @@ Widget topartistContainer(context) {
                   backgroundColor: MaterialStateProperty.all(color1()),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0)))),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const ArtistProfileScreen2()));
-              },
+              onPressed: () {},
               child: const Text(
-                'Show profile',
+                ' More details ',
                 style: TextStyle(
-                    fontSize: 10, color: Color.fromARGB(255, 231, 231, 231)),
+                    fontSize: 11, color: Color.fromARGB(255, 231, 231, 231)),
               ))
         ],
       ),
