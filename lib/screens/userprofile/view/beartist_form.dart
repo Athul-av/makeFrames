@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:makeframes/Services/BeArtistService/be_artist_service.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/core/const.dart';
+import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/screens/userprofile/model/be_artist_req.dart';
+import 'package:makeframes/screens/userprofile/provider/be_artistprovider.dart';
 import 'package:makeframes/screens/userprofile/view/artist_profile.dart';
+import 'package:provider/provider.dart';
 
 class BeAnartistForm extends StatefulWidget {
   const BeAnartistForm({super.key});
@@ -9,12 +15,11 @@ class BeAnartistForm extends StatefulWidget {
   @override
   State<BeAnartistForm> createState() => _BeAnartistFormState();
 }
-
 class _BeAnartistFormState extends State<BeAnartistForm> {
   GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController skillcontroller = TextEditingController();
-  TextEditingController experiencecontroller = TextEditingController();
   TextEditingController aboutcontroller = TextEditingController();
+
+  FlutterSecureStorage storage = const FlutterSecureStorage();
 
   String? dropdownvalue;
 
@@ -30,25 +35,29 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
 
   @override
   Widget build(BuildContext context) {
+   final providerBartist = Provider.of<BeArtistProvider>(context,listen: false);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
-      body: SafeArea( 
+      body: SafeArea(
         child: Column(
           children: [
             Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                height:height(context, 0.08),
-           
+                height: height(context, 0.08),
                 child: IconButton(
-                  icon:const Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white ,),
-                  onPressed: (){
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
                     Navigator.of(context).pop();
-                  },),
+                  },
+                ),
               ),
             ),
             Expanded(
-             
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -65,15 +74,17 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                   const Text(
                     'please fill the form to be an artist ',
                     style: TextStyle(
-                        color: Color.fromARGB(255, 113, 113, 113), fontSize: 13),
+                        color: Color.fromARGB(255, 113, 113, 113),
+                        fontSize: 13),
                   ),
                 ],
               ),
             ),
             Expanded(
-              flex: 5 ,
+              flex: 5,
               child: Padding(
-                padding: const EdgeInsets.only(left: 32, right: 32, bottom: 15),
+                padding: const EdgeInsets.only(
+                    left: 32, right: 32, bottom: 15, top: 25),
                 child: Form(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   key: formKey,
@@ -119,53 +130,15 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                         height: height(context, 0.02),
                       ),
                       TextFormField(
-                        controller: skillcontroller,
-                        cursorColor: color1(),
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Additional skills   (optional)',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 190, 190, 190)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                        ),
-                      ),
-                      SizedBox(
-                        height: height(context, 0.02),
-                      ),
-                      TextFormField(
-                        controller: experiencecontroller,
-                        cursorColor: color1(),
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Experience   (optional)',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 190, 190, 190)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                        ),
-                      ),
-                      SizedBox(
-                        height: height(context, 0.02),
-                      ),
-                      TextFormField(
                         controller: aboutcontroller,
                         keyboardType: TextInputType.multiline,
                         maxLines: 4,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "fill this field";
+                          }
+                          return null;
+                        },
                         cursorColor: color1(),
                         style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -175,7 +148,7 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide.none,
                           ),
-                          labelText: 'About your self   (optional)',
+                          labelText: 'About your self',
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelStyle: const TextStyle(
                               fontSize: 13,
@@ -185,27 +158,32 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                         ),
                       ),
                       SizedBox(
-                        height: height(context, 0.119),
+                        height: height(context, 0.219),
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if(dropdownvalue == null){  
-                              CustomSnackBar().snackBar(context, 'category is mandatory ! ',const  Color.fromARGB(255, 154, 51, 44));   
-                            }else{
-                                 Navigator.of(context).pushReplacement (MaterialPageRoute(builder: (_)=>const ArtistProfileScreen()));  
+                            if (dropdownvalue != null && formKey.currentState!.validate()) {
+                             providerBartist.beArtist(context, dropdownvalue);
+                            } else {
+                              CustomSnackBar().snackBar(
+                                  context,
+                                  'please fill all field',
+                                  const Color.fromARGB(255, 154, 51, 44));
                             }
                           },
-                          style: ButtonStyle( 
+                          style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(color1()),
                               padding: MaterialStateProperty.all(
                                   const EdgeInsets.all(20)),
                               textStyle: MaterialStateProperty.all(
                                   const TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)))),
+                                      borderRadius:
+                                          BorderRadius.circular(20)))),
                           child: const Text('Submit')),
                     ],
                   ),
@@ -217,4 +195,5 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
       ),
     );
   }
+
 }

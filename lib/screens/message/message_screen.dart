@@ -25,6 +25,8 @@ class MessageScreen extends StatelessWidget {
               padding: EdgeInsets.only(right: 16.0),
               child: CircleAvatar(
                 radius: 23,
+                backgroundColor: Colors.transparent,  
+                backgroundImage: AssetImage('assets/images/user2.png'), 
               ),
             ),
           ],
@@ -47,7 +49,7 @@ class MessageScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide.none,
                     ),
-                    labelText: 'Enter Email',
+                    labelText: 'message',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: const TextStyle(
                         fontSize: 14,

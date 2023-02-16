@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
@@ -11,7 +10,7 @@ class SplashProvider with ChangeNotifier {
   FlutterSecureStorage storage = const FlutterSecureStorage();
   String? logincheck;
   String username = '';
-  bool Artist= false;
+  bool artist= false;
 
   timer(context) async {
     Timer(const Duration(milliseconds: 1700), () async {
@@ -28,10 +27,10 @@ class SplashProvider with ChangeNotifier {
 
             ArtistCheck().checkartist(logincheck!).then((value){
               if(value!.isArtist == true){ 
-                Artist = true; 
+                artist = true; 
                 notifyListeners();
               } else if (value.isArtist == false){
-                Artist  = false;
+                artist  = false;
                 notifyListeners();
               }
             }

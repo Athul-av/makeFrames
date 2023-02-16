@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/homescreen/view/carouselitem.dart';
 import 'package:makeframes/screens/homescreen/view/topartist_container.dart';
@@ -10,16 +9,11 @@ import 'package:makeframes/screens/userprofile/view/artist_profile.dart';
 import 'package:makeframes/screens/userprofile/view/normal_user.dart';
 import 'package:provider/provider.dart';
 
-
-
 class HomeScreen extends StatelessWidget {
-   HomeScreen({super.key});
-
-  
-  
+   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
    final providerSplash = Provider.of<SplashProvider>(context,listen: false);
   
     return Scaffold(
@@ -44,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 radius: 19,
                 child: IconButton(
                     onPressed: () {
-                      if(providerSplash.Artist == true){
+                      if(providerSplash.artist == true){
                         Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const ArtistProfileScreen()));
                       }else{
                         Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const NormalUserProfile())); 

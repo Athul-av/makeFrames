@@ -17,7 +17,7 @@ Widget stageShowlist(context) {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 image: DecorationImage(
-                    image: AssetImage('assets/images/stage.jpg'))),
+                    image: AssetImage('assets/images/stage2.png'))),
           ),
           const Text(
             'Name',

@@ -5,6 +5,7 @@ import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
+import 'package:makeframes/screens/userprofile/view/artist_profile.dart';
 
 import 'package:provider/provider.dart';
 
@@ -31,10 +32,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
+        
         ),
         debugShowCheckedModeBanner: false,
-        home: const Splash(),  
-      ),
+        home: const Splash(),     
+      ), 
     );
   }
 }

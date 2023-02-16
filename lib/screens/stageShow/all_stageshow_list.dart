@@ -41,6 +41,7 @@ class StageshowList extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, 
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, mainAxisSpacing: 9.0),
                 itemBuilder: (context, index) {

@@ -13,7 +13,7 @@ class BottomNavigationScreen extends StatelessWidget {
   int currentIndex = 0;
 
   List<Widget> pages = [
-     HomeScreen(),
+    const HomeScreen(),
     const SearchScreen(),
     SettingsScreen(),
   ];

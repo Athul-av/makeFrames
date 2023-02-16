@@ -84,7 +84,7 @@ class ArtistProfileScreen2 extends StatelessWidget {
                                   MaterialStateProperty.all(color1())),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => MessageScreen()));
+                                builder: (_) =>const  MessageScreen()));
                           },
                           child: const Padding(
                             padding: EdgeInsets.only(
