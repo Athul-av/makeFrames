@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
@@ -120,7 +119,7 @@ class SettingsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () async {
+                                      onPressed: () async { 
 
                                     //DELETING THE TOKEN    
                                         await storage.deleteAll();

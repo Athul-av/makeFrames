@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
 import 'package:makeframes/Services/checkUser/artist_check.dart';
+import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signin/view/loginscreen.dart';
 
@@ -11,11 +12,12 @@ class SplashProvider with ChangeNotifier {
   String? logincheck;
   String username = '';
   bool artist= false;
+  // String? dp ;
 
   timer(context) async {
     Timer(const Duration(milliseconds: 1700), () async {
       logincheck = await storage.read(key: 'token');
-
+       
       //CHECKING THE TOKEN VALID OR NOT
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
@@ -25,6 +27,10 @@ class SplashProvider with ChangeNotifier {
             Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
 
+             username = value.firstName!;
+            notifyListeners();
+        
+        //CHECK THE USER IS ARTIST OR NOT
             ArtistCheck().checkartist(logincheck!).then((value){
               if(value!.isArtist == true){ 
                 artist = true; 
@@ -35,8 +41,16 @@ class SplashProvider with ChangeNotifier {
               }
             }
             );
-            username = value.firstName!;
-            notifyListeners();
+          // //DP BRINGING FUNCTION
+          // BringProfilePicService().bringDP(logincheck!).then((value){
+          //   if(value != null){
+          //     dp = value; 
+          //     notifyListeners(); 
+          //   }else{ 
+          //     dp =null;
+          //   }
+          // })  ;   
+            
 
           } else {
 

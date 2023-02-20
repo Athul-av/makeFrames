@@ -36,41 +36,47 @@ class MessageScreen extends StatelessWidget {
             SizedBox(
               height: height(context, 0.8),
               width: MediaQuery.of(context).size.width,
-            ),
-            SingleChildScrollView(
-              physics: const ScrollPhysics(),
-              child: TextField(
-                cursorColor: color1(),
-                keyboardType: TextInputType.multiline,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(17),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    labelText: 'message',
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelStyle: const TextStyle(
-                        fontSize: 14,
-                        color: Color.fromARGB(255, 190, 190, 190)),
-                    filled: true,
-                    fillColor: const Color.fromARGB(255, 38, 38, 38),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.send,
-                          size: 25,
-                          color: Color.fromARGB(255, 169, 169, 169),
-                        ),
-                        splashColor: Colors.transparent,
-                      ),
-                    )),
+              child: SingleChildScrollView(
+
+                child: Column(
+                  children:const[
+                   
+                  ],
+                ),
               ),
             ),
+            TextField(
+              cursorColor: color1(),
+              keyboardType: TextInputType.multiline,
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(17),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide.none,
+                  ),
+                  labelText: 'message',
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  labelStyle: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromARGB(255, 190, 190, 190)),
+                  filled: true,
+                  fillColor: const Color.fromARGB(255, 38, 38, 38),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.send,
+                        size: 25,
+                        color: Color.fromARGB(255, 169, 169, 169),
+                      ),
+                      splashColor: Colors.transparent,
+                    ),
+                  )),
+            ),
           ],
-        ));
+       ),
+       );
   }
 }

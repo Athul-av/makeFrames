@@ -21,16 +21,16 @@ class BeArtistProvider with ChangeNotifier{
     BeArtistReq model =
         BeArtistReq(about: about, token: token, domain: dropdownvalue);
 
-    BeArtistService().beArtist(model).then((value) {
+    BeArtistService().beArtist(model).then(( value ) {
       if (value == true) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) => const ArtistProfileScreen()));
 
         Provider.of<SplashProvider>(context, listen: false).artist = true;
         notifyListeners();   
-      } else {
+      } else { 
         CustomSnackBar().snackBar(context, 'something went wrong',
-            const Color.fromARGB(255, 145, 34, 27));
+            const Color.fromARGB(255, 145, 34, 27)); 
       }
     });
   }

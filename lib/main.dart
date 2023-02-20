@@ -5,8 +5,9 @@ import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
-import 'package:makeframes/screens/userprofile/view/artist_profile.dart';
-
+import 'package:makeframes/screens/userprofile/provider/be_artistprovider.dart';
+import 'package:makeframes/screens/userprofile/provider/post_provider.dart';
+import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => SplashProvider())),
         ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
         ChangeNotifierProvider(create: ((context) => LoginProvider())),
-        ChangeNotifierProvider(create: (context) => BottomNavProvider())
+        ChangeNotifierProvider(create: ((context) => BottomNavProvider())),
+         ChangeNotifierProvider(create: (context) => BeArtistProvider()),
+         ChangeNotifierProvider(create: (context)=> ProfilePicProvidr()),
+         ChangeNotifierProvider(create: (context)=> PostProvidr()),   
       ],
       child: MaterialApp(
         theme: ThemeData(

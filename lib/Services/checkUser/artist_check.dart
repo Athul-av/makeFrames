@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:makeframes/core/api/apiconfig.dart';
-import 'package:makeframes/screens/userprofile/model/checkartist_rep.dart';
+import 'package:makeframes/screens/userprofile/model/checkartist_res.dart';
 
 class ArtistCheck {
   var dio = Dio();

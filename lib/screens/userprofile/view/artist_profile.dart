@@ -1,11 +1,17 @@
-import 'dart:io';
-import 'dart:ui';
+
+
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:makeframes/Services/AllPosts/all_post_service.dart';
+import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/screens/userprofile/model/all_post_res.dart';
+
+import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
+import 'package:makeframes/screens/userprofile/view/post_screen.dart';
 import 'package:provider/provider.dart';
 
 class ArtistProfileScreen extends StatefulWidget {
@@ -16,11 +22,17 @@ class ArtistProfileScreen extends StatefulWidget {
 }
 
 class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
-  File? image;
+ 
 
   @override
   Widget build(BuildContext context) {
+
     final providerSplash = Provider.of<SplashProvider>(context, listen: false);
+    final providerPicker =
+        Provider.of<ProfilePicProvidr>(context, listen: false);
+    final String? token =  
+        Provider.of<SplashProvider>(context, listen: false).logincheck;
+
     return Scaffold(
       backgroundColor: scaffoldback,
       appBar: AppBar(
@@ -34,24 +46,18 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
             icon: const Icon(Icons.arrow_back_ios_new_rounded)),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: Row(
-          children: const [
-            Icon(
-              Icons.add,
-              size: 16,
-            ),
-            Text(
-              ' Post',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
+        label: const Icon(
+          Icons.add,
+          size: 23,
         ),
         backgroundColor: color1(),
         elevation: 5,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => PostScreen()));
+        },
       ),
-      body: ListView(
-        shrinkWrap: true,
+      body: Column(
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -60,34 +66,43 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
             height: height(context, 0.365),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Stack(alignment: Alignment.bottomRight, children: [
-                    image != null
-                        ? CircleAvatar(
-                            radius: 67,
-                            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                            backgroundImage: FileImage(image!),
+                FutureBuilder<String?>(
+                  future: BringProfilePicService().bringDP(token!),
+                  builder: (context,snapshot) {      
+                      
 
-                            //  AssetImage('assets/images/user2.png')
-                          )
-                        : const CircleAvatar(
-                            radius: 67,
-                            backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                            backgroundImage:
-                                AssetImage('assets/images/user2.png')),
-                    InkWell(
-                      onTap: () async {
-                        getImage();
-                      },
-                      child: const CircleAvatar(
-                        radius: 23,
-                        backgroundColor: Color.fromARGB(255, 29, 29, 29),
-                        foregroundColor: Colors.white,
-                        child: Icon(Icons.add_a_photo),
-                      ),
-                    )
-                  ]),
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Stack(alignment: Alignment.bottomRight, children: [
+                           
+                      snapshot.hasData && snapshot.connectionState == ConnectionState.done 
+
+                            ? CircleAvatar(
+                                radius: 67,
+                                backgroundColor:
+                                    const Color.fromARGB(255, 0, 0, 0),
+                                backgroundImage: NetworkImage(snapshot.data!), 
+                                //  AssetImage('assets/images/user2.png')
+                              )
+                            : const CircleAvatar(
+                                radius: 67,
+                                backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                                backgroundImage:
+                                    AssetImage('assets/images/user2.png')),
+                        InkWell(
+                          onTap: () async {
+                            providerPicker.getImage(context);
+                          },
+                          child: const CircleAvatar(
+                            radius: 23,
+                            backgroundColor: Color.fromARGB(255, 29, 29, 29),
+                            foregroundColor: Colors.white,
+                            child: Icon(Icons.add_a_photo),
+                          ), 
+                        )
+                      ]),
+                    );
+                  }
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 13.0, bottom: 13),
@@ -136,40 +151,44 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
               ],
             ),
           ),
-          // Expanded(
-          //   child:ListView.separated(
-          //   shrinkWrap: true,
-          //   physics: ScrollPhysics(),
+          Expanded(
+              child: FutureBuilder<List<AllPostRes>?>(  
+            future: AllPostService().getallpost(token), 
+            builder: (context, snapshot) {
+              log(snapshot.data.toString());   
 
-          //     itemBuilder: (context, index) {
-          //       return Container(
-          //         color: Colors.teal,
-          //         height: 60 ,
-          //       );
-          //     }, separatorBuilder: (context, index) {
-          //       return SizedBox(height: 10,);
-          //     }, itemCount: 9) )
-          hsizedbox(context, 0.2),
-          const Align(
-              child: Text('No Posts!',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white))),
-          hsizedbox(context, 0.28),
+              if (snapshot.hasData &&
+                  snapshot.connectionState == ConnectionState.done) {
+ 
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 150, 
+                      childAspectRatio: 1 / 1,
+                      crossAxisSpacing: 2,  
+                      mainAxisSpacing: 2),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: const Color.fromARGB(255, 65, 65, 65),
+                    );
+                  }, 
+                  itemCount: snapshot.data!.length,
+                );
+
+              } else {
+                 
+                return const Center( 
+                  child: Text(
+                    'No Post',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );  
+              }
+            },
+          )  
+          )
+         
         ],
       ),
     );
-  }
-
-  Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (image == null) return;
-
-    final tempImg = File(image.path);
-    setState(() {
-      this.image = tempImg;
-    });
   }
 }

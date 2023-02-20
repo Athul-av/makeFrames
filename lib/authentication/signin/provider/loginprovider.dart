@@ -8,7 +8,7 @@ import 'package:makeframes/screens/splash/view/splash.dart';
 
 class LoginProvider with ChangeNotifier {
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final passwordController = TextEditingController(); 
   bool isload = false;
   bool obscure = true;
 
