@@ -9,44 +9,20 @@ import 'package:makeframes/authentication/signup/model/signup_request_model.dart
 import 'package:makeframes/authentication/signup/model/signup_response.dart';
 
 class AuthApiService {
-    var dio = Dio();
+  var dio = Dio();
 
 // LOGIN API SERVICE
-    Future<LoginResp?> login(LoginreqModel model) async {
+  Future<LoginResp?> login(LoginreqModel model) async {
     String path = Apiconfig.baseUrl + Apiconfig.loginApi;
 
     try {
       Response response = await dio.post(path,
           data: jsonEncode(model.toJson()),
           queryParameters: ApiQueryParameter.queryParameter);
-           if(response.statusCode==200|| response.statusCode==201){
-      log(response.data.toString());
-      final LoginResp loginmodl = LoginResp.fromJson(response.data);
-      return loginmodl;
-           } 
-    } on DioError catch (e) {
-      log(e.message.toString());
-    }
-    return null;
-   
-  }
-
-
-
-//SIGNUP API SERVICE
-  Future<SignupRes?> signup(SignupReqModel model) async {
-    String path = Apiconfig.baseUrl + Apiconfig.signupApi;
-
-    try {
-      final  response = await dio.post(path,
-          data: jsonEncode(
-            model.toJson(),
-          ),
-         );
       if (response.statusCode == 200 || response.statusCode == 201) {
         log(response.data.toString());
-        final  signupmodl = SignupRes.fromJson(response.data);
-        return signupmodl;
+        final LoginResp loginmodl = LoginResp.fromJson(response.data);
+        return loginmodl;
       }
     } on DioError catch (e) {
       log(e.message.toString());
@@ -54,7 +30,27 @@ class AuthApiService {
     return null;
   }
 
+//SIGNUP API SERVICE
+  Future<SignupRes?> signup(SignupReqModel model) async {
+    String path = Apiconfig.baseUrl + Apiconfig.signupApi;
 
+    try {
+      final response = await dio.post(
+        path,
+        data: jsonEncode(
+          model.toJson(),
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log(response.data.toString());
+        final signupmodl = SignupRes.fromJson(response.data);
+        return signupmodl;
+      }
+    } on DioError catch (e) {
+      log(e.message.toString());
+    }
+    return null;
+  }
 
 // API SERVICE FOR OTP TO THE EMAIL
   Future<bool?> otpGet(String email) async {
@@ -74,24 +70,21 @@ class AuthApiService {
       log(e.message.toString());
     }
     return null;
-  } 
+  }
 
-
-
-// CHECKING TOKEN VALID OR NOT API SERVICE 
-  Future<LoginCheckResp?> checktoken (String token ) async{
+// CHECKING TOKEN VALID OR NOT API SERVICE
+  Future<LoginCheckResp?> checktoken(String token) async {
     try {
-      final response = await dio.post(Apiconfig.baseUrl+Apiconfig.loginCheck,
-      data:{"token":token});
+      final response = await dio.post(Apiconfig.baseUrl + Apiconfig.loginCheck,
+          data: {"token": token});
 
-      if(response.statusCode==200|| response.statusCode==201){
+      if (response.statusCode == 200 || response.statusCode == 201) {
         log(response.data.toString());
 
         final tokencheck = LoginCheckResp.fromJson(response.data);
         return tokencheck;
       }
-      
-    }on DioError catch (e) {
+    } on DioError catch (e) {
       log(e.message.toString());
     }
     return null;

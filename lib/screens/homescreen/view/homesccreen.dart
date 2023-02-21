@@ -10,12 +10,12 @@ import 'package:makeframes/screens/userprofile/view/normal_user.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-   const HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {  
-   final providerSplash = Provider.of<SplashProvider>(context,listen: false);
-  
+  Widget build(BuildContext context) {
+    final providerSplash = Provider.of<SplashProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: scaffoldback,
       appBar: AppBar(
@@ -30,29 +30,25 @@ class HomeScreen extends StatelessWidget {
                   image: AssetImage('assets/images/Makeframes2.png'))),
         ),
         actions: [
-      
-            
-                CircleAvatar(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.transparent,
-                radius: 19,
-                child: IconButton(
-                    onPressed: () {
-                      if(providerSplash.artist == true){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const ArtistProfileScreen()));
-                      }else{
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const NormalUserProfile())); 
-                      }
-          
-                    },
-                    icon: const Icon(CupertinoIcons.person_alt_circle_fill))),
-            
+          CircleAvatar(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.transparent,
+              radius: 19,
+              child: IconButton(
+                  onPressed: () {
+                    if (providerSplash.artist == true) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const ArtistProfileScreen()));
+                    } else {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const NormalUserProfile()));
+                    }
+                  },
+                  icon: const Icon(CupertinoIcons.person_alt_circle_fill))),
           Padding(
             padding: const EdgeInsets.only(right: 10.0, left: 5),
             child: IconButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 icon: const Icon(CupertinoIcons.chat_bubble_text_fill)),
           ),
         ],

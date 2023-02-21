@@ -383,7 +383,8 @@ class LoginScreen extends StatelessWidget {
                                     )
                                   : const Text('Sign In');
                             },
-                          )),
+                          )
+                          ),
                       const SizedBox(
                         height: 12,
                       ),

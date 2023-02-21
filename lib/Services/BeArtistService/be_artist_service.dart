@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer'; 
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:makeframes/core/api/apiconfig.dart';
 import 'package:makeframes/screens/userprofile/model/be_artist_req.dart';
@@ -17,7 +17,7 @@ class BeArtistService {
 
       if (response.data['artistDone'] == true) {
         return true;
-      }else{
+      } else {
         return false;
       }
     } on DioError catch (e) {

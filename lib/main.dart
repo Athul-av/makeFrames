@@ -6,6 +6,7 @@ import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
 import 'package:makeframes/screens/userprofile/provider/be_artistprovider.dart';
+import 'package:makeframes/screens/userprofile/provider/createshow_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/post_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
 import 'package:provider/provider.dart';
@@ -29,18 +30,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
         ChangeNotifierProvider(create: ((context) => LoginProvider())),
         ChangeNotifierProvider(create: ((context) => BottomNavProvider())),
-         ChangeNotifierProvider(create: (context) => BeArtistProvider()),
-         ChangeNotifierProvider(create: (context)=> ProfilePicProvidr()),
-         ChangeNotifierProvider(create: (context)=> PostProvidr()),   
+        ChangeNotifierProvider(create: (context) => BeArtistProvider()),
+        ChangeNotifierProvider(create: (context) => ProfilePicProvidr()),
+        ChangeNotifierProvider(create: (context) => PostProvidr()),
+        ChangeNotifierProvider(create: (context) => CreateShowProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
-        
         ),
         debugShowCheckedModeBanner: false,
-        home: const Splash(),     
-      ), 
+        home: const Splash(),
+      ),
     );
   }
 }

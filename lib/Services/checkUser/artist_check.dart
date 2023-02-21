@@ -18,7 +18,6 @@ class ArtistCheck {
         final CheckartistRes res = CheckartistRes.fromJson(response.data);
         return res;
       }
-      
     } on DioError catch (e) {
       log(e.message.toString());
     }

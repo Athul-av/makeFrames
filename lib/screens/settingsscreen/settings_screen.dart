@@ -119,21 +119,22 @@ class SettingsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () async { 
-
-                                    //DELETING THE TOKEN    
+                                      onPressed: () async {
+                                        //DELETING THE TOKEN
                                         await storage.deleteAll();
-                                   
-                                   //NAVIGATING TO SIGN IN
-                                         Navigator.of(context)
+
+                                        //NAVIGATING TO SIGN IN
+                                        Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
                                                         const Splash()),
                                                 (route) => false);
 
-                                  //BOTTOMNAV CHANGING TO HOMESCREEN
-                                        Provider.of<BottomNavProvider>(context, listen: false) .currentIndex = 0;
+                                        //BOTTOMNAV CHANGING TO HOMESCREEN
+                                        Provider.of<BottomNavProvider>(context,
+                                                listen: false)
+                                            .currentIndex = 0;
                                       },
                                       child: const Text(
                                         'continue',

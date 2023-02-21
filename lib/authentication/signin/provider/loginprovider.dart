@@ -8,7 +8,7 @@ import 'package:makeframes/screens/splash/view/splash.dart';
 
 class LoginProvider with ChangeNotifier {
   final emailController = TextEditingController();
-  final passwordController = TextEditingController(); 
+  final passwordController = TextEditingController();
   bool isload = false;
   bool obscure = true;
 
@@ -22,17 +22,16 @@ class LoginProvider with ChangeNotifier {
     final password = passwordController.text.trim();
 
     final loguser = LoginreqModel(email: email, password: password);
- 
+
     await AuthApiService().login(loguser).then((value) => {
           log("message"),
           if (value!.isPass == true)
             {
               storage.write(key: 'token', value: value.token),
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => const Splash()), 
-
+                  MaterialPageRoute(builder: (_) => const Splash()),
                   (route) => false),
-                  disposeTextfieldLogin() 
+              disposeTextfieldLogin()
             }
           else
             {
@@ -43,7 +42,6 @@ class LoginProvider with ChangeNotifier {
     isload = false;
     notifyListeners();
   }
-
 
 //PASSWORD VISIBILITY
   void visibility() {
@@ -56,8 +54,8 @@ class LoginProvider with ChangeNotifier {
   }
 
 //CLEAR TEXTFIELD
-  void disposeTextfieldLogin(){
+  void disposeTextfieldLogin() {
     emailController.clear();
-    passwordController.clear(); 
+    passwordController.clear();
   }
 }

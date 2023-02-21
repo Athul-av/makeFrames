@@ -11,9 +11,10 @@ class BeAnartistForm extends StatefulWidget {
   @override
   State<BeAnartistForm> createState() => _BeAnartistFormState();
 }
+
 class _BeAnartistFormState extends State<BeAnartistForm> {
   GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController aboutcontroller = TextEditingController();
+  // TextEditingController aboutcontroller = TextEditingController();
 
   FlutterSecureStorage storage = const FlutterSecureStorage();
 
@@ -31,7 +32,8 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
 
   @override
   Widget build(BuildContext context) {
-   final providerBartist = Provider.of<BeArtistProvider>(context,listen: false);
+    final providerBartist =
+        Provider.of<BeArtistProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -126,7 +128,7 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                         height: height(context, 0.02),
                       ),
                       TextFormField(
-                        controller: aboutcontroller,
+                        controller: providerBartist.aboutcontroller,
                         keyboardType: TextInputType.multiline,
                         maxLines: 4,
                         validator: (value) {
@@ -158,8 +160,9 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if (dropdownvalue != null && formKey.currentState!.validate()) {
-                             providerBartist.beArtist(context, dropdownvalue);
+                            if (dropdownvalue != null &&
+                                formKey.currentState!.validate()) {
+                              providerBartist.beArtist(context, dropdownvalue);
                             } else {
                               CustomSnackBar().snackBar(
                                   context,
@@ -191,5 +194,4 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
       ),
     );
   }
-
 }

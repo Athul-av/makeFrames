@@ -1,7 +1,3 @@
-
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:makeframes/Services/AllPosts/all_post_service.dart';
 import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
@@ -9,9 +5,10 @@ import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/userprofile/model/all_post_res.dart';
-
 import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
 import 'package:makeframes/screens/userprofile/view/post_screen.dart';
+import 'package:makeframes/screens/userprofile/view/postedimage_screen.dart';
+import 'package:makeframes/screens/userprofile/view/tostage_screen.dart';
 import 'package:provider/provider.dart';
 
 class ArtistProfileScreen extends StatefulWidget {
@@ -22,15 +19,12 @@ class ArtistProfileScreen extends StatefulWidget {
 }
 
 class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
- 
-
   @override
   Widget build(BuildContext context) {
-
     final providerSplash = Provider.of<SplashProvider>(context, listen: false);
     final providerPicker =
         Provider.of<ProfilePicProvidr>(context, listen: false);
-    final String? token =  
+    final String? token =
         Provider.of<SplashProvider>(context, listen: false).logincheck;
 
     return Scaffold(
@@ -67,43 +61,41 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
             child: Column(
               children: [
                 FutureBuilder<String?>(
-                  future: BringProfilePicService().bringDP(token!),
-                  builder: (context,snapshot) {      
-                      
-
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Stack(alignment: Alignment.bottomRight, children: [
-                           
-                      snapshot.hasData && snapshot.connectionState == ConnectionState.done 
-
-                            ? CircleAvatar(
-                                radius: 67,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 0, 0, 0),
-                                backgroundImage: NetworkImage(snapshot.data!), 
-                                //  AssetImage('assets/images/user2.png')
-                              )
-                            : const CircleAvatar(
-                                radius: 67,
-                                backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                                backgroundImage:
-                                    AssetImage('assets/images/user2.png')),
-                        InkWell(
-                          onTap: () async {
-                            providerPicker.getImage(context);
-                          },
-                          child: const CircleAvatar(
-                            radius: 23,
-                            backgroundColor: Color.fromARGB(255, 29, 29, 29),
-                            foregroundColor: Colors.white,
-                            child: Icon(Icons.add_a_photo),
-                          ), 
-                        )
-                      ]),
-                    );
-                  }
-                ),
+                    future: BringProfilePicService().bringDP(token!),
+                    builder: (context, snapshot) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child:
+                            Stack(alignment: Alignment.bottomRight, children: [
+                          snapshot.hasData &&
+                                  snapshot.connectionState ==
+                                      ConnectionState.done
+                              ? CircleAvatar(
+                                  radius: 67,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 0, 0, 0),
+                                  backgroundImage: NetworkImage(snapshot.data!),
+                                  //  AssetImage('assets/images/user2.png')
+                                )
+                              : const CircleAvatar(
+                                  radius: 67,
+                                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                                  backgroundImage:
+                                      AssetImage('assets/images/user2.png')),
+                          InkWell(
+                            onTap: () async {
+                              providerPicker.getImage(context);
+                            },
+                            child: const CircleAvatar(
+                              radius: 23,
+                              backgroundColor: Color.fromARGB(255, 29, 29, 29),
+                              foregroundColor: Colors.white,
+                              child: Icon(Icons.add_a_photo),
+                            ),
+                          )
+                        ]),
+                      );
+                    }),
                 Padding(
                   padding: const EdgeInsets.only(top: 13.0, bottom: 13),
                   child: Text(
@@ -123,7 +115,10 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   const Color.fromARGB(255, 155, 35, 27))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => ToStageScreen()));
+                          },
                           child: const Padding(
                             padding: EdgeInsets.only(
                                 left: 30.0, right: 30, top: 11, bottom: 11),
@@ -152,41 +147,47 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
             ),
           ),
           Expanded(
-              child: FutureBuilder<List<AllPostRes>?>(  
-            future: AllPostService().getallpost(token), 
+              child: FutureBuilder<List<AllPostRes>?>(
+            future: AllPostService().getallpost(token),
             builder: (context, snapshot) {
-              log(snapshot.data.toString());   
-
               if (snapshot.hasData &&
                   snapshot.connectionState == ConnectionState.done) {
- 
                 return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 150, 
+                      maxCrossAxisExtent: 150,
                       childAspectRatio: 1 / 1,
-                      crossAxisSpacing: 2,  
+                      crossAxisSpacing: 2,
                       mainAxisSpacing: 2),
                   itemBuilder: (context, index) {
-                    return Container(
-                      color: const Color.fromARGB(255, 65, 65, 65),
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => PostedImageorVideoScreen(
+                                  image: snapshot.data![index].images![0],
+                                  comment: snapshot.data![index].coments!,
+                                ))));
+                      },
+                      child: Container(
+                        color: const Color.fromARGB(255, 65, 65, 65),
+                        child: Image(
+                            fit: BoxFit.cover,
+                            image:
+                                NetworkImage(snapshot.data![index].images![0])),
+                      ),
                     );
-                  }, 
+                  },
                   itemCount: snapshot.data!.length,
                 );
-
               } else {
-                 
-                return const Center( 
+                return const Center(
                   child: Text(
                     'No Post',
                     style: TextStyle(color: Colors.white),
                   ),
-                );  
+                );
               }
             },
-          )  
-          )
-         
+          ))
         ],
       ),
     );

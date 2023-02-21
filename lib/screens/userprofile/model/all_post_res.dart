@@ -2,11 +2,6 @@
 //
 //     final allPostRes = allPostResFromJson(jsonString);
 
-import 'dart:convert';
-
-List<AllPostRes> allPostResFromJson(String str) => List<AllPostRes>.from(json.decode(str).map((x) => AllPostRes.fromJson(x)));
-
-String allPostResToJson(List<AllPostRes> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AllPostRes {
     AllPostRes({

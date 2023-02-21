@@ -7,47 +7,46 @@ import 'package:provider/provider.dart';
 class PostScreen extends StatelessWidget {
   PostScreen({super.key});
 
- 
-
   @override
   Widget build(BuildContext context) {
-    final postprovider =Provider.of<PostProvidr>(context); 
+    final postprovider = Provider.of<PostProvidr>(context);
     return Scaffold(
-       
       backgroundColor: scaffoldback,
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.of(context).pop(); 
-             postprovider.file = null; 
+            Navigator.of(context).pop();
+            postprovider.file = null;
           },
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Column( 
-            
+          child: Column(
             children: [
-              Stack(alignment: Alignment.bottomCenter, 
-               children: [
+              Stack(alignment: Alignment.bottomCenter, children: [
                 Consumer<PostProvidr>(
                   builder: (context, value, child) {
                     return Container(
-                    margin: const EdgeInsets.only(bottom: 28),
-                    height: height(context, 0.45), 
-                    width: MediaQuery.of(context).size.width, 
-                    decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(16.0),
-                 color:const Color.fromARGB(255, 34, 34, 34)
-                    ),
-                    child: value.file != null ? Image(image: FileImage(value.file!),) : 
-                    const Icon(Icons.image_not_supported ,color: Color.fromARGB(255, 115, 115, 115),size: 80, )
-                  ); 
+                        margin: const EdgeInsets.only(bottom: 28),
+                        height: height(context, 0.45),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.0),
+                            color: const Color.fromARGB(255, 22, 22, 22)),
+                        child: value.file != null
+                            ? Image(
+                                image: FileImage(value.file!),
+                              )
+                            : const Icon(
+                                Icons.image_not_supported,
+                                color: Color.fromARGB(255, 115, 115, 115),
+                                size: 80,
+                              ));
                   },
-                  
                 ),
                 SizedBox(
                   child: CircleAvatar(
@@ -56,15 +55,15 @@ class PostScreen extends StatelessWidget {
                     child: IconButton(
                       icon: const Icon(Icons.camera_alt_rounded),
                       onPressed: () {
-                        postprovider.getfile(context); 
+                        postprovider.getfile(context);
                       },
                     ),
                   ),
                 ),
               ]),
-              hsizedbox(context, 0.06), 
+              hsizedbox(context, 0.06),
               TextFormField(
-                controller: postprovider.comentcontroller, 
+                controller: postprovider.comentcontroller,
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
                 validator: (value) {
@@ -90,7 +89,7 @@ class PostScreen extends StatelessWidget {
                   fillColor: const Color.fromARGB(255, 38, 38, 38),
                 ),
               ),
-              hsizedbox(context, 0.02), 
+              hsizedbox(context, 0.02),
               ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(color1()),
@@ -100,27 +99,34 @@ class PostScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onPressed: () async{
-                    if(postprovider.file != null){
-                   await postprovider.uploadpost(context);
-                    Navigator.of(context).pop(); 
-                    postprovider.file = null; 
-                    }else{
-                      CustomSnackBar().snackBar(context,'pick a image', const Color.fromARGB(255, 137, 38, 31)); 
+                  onPressed: () async {
+                    if (postprovider.file != null) {
+                      await postprovider.uploadpost(context);
+                      Navigator.of(context).pop();
+                      postprovider.file = null;
+                      // postprovider.comentcontroller.clear();
+
+                    } else {
+                      CustomSnackBar().snackBar(context, 'pick a image',
+                          const Color.fromARGB(255, 137, 38, 31));
                     }
                   },
                   child: Consumer<PostProvidr>(
                     builder: (context, value, child) {
-                      return  Padding(
-                      padding:const   EdgeInsets.all(12.0),
-                      child:value.load ?const CircularProgressIndicator(color: Colors.white,strokeWidth: 1,  ): const Text( 
-                      'POST',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ); 
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: value.load
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              )
+                            : const Text(
+                                'POST',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                      );
                     },
-                
-                  )) 
+                  ))
             ],
           ),
         ),
