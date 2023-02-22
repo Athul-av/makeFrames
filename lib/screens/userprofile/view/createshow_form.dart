@@ -201,9 +201,16 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                           fillColor: const Color.fromARGB(255, 38, 38, 38),
                         ),
                       ),
+                      const Align(
+                        alignment: Alignment.centerRight, 
+                        child: Padding(
+                          padding:  EdgeInsets.all(5.0),
+                          child: Text('minimum 30 letters*',style: TextStyle(color: Color.fromARGB(255, 162, 162, 162),fontSize: 7 ),),
+                        )),
                       SizedBox(
                         height: height(context, 0.017),
                       ),
+                       
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -257,9 +264,16 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                                 if (formkey.currentState!.validate() &&
                                     category != null) {
                                   if (value.img != null &&
-                                      value.video != null) {
+                                      value.video != null && provider.aboutcontroller.text.length >= 30) {
                                     value.createshow(category, context);
-                                  } else {
+                                    
+                                  } else if(provider.aboutcontroller.text.length < 30){
+                                      CustomSnackBar().snackBar(
+                                        context, 'please input atleast 30 letters in about field',
+                                         const Color.fromARGB(255, 126, 42, 36)); 
+                                  }
+                                  
+                                  else {
                                     CustomSnackBar().snackBar(
                                         context,
                                         'select image&video',

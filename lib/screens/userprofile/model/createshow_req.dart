@@ -16,16 +16,16 @@ class CreateShowReq {
         this.amount,
         this.description,
         this.videoUrl,
-        this.image,
+        this.imageArray,
     });
 
     String? token;
     String? name;
     String? category;
-    num? amount;
+    num? amount; 
     String? description;
     String? videoUrl;
-    List<String>? image;
+    List<String>? imageArray;
 
     factory CreateShowReq.fromJson(Map<String, dynamic> json) => CreateShowReq(
         token: json["token"],
@@ -34,16 +34,16 @@ class CreateShowReq {
         amount: json["amount"],
         description: json["description"],
         videoUrl: json["videoUrl"],
-        image: json["image"] == null ? [] : List<String>.from(json["image"]!.map((x) => x)),
+        imageArray: json["imageArray"] == null ? [] : List<String>.from(json["imageArray"]!.map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
         "token": token,
         "name": name,
         "category": category,
-        "amount": amount,
+        "amount": amount, 
         "description": description,
         "videoUrl": videoUrl,
-        "image": image == null ? [] : List<dynamic>.from(image!.map((x) => x)),
+        "imageArray": imageArray == null ? [] : List<dynamic>.from(imageArray!.map((x) => x)),
     };
 }

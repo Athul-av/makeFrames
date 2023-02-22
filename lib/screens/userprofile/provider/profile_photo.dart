@@ -29,7 +29,7 @@ class ProfilePicProvidr with ChangeNotifier {
         .uploadImageCloudinary(this.image!)
         .then((value) async {
       if (value != null) {
-        CustomSnackBar().snackBar(context, "profile pic changed", color1());
+        
 
 //CLOUDINARY RETURN A URL, ADD THAT TO THE BACKEND SERVER
         String? token = await storage.read(key: 'token');
@@ -37,7 +37,10 @@ class ProfilePicProvidr with ChangeNotifier {
 
         await ProfilePicAddService().addProfilepic(model).then((value) async {
           if (value == true) {
+            CustomSnackBar().snackBar(context, "profile pic changed", color1());  
             log('profile pic added to server');
+
+          
 
             //
             //   BringProfilePicService().bringDP(token!).then((value){

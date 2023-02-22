@@ -28,7 +28,7 @@ class PostedImageorVideoScreen extends StatelessWidget {
             color: const Color.fromARGB(255, 231, 229, 229),
             child: Image(image: NetworkImage(image)),
           ),
-          Container(
+          SizedBox(
             height: height(context, 0.02),
             width: MediaQuery.of(context).size.width,
             child: const Align(
@@ -43,7 +43,7 @@ class PostedImageorVideoScreen extends StatelessWidget {
                   ),
                 )),
           ),
-          Container(
+          SizedBox(
             height: height(context, 0.19),
             width: MediaQuery.of(context).size.width,
             child: Padding(

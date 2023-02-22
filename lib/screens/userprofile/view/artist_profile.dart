@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makeframes/Services/AllPosts/all_post_service.dart';
 import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
@@ -48,7 +50,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
         elevation: 5,
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => PostScreen()));
+              .push(MaterialPageRoute(builder: (_) => const PostScreen()));
         },
       ),
       body: Column(
@@ -117,7 +119,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                                   const Color.fromARGB(255, 155, 35, 27))),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ToStageScreen()));
+                                builder: (_) =>const  ToStageScreen()));
                           },
                           child: const Padding(
                             padding: EdgeInsets.only(
@@ -130,7 +132,9 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(color1())),
-                          onPressed: () {},
+                          onPressed: () {
+                            log(token.toString());   
+                          },
                           child: const Padding(
                             padding: EdgeInsets.only(
                                 left: 30.0, right: 30, top: 11, bottom: 11),

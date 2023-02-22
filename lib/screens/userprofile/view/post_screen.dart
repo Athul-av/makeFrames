@@ -5,7 +5,7 @@ import 'package:makeframes/screens/userprofile/provider/post_provider.dart';
 import 'package:provider/provider.dart';
 
 class PostScreen extends StatelessWidget {
-  PostScreen({super.key});
+ const PostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

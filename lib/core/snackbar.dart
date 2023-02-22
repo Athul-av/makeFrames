@@ -8,7 +8,7 @@ class CustomSnackBar {
           text,
         ),
         behavior: SnackBarBehavior.fixed,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 2),  
         backgroundColor: color,
       ),
     );

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
 import 'package:makeframes/Services/checkUser/artist_check.dart';
-import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signin/view/loginscreen.dart';
 

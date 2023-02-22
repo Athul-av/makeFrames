@@ -1,5 +1,5 @@
 class Apiconfig {
-  static const baseUrl = "http://10.4.5.222:3033";
+  static const baseUrl = "http://10.4.3.192:3033";
   static const loginApi = "/user/login";
   static const signupApi = "/user/signup";
   static const otp = "/user/otp";
@@ -11,6 +11,7 @@ class Apiconfig {
   static const addpost = "/user/addPost";
   static const allpost = "/user/pickPosts";
   static const createshow = "/user/submitProgram";
+  static const artistcreatedshow = "/user/viewPrograms"; 
  }
 
 class ApiQueryParameter {

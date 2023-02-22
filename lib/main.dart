@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProfilePicProvidr()),
         ChangeNotifierProvider(create: (context) => PostProvidr()),
         ChangeNotifierProvider(create: (context) => CreateShowProvider()),
+        // ChangeNotifierProvider(create: (context) => ArtistCreatedShowsProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
