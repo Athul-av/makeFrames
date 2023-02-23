@@ -12,11 +12,13 @@ class Apiconfig {
   static const allpost = "/user/pickPosts";
   static const createshow = "/user/submitProgram";
   static const artistcreatedshow = "/user/viewPrograms"; 
+  static const allstageshow = "/user/bringAllpost";
  }
 
 class ApiQueryParameter {
   static const queryParameter = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
+
   };
 }

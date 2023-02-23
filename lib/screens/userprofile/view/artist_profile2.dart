@@ -36,7 +36,7 @@ class ArtistProfileScreen2 extends StatelessWidget {
                     const CircleAvatar(
                       radius: 67,
                       backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                      backgroundImage: AssetImage('assets/images/user2.png'), 
+                      backgroundImage: AssetImage('assets/images/user2.png'),
                     ),
                     InkWell(
                       onTap: () {},

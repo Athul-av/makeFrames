@@ -1,24 +1,16 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:makeframes/Services/ArtistcreatedshowsService/createdshow_servc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:makeframes/Services/ArtistcreatedshowsService/createdshow_servc.dart';
+import 'package:makeframes/screens/userprofile/model/createdshow_res.dart';
 
-// class ArtistCreatedShowsProvider with ChangeNotifier{
+class ArtistCreatedShowsProvider with ChangeNotifier {
+  List<ArtistCreatedShowRes>? data;
+  FlutterSecureStorage storage = const FlutterSecureStorage();
 
-//   List<int>? bookingCount;
-//   List<String>? name;
-//   List<String>? category;
-//   List<String>? id;
-//   List<int>? amount;
-//   List<String>? description;
-//   List<String>? images;
-//   List<String>? video;
-//   List<String>? user; 
-
-//  Future<void> artistshows(context,token)async{
-
-//   await CreatedShowService().artiststagePrograms(token).then((value) {
-
-  
-//   })
-//  }
-
-// }
+//to get the artist created shows in his profile
+  Future<void> artistshows() async {
+    String? token = await storage.read(key: 'token');
+    data = await CreatedShowService().artiststagePrograms(token!);
+    notifyListeners();
+  }
+}

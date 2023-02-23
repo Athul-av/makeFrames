@@ -8,6 +8,8 @@ import 'package:makeframes/Services/uploadtocloudinary/uploadimage_cloud.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/userprofile/model/post_req.dart';
+import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
+import 'package:provider/provider.dart';
 
 class PostProvidr with ChangeNotifier {
   bool load = false;
@@ -45,17 +47,19 @@ class PostProvidr with ChangeNotifier {
 
           await Postservice().addpost(model).then((value) {
             if (value == true) {
+              Provider.of<AllPostProvider>(context, listen: false).getallpost();
               CustomSnackBar()
                   .snackBar(context, 'posted successfully', color1());
+                  comentcontroller.clear(); 
               log('post success');
             } else {
-              // CustomSnackBar().snackBar(context, 'unable to change profile pic',const Color.fromARGB(255, 152, 38, 30));
+              CustomSnackBar().snackBar(context, 'unable to change profile pic',const Color.fromARGB(255, 152, 38, 30));
               log('post failed');
             }
           });
         } else {
           log('not add');
-          //  CustomSnackBar().snackBar(context, 'failed', const Color.fromARGB(255, 131, 43, 37)) ;
+           CustomSnackBar().snackBar(context, 'failed', const Color.fromARGB(255, 131, 43, 37)) ; 
         }
       },
     );

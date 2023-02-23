@@ -16,8 +16,7 @@ class BeArtistProvider with ChangeNotifier {
     final about = aboutcontroller.text.trim();
     String? token = await storage.read(key: 'token');
 
-    BeArtistReq model =
-        BeArtistReq(about: about, token: token, domain: dropdownvalue);
+    BeArtistReq model = BeArtistReq(about: about, token: token, domain: dropdownvalue);
 
     BeArtistService().beArtist(model).then((value) {
       if (value == true) {

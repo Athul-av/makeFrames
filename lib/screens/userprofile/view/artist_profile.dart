@@ -1,33 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:makeframes/Services/AllPosts/all_post_service.dart';
-import 'package:makeframes/Services/profilePicService/bring_profilepic.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
-import 'package:makeframes/screens/userprofile/model/all_post_res.dart';
+import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
+import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
 import 'package:makeframes/screens/userprofile/view/post_screen.dart';
 import 'package:makeframes/screens/userprofile/view/postedimage_screen.dart';
 import 'package:makeframes/screens/userprofile/view/tostage_screen.dart';
 import 'package:provider/provider.dart';
 
-class ArtistProfileScreen extends StatefulWidget {
+class ArtistProfileScreen extends StatelessWidget {
   const ArtistProfileScreen({super.key});
 
   @override
-  State<ArtistProfileScreen> createState() => _ArtistProfileScreenState();
-}
-
-class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
-  @override
   Widget build(BuildContext context) {
+
     final providerSplash = Provider.of<SplashProvider>(context, listen: false);
-    final providerPicker =
-        Provider.of<ProfilePicProvidr>(context, listen: false);
-    final String? token =
-        Provider.of<SplashProvider>(context, listen: false).logincheck;
+    final providerPicker =Provider.of<ProfilePicProvidr>(context, listen: false);
 
     return Scaffold(
       backgroundColor: scaffoldback,
@@ -62,42 +52,37 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
             height: height(context, 0.365),
             child: Column(
               children: [
-                FutureBuilder<String?>(
-                    future: BringProfilePicService().bringDP(token!),
-                    builder: (context, snapshot) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child:
-                            Stack(alignment: Alignment.bottomRight, children: [
-                          snapshot.hasData &&
-                                  snapshot.connectionState ==
-                                      ConnectionState.done
-                              ? CircleAvatar(
-                                  radius: 67,
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 0, 0, 0),
-                                  backgroundImage: NetworkImage(snapshot.data!),
-                                  //  AssetImage('assets/images/user2.png')
-                                )
-                              : const CircleAvatar(
-                                  radius: 67,
-                                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                                  backgroundImage:
-                                      AssetImage('assets/images/user2.png')),
-                          InkWell(
-                            onTap: () async {
-                              providerPicker.getImage(context);
-                            },
-                            child: const CircleAvatar(
-                              radius: 23,
-                              backgroundColor: Color.fromARGB(255, 29, 29, 29),
-                              foregroundColor: Colors.white,
-                              child: Icon(Icons.add_a_photo),
-                            ),
-                          )
-                        ]),
-                      );
-                    }),
+                Consumer<DpGetProvider>(builder: (context, value, child) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Stack(alignment: Alignment.bottomRight, children: [
+                      value.data != null
+                          ? CircleAvatar(
+                              radius: 67,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 0, 0, 0),
+                              backgroundImage: NetworkImage(value.data!),
+                              //  AssetImage('assets/images/user2.png')
+                            )
+                          : const CircleAvatar(
+                              radius: 67,
+                              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                              backgroundImage:
+                                  AssetImage('assets/images/user2.png')),
+                      InkWell(
+                        onTap: () async {
+                          providerPicker.getImage(context);
+                        },
+                        child: const CircleAvatar(
+                          radius: 23,
+                          backgroundColor: Color.fromARGB(255, 29, 29, 29),
+                          foregroundColor: Colors.white,
+                          child: Icon(Icons.add_a_photo),
+                        ),
+                      )
+                    ]),
+                  );
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 13.0, bottom: 13),
                   child: Text(
@@ -119,7 +104,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                                   const Color.fromARGB(255, 155, 35, 27))),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) =>const  ToStageScreen()));
+                                builder: (_) => const ToStageScreen()));
                           },
                           child: const Padding(
                             padding: EdgeInsets.only(
@@ -132,9 +117,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(color1())),
-                          onPressed: () {
-                            log(token.toString());   
-                          },
+                          onPressed: () {},
                           child: const Padding(
                             padding: EdgeInsets.only(
                                 left: 30.0, right: 30, top: 11, bottom: 11),
@@ -150,12 +133,9 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
               ],
             ),
           ),
-          Expanded(
-              child: FutureBuilder<List<AllPostRes>?>(
-            future: AllPostService().getallpost(token),
-            builder: (context, snapshot) {
-              if (snapshot.hasData &&
-                  snapshot.connectionState == ConnectionState.done) {
+          Expanded(child: Consumer<AllPostProvider>(
+            builder: (context, value, child) {
+              if (value.data != null) {
                 return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
@@ -167,20 +147,19 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => PostedImageorVideoScreen(
-                                  image: snapshot.data![index].images![0],
-                                  comment: snapshot.data![index].coments!,
+                                  image: value.data![index].images![0],
+                                  comment: value.data![index].coments!,
                                 ))));
                       },
                       child: Container(
                         color: const Color.fromARGB(255, 65, 65, 65),
                         child: Image(
                             fit: BoxFit.cover,
-                            image:
-                                NetworkImage(snapshot.data![index].images![0])),
+                            image: NetworkImage(value.data![index].images![0])),
                       ),
                     );
                   },
-                  itemCount: snapshot.data!.length,
+                  itemCount: value.data!.length,
                 );
               } else {
                 return const Center(

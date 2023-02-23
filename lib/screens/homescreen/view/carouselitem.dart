@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
-import 'package:makeframes/screens/stageShow/all_stageshow_list.dart';
+import 'package:makeframes/screens/stageShow/view/all_stageshow_list.dart';
 
 Widget caroselitems(String image, context) {
   return Stack(children: [

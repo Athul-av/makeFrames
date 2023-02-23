@@ -5,7 +5,7 @@ import 'package:makeframes/screens/userprofile/provider/createshow_provider.dart
 import 'package:provider/provider.dart';
 
 class CreateShowScreen extends StatefulWidget {
-  const CreateShowScreen({super.key});
+const CreateShowScreen({super.key});
 
   @override
   State<CreateShowScreen> createState() => _CreateShowScreenState();
@@ -15,7 +15,7 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   String? category;
-
+  
   var items = ['Drama', 'Song', 'Dance', 'Mimicry'];
 
   @override
@@ -202,15 +202,19 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                         ),
                       ),
                       const Align(
-                        alignment: Alignment.centerRight, 
-                        child: Padding(
-                          padding:  EdgeInsets.all(5.0),
-                          child: Text('minimum 30 letters*',style: TextStyle(color: Color.fromARGB(255, 162, 162, 162),fontSize: 7 ),),
-                        )),
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text(
+                              'minimum 30 letters*',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 162, 162, 162),
+                                  fontSize: 7),
+                            ),
+                          )),
                       SizedBox(
                         height: height(context, 0.017),
                       ),
-                       
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -264,16 +268,18 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                                 if (formkey.currentState!.validate() &&
                                     category != null) {
                                   if (value.img != null &&
-                                      value.video != null && provider.aboutcontroller.text.length >= 30) {
+                                      value.video != null &&
+                                      provider.aboutcontroller.text.length >=
+                                          30) {
                                     value.createshow(category, context);
-                                    
-                                  } else if(provider.aboutcontroller.text.length < 30){
-                                      CustomSnackBar().snackBar(
-                                        context, 'please input atleast 30 letters in about field',
-                                         const Color.fromARGB(255, 126, 42, 36)); 
-                                  }
-                                  
-                                  else {
+                                  } else if (provider
+                                          .aboutcontroller.text.length <
+                                      30) {
+                                    CustomSnackBar().snackBar(
+                                        context,
+                                        'please input atleast 30 letters in about field',
+                                        const Color.fromARGB(255, 126, 42, 36));
+                                  } else {
                                     CustomSnackBar().snackBar(
                                         context,
                                         'select image&video',

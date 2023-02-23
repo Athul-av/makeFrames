@@ -8,6 +8,8 @@ import 'package:makeframes/Services/uploadtocloudinary/uploadimage_cloud.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/userprofile/model/createshow_req.dart';
+import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
+import 'package:provider/provider.dart';
 
 class CreateShowProvider with ChangeNotifier {
   TextEditingController namecontroller = TextEditingController();
@@ -19,7 +21,7 @@ class CreateShowProvider with ChangeNotifier {
   File? video;
   String? cloudvideourl;
   bool isload = false;
-  List<String>? cloudinaryimg;
+  List<String> cloudinaryimg=[];
 
 //GET MULTIPLE IMAGE FUNCTION
   Future<void> getimages() async {
@@ -28,6 +30,7 @@ class CreateShowProvider with ChangeNotifier {
     if (file == null) return;
 
     img = file.map((e) => File(e.path)).toList();
+    
     notifyListeners();
   }
 
@@ -41,53 +44,52 @@ class CreateShowProvider with ChangeNotifier {
     video = File(file.path);
   }
 
-
 //SUBMIT FUNCTION
   Future<void> createshow(category, context) async {
     isload = true;
     notifyListeners();
 
-    
-       
-      //uploading video to cloudinary
+    //uploading video to cloudinary
     await UploadService().uploadvideoCloudinary(video!).then((value) {
-      cloudvideourl = value;
+    cloudvideourl = value;
+    
     });
-      
-       
-      //uploading multiple img
-      for (var i = 0; i < img!.length; i++) {
-       await UploadService().uploadImageCloudinary(img![i]).then((value){ 
-           cloudinaryimg?.add(value!);   
-              
-        });
-         
-      }     
-     
-    String? token = await storage.read(key: 'token');  
+
+    //uploading multiple img
+    for(var value in img!){
+      await UploadService().uploadImageCloudinary(value).then((value) {
+        cloudinaryimg.add(value!);
+        notifyListeners();
+      }); 
+    }
+
+    String? token = await storage.read(key: 'token');
     final name = namecontroller.text.trim();
     final amount = num.parse(amountcontroller.text);
     final about = aboutcontroller.text;
 
-    CreateShowReq data = CreateShowReq( 
+    CreateShowReq data = CreateShowReq(
         amount: amount,
-        name: name,  
+        name: name,
         description: about,
         category: category,
         token: token,
-        videoUrl: cloudvideourl,   
-        imageArray: cloudinaryimg); 
+        videoUrl: cloudvideourl,
+        imageArray: cloudinaryimg);
 
-        //adding the details to the server  
+    //adding the details to the server
 
     await CreateShowService().uploadStageShow(data).then((value) {
       if (value == true) {
+
+        Provider.of<ArtistCreatedShowsProvider>(context, listen: false).artistshows();
+
         Navigator.of(context).pop();
         clearTextfield();
         CustomSnackBar().snackBar(context, 'successfully created', color1());
       } else {
-        CustomSnackBar().snackBar(context, "couldn't create",
-            const Color.fromARGB(255, 144, 42, 34));
+        CustomSnackBar().snackBar(
+            context, "couldn't create", const Color.fromARGB(255, 144, 42, 34));
       }
     });
     isload = false;
@@ -96,10 +98,10 @@ class CreateShowProvider with ChangeNotifier {
 
   clearTextfield() {
     namecontroller.clear();
-    amountcontroller.clear(); 
+    amountcontroller.clear();
     aboutcontroller.clear();
     img = null;
     video = null;
     notifyListeners();
   }
-} 
+}
