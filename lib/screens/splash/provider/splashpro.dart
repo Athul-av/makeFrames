@@ -25,6 +25,7 @@ class SplashProvider with ChangeNotifier {
       //CHECKING THE TOKEN VALID OR NOT
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
+          
           //THE FUNCTION RETURNING THE TOKEN VALID OR NOT AND THE USERNAME
           if (value!.user == true) {
             Navigator.of(context).pushReplacement(

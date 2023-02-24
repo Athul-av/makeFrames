@@ -29,7 +29,7 @@ class CreateShowProvider with ChangeNotifier {
 
     if (file == null) return;
 
-    img = file.map((e) => File(e.path)).toList();
+    img = file.map((e) => File(e.path)).toList(); 
     
     notifyListeners();
   }
@@ -83,9 +83,9 @@ class CreateShowProvider with ChangeNotifier {
       if (value == true) {
 
         Provider.of<ArtistCreatedShowsProvider>(context, listen: false).artistshows();
-
+        
+         clearTextfield();
         Navigator.of(context).pop();
-        clearTextfield();
         CustomSnackBar().snackBar(context, 'successfully created', color1());
       } else {
         CustomSnackBar().snackBar(

@@ -72,7 +72,7 @@ class ArtistProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () async {
                           providerPicker.getImage(context);
-                        },
+                        }, 
                         child: const CircleAvatar(
                           radius: 23,
                           backgroundColor: Color.fromARGB(255, 29, 29, 29),
@@ -138,8 +138,7 @@ class ArtistProfileScreen extends StatelessWidget {
               if (value.data != null) {
                 return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 150,
-                      childAspectRatio: 1 / 1,
+                      maxCrossAxisExtent: 150,                        
                       crossAxisSpacing: 2,
                       mainAxisSpacing: 2),
                   itemBuilder: (context, index) {

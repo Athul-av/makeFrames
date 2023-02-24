@@ -38,6 +38,7 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    provider.clearTextfield(); 
                   },
                 ),
               ),

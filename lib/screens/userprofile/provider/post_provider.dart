@@ -47,7 +47,9 @@ class PostProvidr with ChangeNotifier {
 
           await Postservice().addpost(model).then((value) {
             if (value == true) {
+
               Provider.of<AllPostProvider>(context, listen: false).getallpost();
+              
               CustomSnackBar()
                   .snackBar(context, 'posted successfully', color1());
                   comentcontroller.clear(); 

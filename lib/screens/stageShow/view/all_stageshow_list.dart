@@ -21,7 +21,7 @@ class StageshowList extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
           title: const Text(
-            "Stage show",
+            "Stage shows",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -48,21 +48,17 @@ class StageshowList extends StatelessWidget {
               Expanded(
                
                   
-                       child: GridView.builder(
+                       child: ListView.builder(
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, mainAxisSpacing: 7.0),
+                  
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: stageShowlist(context,
-                       value.data![index].name, 
-                        value.data![index].imageArray![0],
-                        value.data![index].category), 
+                        padding: const EdgeInsets.only(left: 10.0, right: 10,top: 5,bottom: 5),
+                        child: Showcontainer(value: value.data![index]), 
                       );  
                     },
-                    itemCount: value.data!.length, 
+                    itemCount: value.data!.length,
                   )
                     
                    

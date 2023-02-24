@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/AllStageShows/allstageshow_service.dart';
 import 'package:makeframes/screens/stageShow/model/allstageshow_res.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class AllStageShowProvider with ChangeNotifier{
   
@@ -21,19 +25,29 @@ class AllStageShowProvider with ChangeNotifier{
     });
   } 
 
-
+//all show search
 void search(String keyboard){
-  if(keyboard.isEmpty){
+  if(keyboard.isEmpty){ 
   data = alldata; 
   notifyListeners();
 
   }else{
     data = alldata!.where((element) =>   
-    element.name!.toLowerCase().contains(keyboard.toLowerCase().trim())).toList(); 
+    element.category!.toLowerCase().contains(keyboard.toLowerCase().trim())).toList();  
     notifyListeners();
   }
 
 }
 
+
+//to get the thumbnail image
+Future<Uint8List?> getThumbnail(String videoUrl) async {
+  final uint8list = await VideoThumbnail.thumbnailData(
+    video: videoUrl,
+    imageFormat: ImageFormat.JPEG,
+    quality: 50,
+  );
+  return uint8list;
+}
 
 }
