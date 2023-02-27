@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/BeArtistService/be_artist_service.dart';
+import 'package:makeframes/Services/beArtistService/be_artist_service.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/userprofile/model/be_artist_req.dart';
@@ -22,9 +22,11 @@ class BeArtistProvider with ChangeNotifier {
       if (value == true) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) => const ArtistProfileScreen()));
-
+        
         Provider.of<SplashProvider>(context, listen: false).artist = true;
+        
         notifyListeners();
+        aboutcontroller.clear(); 
       } else {
         CustomSnackBar().snackBar(context, 'something went wrong',
             const Color.fromARGB(255, 145, 34, 27));

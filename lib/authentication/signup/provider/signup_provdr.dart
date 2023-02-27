@@ -58,6 +58,7 @@ class SignUpProvdr with ChangeNotifier {
         storage.write(key: 'token', value: value.token);
 
         goToHome(context);
+        disposeTextfield(); 
       } else if (value.signupResIs == true) {
         CustomSnackBar().snackBar(context, 'email already taken',
             const Color.fromARGB(255, 160, 45, 37));
@@ -84,6 +85,7 @@ class SignUpProvdr with ChangeNotifier {
     userNameController.clear();
     passwordController.clear();
     repasswordController.clear();
+    otpController.clear(); 
   }
 
 

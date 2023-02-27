@@ -3,6 +3,7 @@ import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
 import 'package:makeframes/screens/userprofile/view/createshow_form.dart';
 import 'package:provider/provider.dart';
+import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
 
 class ToStageScreen extends StatelessWidget {
   const ToStageScreen({super.key});
@@ -33,19 +34,24 @@ class ToStageScreen extends StatelessWidget {
             label: const Text('New show')),
         body: Consumer<ArtistCreatedShowsProvider>(
           builder: (context, value, child) {
-            if (value.data != null) {
+            if (value.data == null || value.data!.isEmpty) {
+               return Center(
+                child: boldtext('no stage show created!', Colors.white, 13),
+              );
+             
+            } else {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: height(context, 0.23),
+                      height: height(context, 0.214),
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 23, 23, 23),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 11, 10, 11),
+                        padding: const EdgeInsets.fromLTRB(10, 13, 10, 11),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -57,25 +63,17 @@ class ToStageScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        value.data![index].name!,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        value.data![index].category!,
-                                        style: const TextStyle(
-                                          color: Color.fromARGB(
+                                      boldtext(value.data![index].name!,
+                                          Colors.white, 20),
+                                      normaltext(
+                                          value.data![index].category!,
+                                          const Color.fromARGB(
                                               255, 108, 108, 108),
-                                          fontSize: 12,
-                                        ),
-                                      )
+                                          12)
                                     ],
                                   ),
                                   SizedBox(
-                                    height: height(context, 0.04),
+                                    height: height(context, 0.035),
                                     width: width(context, 0.24),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
@@ -88,10 +86,10 @@ class ToStageScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      child: Text(
-                                        '${value.data![index].bookingCount} Booking',
-                                        style: const TextStyle(fontSize: 11),
-                                      ),
+                                      child: normaltext(
+                                          '${value.data![index].bookingCount} Booking',
+                                          Colors.white,
+                                          11),
                                       onPressed: () {},
                                     ),
                                   )
@@ -104,49 +102,55 @@ class ToStageScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                      height: height(context, 0.10),
+                                      height: height(context, 0.08),
                                       width: width(context, 0.6),
                                       child: Center(
-                                          child: Text(
-                                        value.data![index].description!,
-                                        style: const TextStyle(
-                                            color: Color.fromARGB(
+                                        child: normaltext(
+                                            value.data![index].description!,
+                                            const Color.fromARGB(
                                                 255, 211, 211, 211),
-                                            fontSize: 13),
-                                      ))),
+                                            13),
+                                      )),
                                   SizedBox(
-                                    height: height(context, 0.10),
+                                    height: height(context, 0.08),
                                     width: width(context, 0.24),
-                                    child:  Image(
+                                    child: Image(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                            value.data![index].imageArray![0])),  
+                                            value.data![index].imageArray![0])),
                                   )
                                 ],
                               ),
                               const SizedBox(
                                 height: 4,
                               ),
-                              Text(
-                                "Amount : ${value.data![index].amount}",
-                                style: TextStyle(
-                                    color: color1(),
-                                    fontWeight: FontWeight.bold),
-                              )
+                              ShapeOfView(
+                                height: 24,
+                                width: width(context, 0.22),
+                                shape: BubbleShape(
+                                    position: BubblePosition.Left,
+                                    arrowPositionPercent: 0.5,
+                                    borderRadius: 5,
+                                    arrowHeight: 16,
+                                    arrowWidth: 12),
+                                child: Container(
+                                  width: 40,
+                                  color: color1(),
+                                  child: Center(
+                                    child: boldtext(
+                                        '₹ ${value.data![index].amount}',
+                                        Colors.white,
+                                        14),
+                                  ),
+                                ),
+                              ),
                             ]),
                       ),
                     ),
                   );
                 },
                 itemCount: value.data!.length,
-              );
-            } else {
-              return const Center(
-                child: Text(
-                  'no stage show created!',
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
+              );  
             }
           },
         ));

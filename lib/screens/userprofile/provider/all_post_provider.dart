@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/AllPosts/all_post_service.dart';
+import 'package:makeframes/Services/allPosts/all_post_service.dart';
 import 'package:makeframes/screens/userprofile/model/all_post_res.dart';
 
 class AllPostProvider with ChangeNotifier {

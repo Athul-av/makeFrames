@@ -1,27 +1,31 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:makeframes/Services/ArtistcreateShowService/createshow_service.dart';
+import 'package:makeframes/Services/artistcreateShowService/createshow_service.dart';
 import 'package:makeframes/Services/uploadtocloudinary/uploadimage_cloud.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/userprofile/model/createshow_req.dart';
 import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
 import 'package:provider/provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class CreateShowProvider with ChangeNotifier {
   TextEditingController namecontroller = TextEditingController();
   TextEditingController amountcontroller = TextEditingController();
   TextEditingController aboutcontroller = TextEditingController();
   FlutterSecureStorage storage = const FlutterSecureStorage();
+  
 
   List<File>? img;
   File? video;
   String? cloudvideourl;
   bool isload = false;
   List<String> cloudinaryimg=[];
+  Uint8List? thumbnail ;
 
 //GET MULTIPLE IMAGE FUNCTION
   Future<void> getimages() async {
@@ -41,7 +45,17 @@ class CreateShowProvider with ChangeNotifier {
 
     if (file == null) return;
 
-    video = File(file.path);
+    video = File(file.path); 
+
+  
+   thumbnail = await VideoThumbnail.thumbnailData(
+    video: video!.path,   
+    imageFormat: ImageFormat.JPEG,
+    quality: 50,
+  );
+  notifyListeners(); 
+  
+
   }
 
 //SUBMIT FUNCTION
@@ -78,13 +92,12 @@ class CreateShowProvider with ChangeNotifier {
         imageArray: cloudinaryimg);
 
     //adding the details to the server
-
     await CreateShowService().uploadStageShow(data).then((value) {
       if (value == true) {
 
         Provider.of<ArtistCreatedShowsProvider>(context, listen: false).artistshows();
         
-         clearTextfield();
+        clearTextfield();
         Navigator.of(context).pop();
         CustomSnackBar().snackBar(context, 'successfully created', color1());
       } else {
@@ -102,6 +115,10 @@ class CreateShowProvider with ChangeNotifier {
     aboutcontroller.clear();
     img = null;
     video = null;
+    thumbnail = null;
+    cloudinaryimg = []; 
+    cloudvideourl = null;
+
     notifyListeners();
   }
 }

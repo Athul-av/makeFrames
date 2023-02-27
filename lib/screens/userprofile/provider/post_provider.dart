@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,22 +11,45 @@ import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/userprofile/model/post_req.dart';
 import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
-class PostProvidr with ChangeNotifier {
+class PostProvidr with ChangeNotifier{
   bool load = false;
   File? file;
+  File? video;
+  Uint8List? vdothumbnail;
   FlutterSecureStorage storage = const FlutterSecureStorage();
   TextEditingController comentcontroller = TextEditingController();
 
-  Future getfile(context) async {
+  Future getimage() async {
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (file == null) return;
 
     final tempImg = File(file.path);
 
+   
     this.file = tempImg;
+    
     notifyListeners();
+  }
+
+  Future getvdo()async{
+    final file = await ImagePicker().pickVideo(source:ImageSource.gallery);
+
+    if(file == null ) return;
+
+     video = File(file.path);
+     notifyListeners();
+    
+   this.file= null; 
+    vdothumbnail = await VideoThumbnail.thumbnailData(
+    video: video!.path,   
+    imageFormat: ImageFormat.JPEG,
+    quality: 50,
+  );
+  notifyListeners(); 
+  
   }
 
   //FUCTION TO ADD THE IMAGE TO CLOUDINARY

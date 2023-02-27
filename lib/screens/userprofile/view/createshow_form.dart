@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/core/snackbar.dart';
+import 'package:makeframes/core/stage_textfield.dart';
 import 'package:makeframes/screens/userprofile/provider/createshow_provider.dart';
 import 'package:provider/provider.dart';
 
 class CreateShowScreen extends StatefulWidget {
-const CreateShowScreen({super.key});
+  const CreateShowScreen({super.key});
 
   @override
   State<CreateShowScreen> createState() => _CreateShowScreenState();
@@ -15,12 +16,13 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   String? category;
-  
+
   var items = ['Drama', 'Song', 'Dance', 'Mimicry'];
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CreateShowProvider>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -30,7 +32,7 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                height: height(context, 0.08),
+                height: height(context, 0.07),
                 child: IconButton(
                   icon: const Icon(
                     Icons.arrow_back_ios_new_rounded,
@@ -38,7 +40,8 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    provider.clearTextfield(); 
+                    provider.clearTextfield();
+                    provider.thumbnail = null;
                   },
                 ),
               ),
@@ -47,22 +50,12 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Create new stage show',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w900),
-                  ),
+                  boldtext('Create new stage show', Colors.white, 21),
                   SizedBox(
-                    height: height(context, 0.013),
+                    height: height(context, 0.011),
                   ),
-                  const Text(
-                    'please fill the form to create new show  ',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 113, 113, 113),
-                        fontSize: 13),
-                  ),
+                  normaltext('please fill the form to create new show  ',
+                      const Color.fromARGB(255, 113, 113, 113), 13)
                 ],
               ),
             ),
@@ -70,48 +63,26 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
               flex: 10,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 32, right: 32, bottom: 15, top: 25),
+                    left: 32, right: 32, bottom: 15, top: 18),
                 child: Form(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   key: formkey,
                   child: ListView(
                     children: [
-                      TextFormField(
-                        controller: provider.namecontroller,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "fill this field";
-                          }
-                          return null;
-                        },
-                        cursorColor: color1(),
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(22),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Name of Programme',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 212, 212, 212)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                        ),
-                      ),
+                      CreateStageTextField(
+                          controller: provider.namecontroller,
+                          cursorcolor: color1(),
+                          validatormessage: 'fill this field',
+                          label: 'Name of Programme',
+                          keyboardtype: TextInputType.name,
+                          contentpadding: 22),
                       SizedBox(
                         height: height(context, 0.017),
                       ),
                       DropdownButtonFormField(
                         menuMaxHeight: 260,
-                        hint: const Text(
-                          'select category',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 212, 212, 212)),
-                        ),
+                        hint: normaltext('select category',
+                            const Color.fromARGB(255, 212, 212, 212), 14),
                         dropdownColor: const Color.fromARGB(255, 77, 77, 77),
                         items: items.map((String items) {
                           return DropdownMenuItem(
@@ -144,70 +115,30 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                       SizedBox(
                         height: height(context, 0.017),
                       ),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: provider.amountcontroller,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "fill this field";
-                          }
-                          return null;
-                        },
-                        cursorColor: color1(),
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(22),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Amount',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 212, 212, 212)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                        ),
-                      ),
+                      CreateStageTextField(
+                          controller: provider.amountcontroller,
+                          cursorcolor: color1(),
+                          label: 'Amount',
+                          validatormessage: 'fill this field',
+                          keyboardtype: TextInputType.number,
+                          contentpadding: 22),
                       SizedBox(
                         height: height(context, 0.017),
                       ),
-                      TextFormField(
-                        controller: provider.aboutcontroller,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 2,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "fill this field";
-                          }
-                          return null;
-                        },
-                        cursorColor: color1(),
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'About the programme',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 212, 212, 212)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                        ),
-                      ),
+                      CreateStageTextField(
+                          controller: provider.aboutcontroller,
+                          cursorcolor: color1(),
+                          label: 'About the programme',
+                          maxlines: 2,
+                          validatormessage: 'fill this field',
+                          keyboardtype: TextInputType.name,
+                          contentpadding: 20),
                       const Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
                             padding: EdgeInsets.all(5.0),
                             child: Text(
-                              'minimum 30 letters*',
+                              'minimum 40 letters*',
                               style: TextStyle(
                                   color: Color.fromARGB(255, 162, 162, 162),
                                   fontSize: 7),
@@ -216,51 +147,75 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                       SizedBox(
                         height: height(context, 0.017),
                       ),
+                      Consumer<CreateShowProvider>(
+                        builder: (context, value, child) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  provider.getimages();
+                                },
+                                child: Container(
+                                  height: height(context, 0.13),
+                                  width: width(context, 0.33),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Color.fromARGB(255, 38, 38, 38),
+                                  ),
+                                  child: value.img != null
+                                      ? Image.file(
+                                          value.img![0],
+                                          fit: BoxFit.cover,
+                                        )
+                                      : const Icon(
+                                          Icons.image,
+                                          color: Color.fromARGB(
+                                              255, 198, 198, 198),
+                                          size: 39,
+                                        ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  provider.getvideo();
+                                },
+                                child: Container(
+                                  height: height(context, 0.13),
+                                  width: width(context, 0.33),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Color.fromARGB(255, 38, 38, 38),
+                                  ),
+                                  child: value.thumbnail != null
+                                      ? Image.memory(
+                                          value.thumbnail!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : const Icon(
+                                          Icons.video_file,
+                                          color: Color.fromARGB(
+                                              255, 198, 198, 198),
+                                          size: 39,
+                                        ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              provider.getimages();
-                            },
-                            child: Container(
-                              height: height(context, 0.13),
-                              width: width(context, 0.33),
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Color.fromARGB(255, 38, 38, 38),
-                              ),
-                              child: const Icon(
-                                Icons.image,
-                                color: Color.fromARGB(255, 198, 198, 198),
-                                size: 39,
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              provider.getvideo();
-                            },
-                            child: Container(
-                              height: height(context, 0.13),
-                              width: width(context, 0.33),
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Color.fromARGB(255, 38, 38, 38),
-                              ),
-                              child: const Icon(
-                                Icons.video_file,
-                                color: Color.fromARGB(255, 198, 198, 198),
-                                size: 39,
-                              ),
-                            ),
-                          )
+                          //  Text('image',style: TextStyle(color: Colors.white,fontSize: 10),),
+                          normaltext('image', Colors.white, 10),
+                          normaltext('video', Colors.white, 10),
                         ],
                       ),
                       SizedBox(
-                        height: height(context, 0.055),
+                        height: height(context, 0.04),
                       ),
                       Consumer<CreateShowProvider>(
                         builder: (context, value, child) {
@@ -271,14 +226,14 @@ class _CreateShowScreenState extends State<CreateShowScreen> {
                                   if (value.img != null &&
                                       value.video != null &&
                                       provider.aboutcontroller.text.length >=
-                                          30) {
+                                          40) {
                                     value.createshow(category, context);
                                   } else if (provider
                                           .aboutcontroller.text.length <
                                       30) {
                                     CustomSnackBar().snackBar(
                                         context,
-                                        'please input atleast 30 letters in about field',
+                                        'please input atleast 40 letters in about field',
                                         const Color.fromARGB(255, 126, 42, 36));
                                   } else {
                                     CustomSnackBar().snackBar(

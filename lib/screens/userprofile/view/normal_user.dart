@@ -74,13 +74,9 @@ class NormalUserProfile extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => const BeAnartistForm()));
                         },
-                        child: Text(
-                          'Artist Mode',
-                          style: TextStyle(
-                              color: color1(),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ))
+
+                        child: boldtext('Artist Mode', color1(), 16),
+                        )
                   ],
                 ))
           ],

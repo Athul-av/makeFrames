@@ -4,8 +4,8 @@ import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/userprofile/provider/post_provider.dart';
 import 'package:provider/provider.dart';
 
-class PostScreen extends StatelessWidget {
-  const PostScreen({super.key});
+class PostVideoScreen extends StatelessWidget {
+  const PostVideoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,8 @@ class PostScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.of(context).pop();
-            postprovider.file = null;
+          postprovider.video = null;
+          postprovider.vdothumbnail = null;
           },
         ),
       ),
@@ -37,12 +38,10 @@ class PostScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
                             color: const Color.fromARGB(255, 22, 22, 22)),
-                        child: value.file != null
-                            ? Image(
-                                image: FileImage(value.file!),
-                              )
+                        child: value.vdothumbnail != null
+                            ? Image.memory(value.vdothumbnail!)
                             : const Icon(
-                                Icons.image_not_supported,
+                                Icons.videocam_off_rounded, 
                                 color: Color.fromARGB(255, 115, 115, 115),
                                 size: 80,
                               ));
@@ -53,9 +52,9 @@ class PostScreen extends StatelessWidget {
                     radius: 30.0,
                     backgroundColor: const Color.fromARGB(255, 69, 69, 69),
                     child: IconButton(
-                      icon: const Icon(Icons.camera_alt_rounded),
+                      icon: const Icon(Icons.videocam_rounded), 
                       onPressed: () {
-                        postprovider.getimage();
+                        postprovider.getvdo();
                       },
                     ),
                   ),
@@ -100,14 +99,14 @@ class PostScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    if (postprovider.file != null) {
-                      await postprovider.uploadpost(context);
-                      Navigator.of(context).pop();
-                      postprovider.file = null;
-                      // postprovider.comentcontroller.clear();
+                    if (postprovider.video != null) {
+                      // await postprovider.uploadpost(context);
+                      // Navigator.of(context).pop();
+                      // postprovider.file = null;
+                      // // postprovider.comentcontroller.clear();
 
                     } else {
-                      CustomSnackBar().snackBar(context, 'pick a image',
+                      CustomSnackBar().snackBar(context, 'pick a video',
                           const Color.fromARGB(255, 137, 38, 31));
                     }
                   },

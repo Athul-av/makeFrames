@@ -59,22 +59,11 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Be an artist !',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w900),
-                  ),
+                  boldtext('Be an artist!', Colors.white, 21),
                   SizedBox(
                     height: height(context, 0.013),
                   ),
-                  const Text(
-                    'please fill the form to be an artist ',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 113, 113, 113),
-                        fontSize: 13),
-                  ),
+                  normaltext('please fill the form to be an artist ',const Color.fromARGB(255, 113, 113, 113), 13)
                 ],
               ),
             ),
@@ -90,11 +79,7 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                     children: [
                       DropdownButtonFormField(
                         menuMaxHeight: 260,
-                        hint: const Text(
-                          'select category',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 187, 187, 187)),
-                        ),
+                        hint: normaltext('select category',const  Color.fromARGB(255, 187, 187, 187), 14),
                         dropdownColor: const Color.fromARGB(255, 77, 77, 77),
                         items: items.map((String items) {
                           return DropdownMenuItem(

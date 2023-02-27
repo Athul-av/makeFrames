@@ -45,6 +45,9 @@ dependencies:
   image_picker: ^0.8.6+1
   path_provider: ^2.0.12
   video_thumbnail: ^0.5.3
+  shape_of_view_null_safe: ^2.0.0
+  video_player: ^2.5.2
+ 
  
 
 dev_dependencies:

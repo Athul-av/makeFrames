@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
@@ -54,6 +55,7 @@ class SplashProvider with ChangeNotifier {
                 .artistshows();
             //to get all stage shows
             Provider.of<AllStageShowProvider>(context,listen: false).getallstage(); 
+           
           } else {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => LoginScreen()));

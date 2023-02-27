@@ -26,3 +26,11 @@ Widget hsizedbox(context, size) {
 }
 
 Color scaffoldback = const Color.fromARGB(255, 15, 15, 15 );
+
+Widget normaltext(String content,Color color,double size){
+  return Text(content, style:TextStyle(color:color, fontSize:size));
+}
+
+Widget boldtext(String content,Color color,double size){
+  return Text(content,style: TextStyle(color: color,fontSize: size,fontWeight: FontWeight.bold),);
+}

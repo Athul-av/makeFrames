@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:makeframes/core/auth_textfield.dart';
 
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
@@ -13,7 +14,6 @@ class SignupScreen extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    
     final provider = Provider.of<SignUpProvdr>(context, listen: false);
 
     return Scaffold(
@@ -27,21 +27,12 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Create new account',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 21,
-                      fontWeight: FontWeight.w900),
-                ),
+                boldtext('Create new account', Colors.white, 21),
                 SizedBox(
                   height: height(context, 0.013),
                 ),
-                const Text(
-                  'Please fill in the form to continue',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 113, 113, 113), fontSize: 13),
-                ),
+                normaltext('Please fill in the form to continue',
+                    const Color.fromARGB(255, 113, 113, 113), 13)
               ],
             ),
           ),
@@ -55,70 +46,33 @@ class SignupScreen extends StatelessWidget {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: ListView(
                   children: [
-                    TextFormField(
-                      controller: provider.userNameController,
-                      cursorColor: color1(),
-                      validator: ((value) {
-                        if (value!.isEmpty) {
-                          return "enter username";
-                        } else {
-                          return null;
-                        }
-                      }),
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'User Name',
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 190, 190, 190)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          prefixIcon: const Icon(
-                            Icons.person,
-                            size: 20,
-                            color: Color.fromARGB(255, 221, 221, 221),
-                          )),
-                    ),
+                    AuthenticationTextField(
+                        controller: provider.userNameController, 
+                        color: color1(),
+                        keyboard: TextInputType.name,
+                        label: 'User Name',
+                        validatormssg: "enter username",
+                        prefix: const Icon(
+                          Icons.person, 
+                          size: 20,
+                          color: Color.fromARGB(255, 221, 221, 221),
+                        ),
+                      ),
                     SizedBox(
                       height: height(context, 0.02),
                     ),
-                    TextFormField(
-                      controller: provider.emailController,
-                      cursorColor: color1(),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: ((value) {
-                        if (value!.isEmpty) {
-                          return "enter your email";
-                        } else {
-                          return null;
-                        }
-                      }),
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Email',
-                          labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 190, 190, 190)),
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 38, 38, 38),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          prefixIcon: const Icon(
-                            CupertinoIcons.mail_solid,
-                            size: 20,
-                            color: Color.fromARGB(255, 220, 220, 220),
-                          )),
-                    ),
+                    AuthenticationTextField(
+                        controller: provider.emailController, 
+                        color: color1(),
+                        keyboard: TextInputType.emailAddress,
+                        label: 'Email',
+                        validatormssg: "enter email",
+                        prefix: const Icon(
+                          CupertinoIcons.mail_solid,  
+                          size: 20,
+                          color: Color.fromARGB(255, 221, 221, 221),
+                        ),
+                      ),
                     SizedBox(
                       height: height(context, 0.02),
                     ),
@@ -245,28 +199,22 @@ class SignupScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                "Have an Account?",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 207, 207, 207),
-                                    fontSize: 13),
-                              ),
+                              normaltext("Have an Account",
+                                  const Color.fromARGB(255, 207, 207, 207), 13),
                               TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (_) => LoginScreen()));
-                                            provider.disposeTextfield(); 
+                                    provider.disposeTextfield();
                                   },
-                                  child: const Text(
-                                    'Sign in',
-                                    style: TextStyle(
-                                      color: Color.fromARGB(251, 5, 113, 74),
-                                    ),
-                                  ))
-                            ],
-                          ),
-                        ))
+                                  child: normaltext(
+                                      'Sign in',
+                                      const Color.fromARGB(251, 5, 113, 74),
+                                      15))
+                        ],
+                      ),
+                    ))
                   ],
                 ),
               ),

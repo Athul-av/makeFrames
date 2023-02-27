@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/ArtistcreatedshowsService/createdshow_servc.dart';
+import 'package:makeframes/Services/artistcreatedshowsService/createdshow_servc.dart';
 import 'package:makeframes/screens/userprofile/model/createdshow_res.dart';
 
 class ArtistCreatedShowsProvider with ChangeNotifier {

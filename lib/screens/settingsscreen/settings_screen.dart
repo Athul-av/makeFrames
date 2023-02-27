@@ -18,13 +18,14 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: scaffoldback,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 5.0),
-          child: Text(
-            'Settings',
-            style: TextStyle(
-                color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
-          ),
+        title:  Padding(
+          padding:const EdgeInsets.only(left: 5.0),
+          // child: Text(
+          //   'Settings',
+          //   style: TextStyle(
+          //       color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          // ),
+          child: boldtext('Settings', Colors.white, 22),
         ),
         centerTitle: true,
       ),
@@ -44,11 +45,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {},
-                            child: const Text(
-                              'Terms & Conditions',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
+                            child:normaltext("Terms & condition", Colors.white, 15)), 
                       ],
                     ),
                   ),
@@ -63,11 +60,8 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {},
-                            child: const Text(
-                              'About us',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
+                            child: normaltext("About Us", Colors.white, 15),
+                            ),
                       ],
                     ),
                   ),
@@ -82,11 +76,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {},
-                            child: const Text(
-                              'Share app ',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
+                            child: normaltext("Share App", Colors.white, 15)),
                       ],
                     ),
                   ),
@@ -110,13 +100,7 @@ class SettingsScreen extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.of(ctx).pop(),
-                                      child: const Text(
-                                        'cancel',
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 29, 29, 29),
-                                            fontSize: 17),
-                                      ),
+                                      child: normaltext('cancel',const  Color.fromARGB(255, 29, 29, 29), 17), 
                                     ),
                                     TextButton(
                                       onPressed: () async {
@@ -136,23 +120,13 @@ class SettingsScreen extends StatelessWidget {
                                                 listen: false)
                                             .currentIndex = 0;
                                       },
-                                      child: const Text(
-                                        'continue',
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 143, 18, 9),
-                                            fontSize: 17),
-                                      ),
+                                      child: normaltext('continue',const  Color.fromARGB(255, 143, 18, 9), 17), 
                                     ),
                                   ],
                                 ),
                               );
                             },
-                            child: const Text(
-                              'Sign out ',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
+                            child:  normaltext("Sign Out", Colors.white, 15)),
                       ],
                     ),
                   ),

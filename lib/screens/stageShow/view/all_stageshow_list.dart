@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/stageShow/provider/allstageshow_provider.dart';
 import 'package:makeframes/screens/stageShow/view/stageshow_item.dart';
@@ -20,10 +19,8 @@ class StageshowList extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-          title: const Text(
-            "Stage shows",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+
+          title: boldtext("Stage shows", Colors.white , 21),
           centerTitle: true,
         ),
         body: Consumer<AllStageShowProvider>(
@@ -36,8 +33,8 @@ class StageshowList extends StatelessWidget {
                 child: CupertinoSearchTextField(
                   backgroundColor:const Color.fromARGB(255, 38, 38, 38),
                   placeholder: 'search',
-                  placeholderStyle: const TextStyle(
-                      color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
+                  placeholderStyle:const TextStyle(
+                  color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
                   itemColor:const Color.fromARGB(255, 180, 180, 180),
                   padding:const EdgeInsets.all(13),
                   style:const TextStyle(color: Colors.white),
@@ -47,8 +44,10 @@ class StageshowList extends StatelessWidget {
               ),
               Expanded(
                
-                  
-                       child: ListView.builder(
+                    child:
+                    value.data == null || value.data!.isEmpty ? 
+                    Center(child: boldtext('No Stage show', Colors.white, 13),):
+                        ListView.builder(
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
                   
@@ -58,12 +57,13 @@ class StageshowList extends StatelessWidget {
                         child: Showcontainer(value: value.data![index]), 
                       );  
                     },
-                    itemCount: value.data!.length,
+                    itemCount: value.data!.length, 
                   )
                     
                    
                 
-              ),
+              )  
+             
             ],
           );
           },

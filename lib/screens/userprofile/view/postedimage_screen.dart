@@ -31,16 +31,11 @@ class PostedImageorVideoScreen extends StatelessWidget {
           SizedBox(
             height: height(context, 0.02),
             width: MediaQuery.of(context).size.width,
-            child: const Align(
-                alignment: Alignment.centerRight,
+            child:  Align(
+                alignment: Alignment.topRight, 
                 child: Padding(
-                  padding: EdgeInsets.only(right: 10.0),
-                  child: Text(
-                    '19-8-2018',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 189, 189, 189),
-                        fontSize: 13),
-                  ),
+                  padding:const EdgeInsets.only(right: 10.0),
+                  child: normaltext('13-03-2023',const Color.fromARGB(255, 189, 189, 189), 13),
                 )),
           ),
           SizedBox(

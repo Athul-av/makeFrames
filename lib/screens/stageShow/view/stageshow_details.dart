@@ -1,107 +1,112 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/stageShow/model/allstageshow_res.dart';
 import 'package:makeframes/screens/stageShow/provider/allstageshow_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
+import 'package:video_player/video_player.dart';
 
 class StageShowDetails extends StatelessWidget {
-   StageShowDetails({super.key,required this.value});
-AllStageShowRes value;
-  @override
+  StageShowDetails({super.key, required this.value});
+  AllStageShowRes value;
+  
+
+   @override
   Widget build(BuildContext context) {
-    final providerstage = Provider.of<AllStageShowProvider>(context,listen: false);
+    Provider.of<AllStageShowProvider>(context,listen: false).videoplayerinitialize(value.vdoFile!); 
     return Scaffold(
       backgroundColor: scaffoldback,
-     appBar: AppBar(
-          backgroundColor: Colors.black,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: ListView(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Provider.of<AllStageShowProvider>(context,listen: false).contrlr.pause(); 
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+      ),
+       body: ListView( 
+        children: [
+          hsizedbox(context, 0.01),
+          Padding(
+            padding: const EdgeInsets.only(left: 8,right: 8),
+            child: Align(child: boldtext(value.name!,Colors.white, 22)), 
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8,right: 8),
+            child: Align(child: normaltext(value.category!,const Color.fromARGB(255, 174, 174, 174), 12)),
+          ),
+          hsizedbox(context, 0.032),
+          Padding(
+            padding: const EdgeInsets.only(left: 8,right: 8),
+            child: normaltext(value.description!,const Color.fromARGB(255, 214, 214, 214), 15),
+          ),
+           Padding(
+             padding: const EdgeInsets.fromLTRB(0,30,20,20), 
+             child: Align(
+              alignment: Alignment.centerRight,
+              
+               child: ShapeOfView(
+                       height: 28,
+                       width: width(context, 0.24),
+                       shape: BubbleShape(
+                         position: BubblePosition.Left,
+                         arrowPositionPercent: 0.5,
+                         borderRadius: 5,
+                         arrowHeight: 16,
+                         arrowWidth: 13 
+                       ),
+                       child: Container(
+                         width: 40, 
+                         color:color1(), 
+                         child: Center(child: 
+                       
+                        boldtext('₹ ${value.amount}', Colors.white, 14)
+                         ), 
+                       ),
+                     ),
+             ),
+           ), 
+         ListView.builder(
+          shrinkWrap: true,
+          physics:const ScrollPhysics() , 
+           itemBuilder: (context, index) {
+           return Padding(
+             padding: const EdgeInsets.only(top:10.0),
+             child: Image(
+              fit: BoxFit.fill, 
+              image:NetworkImage(value.imageArray![index])),
+           );
+         },
+         itemCount: value.imageArray!.length,), 
+          Consumer<AllStageShowProvider>(
+            builder: (context, value, child) { 
+              return  SizedBox(
+              height: 300, 
+              width: MediaQuery.of(context).size.width, 
+              child:Stack(
+              alignment: Alignment.center,
+                children:[ VideoPlayer(value.contrlr),
+              IconButton(onPressed: (){
+               value.playvdo();
+              }, icon: 
+              value.isplay?
+             const Icon(Icons.pause_circle_filled,size: 45,color: Colors.white,):
+              const Icon(Icons.play_circle_fill,size: 45,color: Colors.white,)) 
+              ]) , 
+            );
+            },
             
-            children: [
-           Align(
-          
-            child:  Text(value.name!,style: const TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
-          const Align(
-             child:  Padding(
-                padding:  EdgeInsets.all(5.0),
-                child: Text('hello',style: TextStyle(color: Color.fromARGB(255, 168, 168, 168),fontSize: 12),),
-              ),
-           ),
-            hsizedbox(context, 0.03),
-            Row(
-              children: [
-                FutureBuilder<Uint8List?>( 
-                  future:providerstage.getThumbnail(value.vdoFile!),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData && snapshot.connectionState == ConnectionState.done){  
-                   return  Stack(
-                    alignment: Alignment.center, 
-                     children:[ SizedBox(
-                                     height: height(context, 0.26),
-                                     width: width(context, 0.46),
-                     child: Image.memory(
-                      
-                       snapshot.data!,fit: BoxFit.cover), 
-                                     ),
-                            const Icon(Icons.play_circle_outline_outlined ,color: Color.fromARGB(255, 169, 169, 169),size: 4,)
-                                     ]
-                   );
-                    }else{
-                       return  SizedBox(
-                  height: height(context, 0.26),
-                  width: width(context, 0.46),
-                   child:const Center(child: Icon(Icons.videocam_off_rounded,color: Color.fromARGB(255, 150, 150, 150),size: 35 ,)), 
-                  );
-                    }
-                    
-                  },
-                
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: height(context, 0.13), 
-                      width: width(context, 0.517),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(value.imageArray![0])), 
-                    ),
-                    SizedBox(
-                       height: height(context, 0.13),  
-                      width: width(context, 0.517),
-                       child: Image(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(value.imageArray![1])), 
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Align(
-              alignment: Alignment.centerRight, 
-              child: TextButton(onPressed: (){}, child:const Text('more media',style: TextStyle(color: Color.fromARGB(255, 27, 92, 146)),))), 
-            hsizedbox(context, 0.01),  
-           Padding(
-             padding:const EdgeInsets.all(5.0),
-             child: Text(value.description!,style: const TextStyle(color: Colors.white,fontSize: 16),),
-           ),
-           Padding(
-             padding: const EdgeInsets.only(top:16.0,left: 5),  
-             child: Text('Amount : ${value.amount} ',style: TextStyle(color:color1(),fontWeight: FontWeight.bold)),
-           )
-            ]),
-        ),
-    );
-  }
+          )
+        ],
+       ),
+     );
+   }
 }
+
+
+
+
+
+
+

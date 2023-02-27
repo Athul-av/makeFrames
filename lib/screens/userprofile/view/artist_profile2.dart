@@ -101,19 +101,6 @@ class ArtistProfileScreen2 extends StatelessWidget {
               ],
             ),
           ),
-          // Expanded(
-          //   child:ListView.separated(
-          //   shrinkWrap: true,
-          //   physics: ScrollPhysics(),
-
-          //     itemBuilder: (context, index) {
-          //       return Container(
-          //         color: Colors.teal,
-          //         height: 60 ,
-          //       );
-          //     }, separatorBuilder: (context, index) {
-          //       return SizedBox(height: 10,);
-          //     }, itemCount: 9) )
           hsizedbox(context, 0.2),
           const Align(
               child: Text('No Posts!',
