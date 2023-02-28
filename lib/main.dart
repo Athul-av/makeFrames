@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DpGetProvider()),
         ChangeNotifierProvider(create: (context) => ArtistCreatedShowsProvider()),
         ChangeNotifierProvider(create: (context) => AllStageShowProvider()),
+        ChangeNotifierProvider(create: (context) => AllUserProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

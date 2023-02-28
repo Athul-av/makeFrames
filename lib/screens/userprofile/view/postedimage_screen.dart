@@ -6,7 +6,7 @@ class PostedImageorVideoScreen extends StatelessWidget {
       {super.key, required this.image, required this.comment});
 
   String image;
-  String comment;
+  String comment; 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

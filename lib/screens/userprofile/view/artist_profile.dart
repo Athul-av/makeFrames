@@ -37,7 +37,7 @@ class ArtistProfileScreen extends StatelessWidget {
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => BottomNavigationScreen()),
+                    MaterialPageRoute(builder: (_) => BottomNavigationScreen()), 
                     (route) => false);
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
@@ -227,7 +227,8 @@ class ArtistProfileScreen extends StatelessWidget {
                   ); 
                 }
               },
-            ))
+            )
+            )
           ],
         ),
       ),

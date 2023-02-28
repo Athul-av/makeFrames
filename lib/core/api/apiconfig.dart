@@ -13,6 +13,7 @@ class Apiconfig {
   static const createshow = "/user/submitProgram";
   static const artistcreatedshow = "/user/viewPrograms"; 
   static const allstageshow = "/user/bringAllpost";
+  static const allusers = "/user/fetchUsers";
  }
 
 class ApiQueryParameter {

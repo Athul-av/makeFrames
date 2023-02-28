@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
+import 'package:makeframes/screens/homescreen&search/view/producer_screen.dart';
 import 'package:makeframes/screens/stageShow/view/all_stageshow_list.dart';
 
 Widget caroselitems(String image, context) {
@@ -25,7 +26,9 @@ Widget caroselitems(String image, context) {
                     backgroundColor: MaterialStateProperty.all(color1()),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ProducerScreen())); 
+                },
                 child:  Padding(
                   padding:const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: boldtext('Approach Producer',const Color.fromARGB(255, 231, 231, 231), 15) 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
 import 'package:makeframes/Services/checkUser/artist_check.dart';
+import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signin/view/loginscreen.dart';
 import 'package:makeframes/screens/stageShow/provider/allstageshow_provider.dart';
@@ -51,10 +52,11 @@ class SplashProvider with ChangeNotifier {
             //to get dp image in profile
             Provider.of<DpGetProvider>(context, listen: false).getdp();
             //to get artist created shows in artist profile
-            Provider.of<ArtistCreatedShowsProvider>(context, listen: false)
-                .artistshows();
+            Provider.of<ArtistCreatedShowsProvider>(context, listen: false).artistshows();
             //to get all stage shows
             Provider.of<AllStageShowProvider>(context,listen: false).getallstage(); 
+            //to get all artists profile
+            Provider.of<AllUserProvider>(context,listen: false).getusers(); 
            
           } else {
             Navigator.of(context).pushReplacement(

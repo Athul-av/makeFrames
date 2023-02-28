@@ -26,8 +26,8 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
     'Director',
     'Producer',
     'Singer',
-    'cinematographer',
-    'editor'
+    'Cinematographer',
+    'Editor'
   ];
 
   @override

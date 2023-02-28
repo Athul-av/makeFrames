@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
-import 'package:makeframes/screens/homescreen/view/homesccreen.dart';
-import 'package:makeframes/screens/search/searchscreen.dart';
+import 'package:makeframes/screens/homescreen&search/view/homesccreen.dart';
+import 'package:makeframes/screens/homescreen&search/view/searchscreen.dart';
 import 'package:makeframes/screens/settingsscreen/settings_screen.dart';
 import 'package:provider/provider.dart';
 
