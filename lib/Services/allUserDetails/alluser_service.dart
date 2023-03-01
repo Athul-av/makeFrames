@@ -19,7 +19,7 @@ class AllUserService{
  
     try {
 
-      Response response = await dio.get(path,options: option,queryParameters: queryparams);
+      Response response = await dio.get(path,options: option,queryParameters: queryparams);  
       if(response.statusCode ==200 || response.statusCode ==201){
         
 
@@ -35,7 +35,7 @@ class AllUserService{
 
     }on DioError catch (e) {
       log(e.message);
-      log('hi4'); 
+     
     }
    return null;
   }

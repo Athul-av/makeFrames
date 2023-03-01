@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
@@ -44,40 +46,43 @@ class SignUpProvdr with ChangeNotifier {
   }
 
 //SIGNUP ON THE OTP BUTTON PRESSED
-  void signupButtonPress(context) async {
+  Future<void> signupButtonPress(context) async {  
     final email = emailController.text.trim();
     final username = userNameController.text.trim();
     final password = passwordController.text.trim();
     final otp = otpController.text.trim();
 
-    SignupReqModel model = SignupReqModel(
+    final SignupReqModel model = SignupReqModel(
         email: email, firstName: username, password: password, otp: otp);
 
-    AuthApiService().signup(model).then((value) {
-      if (value!.signupResIs == false && value.serverOtp == true) {
-        storage.write(key: 'token', value: value.token);
+   await AuthApiService().signup(model).then((value)=> {
+      if ( value!.serverOtp == true)
+       {
 
-        goToHome(context);
-        disposeTextfield(); 
+         storage.write(key: 'token', value:value.token), 
+     
+         
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => const Splash()),
+                  (route) => false),
+                 
+              disposeTextfield()
+
       } else if (value.signupResIs == true) {
         CustomSnackBar().snackBar(context, 'email already taken',
-            const Color.fromARGB(255, 160, 45, 37));
-        Navigator.of(context).pop();
-        otpController.clear();
+            const Color.fromARGB(255, 160, 45, 37)),
+        Navigator.of(context).pop(),
+        otpController.clear()
       } else {
         CustomSnackBar().snackBar(context, 'otp verification failed',
-            const Color.fromARGB(255, 160, 45, 37));
-        Navigator.of(context).pop();
-        otpController.clear();
+            const Color.fromARGB(255, 160, 45, 37)),
+        Navigator.of(context).pop(),
+        otpController.clear()
       }
     });
   }
 
-  void goToHome(context) {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) =>const Splash())); 
-    notifyListeners();
-  }
+ 
 
 //CLEAR THE TEXT FIELD
   void disposeTextfield() {

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
+import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
 import 'package:provider/provider.dart';
@@ -105,14 +108,16 @@ class SettingsScreen extends StatelessWidget {
                                     TextButton(
                                       onPressed: () async {
                                         //DELETING THE TOKEN
-                                        await storage.deleteAll();
+                                        await storage.deleteAll(); 
+                                    Provider.of<AllUserProvider>(context,listen: false).aristnullonsignout(); 
+                                  log( Provider.of<AllUserProvider>(context,listen: false).actors.toString());  
 
                                         //NAVIGATING TO SIGN IN
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        const Splash()),
+                                                         Splash()),  
                                                 (route) => false);
 
                                         //BOTTOMNAV CHANGING TO HOMESCREEN

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
@@ -8,7 +9,10 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<SplashProvider>(context, listen: false).timer(context);
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) =>  Provider.of<SplashProvider>(context, listen: false).timer(context)); 
+   
+    log('helllo'); 
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(

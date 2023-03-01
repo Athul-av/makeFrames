@@ -1,10 +1,10 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:provider/provider.dart';
 
 Future<void> displayTextInputDialog(BuildContext context) async {
+  final provider = Provider.of<SignUpProvdr>(context,listen: false);
   GlobalKey<FormState> key = GlobalKey();
   return showDialog(
       context: context,
@@ -38,9 +38,9 @@ Future<void> displayTextInputDialog(BuildContext context) async {
                     child: const Text('SUBMIT'),
                     onPressed: () {
                       if (key.currentState!.validate()) {
-                        Provider.of<SignUpProvdr>(context, listen: false)
-                            .signupButtonPress(context);
-                        log('hiii');
+                        
+                          provider.signupButtonPress(context);
+                       
                       }
                     }),
               )

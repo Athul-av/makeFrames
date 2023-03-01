@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
@@ -24,13 +23,14 @@ class LoginProvider with ChangeNotifier {
     final loguser = LoginreqModel(email: email, password: password);
 
     await AuthApiService().login(loguser).then((value) => {
-          log("message"),
+        
           if (value!.isPass == true)
             {
               storage.write(key: 'token', value: value.token),
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => const Splash()),
                   (route) => false),
+
               disposeTextfieldLogin()
             }
           else

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/Services/allPosts/all_post_service.dart';
@@ -12,7 +10,7 @@ class AllPostProvider with ChangeNotifier {
 //function for getting the posts in artist profile which the artist posted
   Future<void> getallpost() async {
     String? token = await storage.read(key: 'token');
-    log(token.toString());
+    // log(token.toString());
     data = await AllPostService().getallpost(token!);
     notifyListeners();
   }

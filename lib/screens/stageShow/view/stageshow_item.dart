@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/stageShow/model/allstageshow_res.dart';
+import 'package:makeframes/screens/stageShow/view/bookshow_screen.dart';
 import 'package:makeframes/screens/stageShow/view/stageshow_details.dart';
 
 class Showcontainer extends StatelessWidget {
@@ -67,7 +68,7 @@ AllStageShowRes value;
                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
                            borderRadius: BorderRadius.circular(12.0)))),
                    onPressed: () {
-                    
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (_)=> BookstageShowScreen()));  
                    },
                    child:
                   normaltext('Book Now',const Color.fromARGB(255, 231, 231, 231), 11) 

@@ -47,6 +47,11 @@ dependencies:
   video_thumbnail: ^0.5.3
   shape_of_view_null_safe: ^2.0.0
   video_player: ^2.5.2
+  
+  location: ^4.4.0
+
+ 
+ 
  
  
 

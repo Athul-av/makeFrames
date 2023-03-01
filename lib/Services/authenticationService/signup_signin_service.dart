@@ -20,7 +20,7 @@ class AuthApiService {
           data: jsonEncode(model.toJson()),
           queryParameters: ApiQueryParameter.queryParameter);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log(response.data.toString());
+        // log(response.data.toString());
         final LoginResp loginmodl = LoginResp.fromJson(response.data);
         return loginmodl;
       }
@@ -42,7 +42,7 @@ class AuthApiService {
         ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log(response.data.toString());
+        // log(response.data.toString());
         final signupmodl = SignupRes.fromJson(response.data);
         return signupmodl;
       }
@@ -79,7 +79,7 @@ class AuthApiService {
           data: {"token": token});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log(response.data.toString());
+        // log(response.data.toString());
 
         final tokencheck = LoginCheckResp.fromJson(response.data);
         return tokencheck;

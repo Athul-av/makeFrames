@@ -24,12 +24,15 @@ class SplashProvider with ChangeNotifier {
     Timer(const Duration(milliseconds: 1700), () async {
       logincheck = await storage.read(key: 'token');
 
+      log(logincheck.toString()); 
+
       //CHECKING THE TOKEN VALID OR NOT
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
           
           //THE FUNCTION RETURNING THE TOKEN VALID OR NOT AND THE USERNAME
           if (value!.user == true) {
+             
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
 
@@ -57,6 +60,7 @@ class SplashProvider with ChangeNotifier {
             Provider.of<AllStageShowProvider>(context,listen: false).getallstage(); 
             //to get all artists profile
             Provider.of<AllUserProvider>(context,listen: false).getusers(); 
+            log('hi');
            
           } else {
             Navigator.of(context).pushReplacement(
