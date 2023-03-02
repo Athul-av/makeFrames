@@ -15,6 +15,7 @@ class AllUserProvider with ChangeNotifier{
  List<AllUsersDetailsRes> directors = [];
  List<AllUsersDetailsRes> actress = [];
 
+
  FlutterSecureStorage storage = const FlutterSecureStorage();
 
   Future<void> getusers() async {
@@ -33,7 +34,8 @@ class AllUserProvider with ChangeNotifier{
    //get the producers
     
 
-    for(AllUsersDetailsRes value in artistdata){   
+
+    for(AllUsersDetailsRes value in artistdata){    
       if(value.domain == 'Producer'){
         producers.add(value);  
         
@@ -51,9 +53,6 @@ class AllUserProvider with ChangeNotifier{
     log(actress.length.toString());
     log(directors.length.toString()); 
     
-
-
-
   }   
  
 

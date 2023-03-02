@@ -15,17 +15,16 @@ class AllUserService{
 
     final option = Options(headers: {'cookie':token}); 
     final queryparams = {'withCredentials': true};
-  
  
     try {
 
       Response response = await dio.get(path,options: option,queryParameters: queryparams);  
       if(response.statusCode ==200 || response.statusCode ==201){
-        
 
         final List<dynamic> json = response.data;
         final res = json.map((e) => AllUsersDetailsRes.fromJson(e)).toList(); 
         return res;
+        
       } 
       else{
       

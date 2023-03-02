@@ -15,6 +15,8 @@ class Apiconfig {
   static const allstageshow = "/user/bringAllpost";
   static const allusers = "/user/allUsers"; 
   static const userspost = "/user/fetchPostsOfUser";
+  static const bookshow ="/user/bookProgram"; 
+  static const userbookedshows = "/user/fetchBookedPg";
  }
 
 class ApiQueryParameter {

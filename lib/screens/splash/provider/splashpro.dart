@@ -7,6 +7,7 @@ import 'package:makeframes/Services/checkUser/artist_check.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signin/view/loginscreen.dart';
+import 'package:makeframes/screens/homescreen&search/provider/userbookinglist_provider.dart';
 import 'package:makeframes/screens/stageShow/provider/allstageshow_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
@@ -60,6 +61,8 @@ class SplashProvider with ChangeNotifier {
             Provider.of<AllStageShowProvider>(context,listen: false).getallstage(); 
             //to get all artists profile
             Provider.of<AllUserProvider>(context,listen: false).getusers(); 
+            //to get user booked StageshowList
+           Provider.of<UserBookingListProvider>(context,listen: false).getuserbookingdetails();   
             log('hi');
            
           } else {
