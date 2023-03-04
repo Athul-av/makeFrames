@@ -27,21 +27,21 @@ class ProfilePicProvidr with ChangeNotifier {
     notifyListeners();
 
 //FUCTION TO ADD THE IMAGE TO CLOUDINARY
-    await UploadService().uploadImageCloudinary(this.image!).then((value) async {
+    await UploadService()
+        .uploadImageCloudinary(this.image!)
+        .then((value) async {
       if (value != null) {
-        log(value.toString()); 
+        log(value.toString());
 //CLOUDINARY RETURN A URL, ADD THAT TO THE BACKEND SERVER
         String? token = await storage.read(key: 'token');
         ProfilePicReq model = ProfilePicReq(image: value, token: token);
 
         await ProfilePicAddService().addProfilepic(model).then((value) async {
           if (value == true) {
-
             Provider.of<DpGetProvider>(context, listen: false).getdp();
 
             CustomSnackBar().snackBar(context, "profile pic changed", color1());
             log('profile pic added to server');
-
           } else {
             CustomSnackBar().snackBar(context, 'unable to change profile pic',
                 const Color.fromARGB(255, 152, 38, 30));

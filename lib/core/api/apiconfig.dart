@@ -17,6 +17,9 @@ class Apiconfig {
   static const userspost = "/user/fetchPostsOfUser";
   static const bookshow ="/user/bookProgram"; 
   static const userbookedshows = "/user/fetchBookedPg";
+  static const artistgotbookings ="/user/checkBookingHost";
+  static const acceptshow = "/user/acceptProgram";
+  static const denyshow = "/user/rejectProgram";
  }
 
 class ApiQueryParameter {

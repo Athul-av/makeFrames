@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -21,8 +20,8 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: scaffoldback,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title:  Padding(
-          padding:const EdgeInsets.only(left: 5.0),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 5.0),
           // child: Text(
           //   'Settings',
           //   style: TextStyle(
@@ -48,7 +47,8 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {},
-                            child:normaltext("Terms & condition", Colors.white, 15)), 
+                            child: normaltext(
+                                "Terms & condition", Colors.white, 15)),
                       ],
                     ),
                   ),
@@ -62,9 +62,9 @@ class SettingsScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         TextButton(
-                            onPressed: () {},
-                            child: normaltext("About Us", Colors.white, 15),
-                            ),
+                          onPressed: () {},
+                          child: normaltext("About Us", Colors.white, 15),
+                        ),
                       ],
                     ),
                   ),
@@ -103,35 +103,38 @@ class SettingsScreen extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.of(ctx).pop(),
-                                      child: normaltext('cancel',const  Color.fromARGB(255, 29, 29, 29), 17), 
+                                      child: normaltext(
+                                          'cancel',
+                                          const Color.fromARGB(255, 29, 29, 29),
+                                          17),
                                     ),
                                     TextButton(
                                       onPressed: () async {
                                         //DELETING THE TOKEN
-                                        await storage.deleteAll(); 
-                                    Provider.of<AllUserProvider>(context,listen: false).aristnullonsignout(); 
-                                  log( Provider.of<AllUserProvider>(context,listen: false).actors.toString());  
+                                        await storage.deleteAll();
+                                        Provider.of<AllUserProvider>(context,listen: false).aristnullonsignout();
+                                        
 
                                         //NAVIGATING TO SIGN IN
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
-                                                    builder: (_) =>
-                                                         Splash()),  
+                                                    builder: (_) =>const Splash()),
                                                 (route) => false);
 
                                         //BOTTOMNAV CHANGING TO HOMESCREEN
-                                        Provider.of<BottomNavProvider>(context,
-                                                listen: false)
-                                            .currentIndex = 0;
+                                        Provider.of<BottomNavProvider>(context, listen: false).currentIndex = 0;
                                       },
-                                      child: normaltext('continue',const  Color.fromARGB(255, 143, 18, 9), 17), 
+                                      child: normaltext(
+                                          'continue',
+                                          const Color.fromARGB(255, 143, 18, 9),
+                                          17),
                                     ),
                                   ],
                                 ),
                               );
                             },
-                            child:  normaltext("Sign Out", Colors.white, 15)),
+                            child: normaltext("Sign Out", Colors.white, 15)),
                       ],
                     ),
                   ),

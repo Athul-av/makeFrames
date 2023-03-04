@@ -1,7 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makeframes/Services/allusersPosts/allusersPsot_service.dart';
+import 'package:makeframes/Services/allusersPosts/alluserspost_service.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
 import 'package:makeframes/screens/message/message_screen.dart';
@@ -109,9 +108,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
           ),
           Expanded(
               child: FutureBuilder(
-            future: AllPostOfUsers().getuserpost(token!, userdetails.id!),
-            builder: (context, snapshot) { 
-               if(snapshot.hasData || snapshot.data != null) {
+            future: AllPostOfUsers().getuserpost(token!, userdetails.id!), 
+            builder: (context, snapshot) {
+              if (snapshot.hasData || snapshot.data != null) {
                 return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -136,8 +135,8 @@ class ArtistProfileScreen2 extends StatelessWidget {
                       );
                     },
                     itemCount: snapshot.data!.length);
-              }else{
-                return Center(child: boldtext("no posts", Colors.white, 14)); 
+              } else {
+                return Center(child: boldtext("no posts", Colors.white, 14));
               }
             },
           ))

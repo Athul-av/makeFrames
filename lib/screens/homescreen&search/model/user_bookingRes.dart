@@ -22,11 +22,12 @@ class UserBookingsResp {
         this.rejected,
         this.createdAt,
         this.updatedAt,
+        this.v,
     });
 
     String? id;
     ProgramId? programId;
-    DateTime? date;
+    String? date;
     String? time;
     String? address;
     String? mob;
@@ -36,11 +37,12 @@ class UserBookingsResp {
     bool? rejected;
     DateTime? createdAt;
     DateTime? updatedAt;
+    int? v;
 
     factory UserBookingsResp.fromJson(Map<String, dynamic> json) => UserBookingsResp(
         id: json["_id"],
         programId: json["program_id"] == null ? null : ProgramId.fromJson(json["program_id"]),
-        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        date: json["date"],
         time: json["time"],
         address: json["address"],
         mob: json["mob"],
@@ -50,12 +52,13 @@ class UserBookingsResp {
         rejected: json["rejected"],
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
         "program_id": programId?.toJson(),
-        "date": date?.toIso8601String(),
+        "date": date,
         "time": time,
         "address": address,
         "mob": mob,
@@ -65,6 +68,7 @@ class UserBookingsResp {
         "rejected": rejected,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+        "__v": v,
     };
 }
 
@@ -105,11 +109,14 @@ class ProgramId {
         this.booking,
         this.user,
         this.bookingCount,
+        this.v,
+        this.isBloked,
+        this.isBlocked,
     });
 
     String? id;
     String? name;
-    List<dynamic>? selectedDaates;
+    List<String>? selectedDaates;
     String? category;
     int? amount;
     String? description;
@@ -118,11 +125,14 @@ class ProgramId {
     List<dynamic>? booking;
     String? user;
     int? bookingCount;
+    int? v;
+    bool? isBloked;
+    bool? isBlocked;
 
     factory ProgramId.fromJson(Map<String, dynamic> json) => ProgramId(
         id: json["_id"],
         name: json["name"],
-        selectedDaates: json["selectedDaates"] == null ? [] : List<dynamic>.from(json["selectedDaates"]!.map((x) => x)),
+        selectedDaates: json["selectedDaates"] == null ? [] : List<String>.from(json["selectedDaates"]!.map((x) => x)),
         category: json["category"],
         amount: json["amount"],
         description: json["description"],
@@ -131,6 +141,9 @@ class ProgramId {
         booking: json["booking"] == null ? [] : List<dynamic>.from(json["booking"]!.map((x) => x)),
         user: json["user"],
         bookingCount: json["bookingCount"],
+        v: json["__v"],
+        isBloked: json["isBloked"],
+        isBlocked: json["isBlocked"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -145,5 +158,8 @@ class ProgramId {
         "booking": booking == null ? [] : List<dynamic>.from(booking!.map((x) => x)),
         "user": user,
         "bookingCount": bookingCount,
+        "__v": v,
+        "isBloked": isBloked,
+        "isBlocked": isBlocked, 
     };
 }

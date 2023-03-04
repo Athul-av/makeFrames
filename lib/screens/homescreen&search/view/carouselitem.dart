@@ -27,12 +27,13 @@ Widget caroselitems(String image, context) {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)))),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const  ProducerScreen())); 
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const ProducerScreen()));
                 },
-                child:  Padding(
-                  padding:const EdgeInsets.only(top: 10.0, bottom: 10),
-                  child: boldtext('Approach Producer',const Color.fromARGB(255, 231, 231, 231), 15) 
-                ))))
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                    child: boldtext('Approach Producer',
+                        const Color.fromARGB(255, 231, 231, 231), 15)))))
   ]);
 }
 
@@ -63,10 +64,9 @@ Widget caroselitems2(String image, context) {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => const StageshowList()));
                 },
-                child:  Padding(
-                  padding:const EdgeInsets.only(top: 10.0, bottom: 10),
-                  child:boldtext('Book stage show',const Color.fromARGB(255, 231, 231, 231), 15) 
-                 
-                ))))
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                    child: boldtext('Book stage show',
+                        const Color.fromARGB(255, 231, 231, 231), 15)))))
   ]);
 }

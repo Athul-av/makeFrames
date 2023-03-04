@@ -25,15 +25,13 @@ class SplashProvider with ChangeNotifier {
     Timer(const Duration(milliseconds: 1700), () async {
       logincheck = await storage.read(key: 'token');
 
-      log(logincheck.toString()); 
+      log(logincheck.toString());
 
       //CHECKING THE TOKEN VALID OR NOT
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
-          
           //THE FUNCTION RETURNING THE TOKEN VALID OR NOT AND THE USERNAME
           if (value!.user == true) {
-             
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
 
@@ -56,15 +54,19 @@ class SplashProvider with ChangeNotifier {
             //to get dp image in profile
             Provider.of<DpGetProvider>(context, listen: false).getdp();
             //to get artist created shows in artist profile
-            Provider.of<ArtistCreatedShowsProvider>(context, listen: false).artistshows();
+            Provider.of<ArtistCreatedShowsProvider>(context, listen: false)
+                .artistshows();
             //to get all stage shows
-            Provider.of<AllStageShowProvider>(context,listen: false).getallstage(); 
+            Provider.of<AllStageShowProvider>(context, listen: false)
+                .getallstage();
             //to get all artists profile
-            Provider.of<AllUserProvider>(context,listen: false).getusers(); 
+            Provider.of<AllUserProvider>(context, listen: false).getusers();
             //to get user booked StageshowList
-           Provider.of<UserBookingListProvider>(context,listen: false).getuserbookingdetails();   
-            log('hi');
-           
+            Provider.of<UserBookingListProvider>(context, listen: false)
+                .getuserbookingdetails(); 
+            //  //to get artist got bookings list
+            //  Provider.of<ArtistGotBookingProvider>(context,listen: false).getartistbookings();
+
           } else {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => LoginScreen()));

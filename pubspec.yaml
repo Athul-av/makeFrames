@@ -51,6 +51,7 @@ dependencies:
   location: ^4.4.0
   flutter_map: ^3.1.0
   latlong2: ^0.8.1
+  polyline: ^1.0.2
 
  
  

@@ -4,38 +4,28 @@ import 'package:dio/dio.dart';
 import 'package:makeframes/core/api/apiconfig.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
 
-class AllUserService{
-
-
+class AllUserService {
   Dio dio = Dio();
 
-  Future<List<AllUsersDetailsRes>?> getalluser(String token)async{
-
+  Future<List<AllUsersDetailsRes>?> getalluser(String token) async {
     String path = Apiconfig.baseUrl + Apiconfig.allusers;
 
-    final option = Options(headers: {'cookie':token}); 
+    final option = Options(headers: {'cookie': token});
     final queryparams = {'withCredentials': true};
- 
+
     try {
-
-      Response response = await dio.get(path,options: option,queryParameters: queryparams);  
-      if(response.statusCode ==200 || response.statusCode ==201){
-
+      Response response =
+          await dio.get(path, options: option, queryParameters: queryparams);
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> json = response.data;
-        final res = json.map((e) => AllUsersDetailsRes.fromJson(e)).toList(); 
+        final res = json.map((e) => AllUsersDetailsRes.fromJson(e)).toList();
         return res;
-        
-      } 
-      else{
-      
+      } else {
         return null;
-       
       }
-
-    }on DioError catch (e) {
+    } on DioError catch (e) {
       log(e.message);
-     
     }
-   return null;
+    return null;
   }
 }

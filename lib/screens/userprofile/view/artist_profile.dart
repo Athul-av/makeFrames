@@ -20,8 +20,6 @@ class ArtistProfileScreen extends StatelessWidget {
     final providerSplash = Provider.of<SplashProvider>(context, listen: false);
     final providerPicker =
         Provider.of<ProfilePicProvidr>(context, listen: false);
-    final providergetpost =
-        Provider.of<AllPostProvider>(context, listen: false);
 
     return WillPopScope(
       onWillPop: () async {
@@ -37,7 +35,7 @@ class ArtistProfileScreen extends StatelessWidget {
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => BottomNavigationScreen()), 
+                    MaterialPageRoute(builder: (_) => BottomNavigationScreen()),
                     (route) => false);
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
@@ -137,29 +135,27 @@ class ArtistProfileScreen extends StatelessWidget {
                   ),
                   Consumer<AllPostProvider>(
                     builder: (context, value, child) {
-                      return  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            
-                            normaltext(value.data!.length.toString(),
-                                Colors.white, 14),
-                            hsizedbox(context, 0.003),
-                            boldtext('Posts', Colors.white, 14)
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            normaltext('0', Colors.white, 14),
-                            hsizedbox(context, 0.003),
-                            boldtext('Hype', Colors.white, 14)
-                          ],
-                        )
-                      ],
-                    ); 
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              normaltext(value.data!.length.toString(),
+                                  Colors.white, 14),
+                              hsizedbox(context, 0.003),
+                              boldtext('Posts', Colors.white, 14)
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              normaltext('0' , Colors.white, 14),
+                              hsizedbox(context, 0.003),
+                              boldtext('Hype', Colors.white, 14)
+                            ],
+                          )
+                        ],
+                      );
                     },
-                    
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 11, bottom: 5),
@@ -197,7 +193,6 @@ class ArtistProfileScreen extends StatelessWidget {
               builder: (context, value, child) {
                 if (value.data == null || value.data!.isEmpty) {
                   return Center(child: boldtext('No Post', Colors.white, 13));
-                  
                 } else {
                   return GridView.builder(
                     gridDelegate:
@@ -224,11 +219,10 @@ class ArtistProfileScreen extends StatelessWidget {
                       );
                     },
                     itemCount: value.data!.length,
-                  ); 
+                  );
                 }
               },
-            )
-            )
+            ))
           ],
         ),
       ),

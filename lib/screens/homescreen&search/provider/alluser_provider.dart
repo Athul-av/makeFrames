@@ -48,10 +48,7 @@ class AllUserProvider with ChangeNotifier{
       }
       
     }
-    log(producers.length.toString());
-    log(actors.length.toString());
-    log(actress.length.toString());
-    log(directors.length.toString()); 
+    log(artistdata.length.toString());  
     
   }   
  

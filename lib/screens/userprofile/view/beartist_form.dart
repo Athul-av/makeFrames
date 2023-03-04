@@ -63,7 +63,8 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                   SizedBox(
                     height: height(context, 0.013),
                   ),
-                  normaltext('please fill the form to be an artist ',const Color.fromARGB(255, 113, 113, 113), 13)
+                  normaltext('please fill the form to be an artist ',
+                      const Color.fromARGB(255, 113, 113, 113), 13)
                 ],
               ),
             ),
@@ -79,7 +80,8 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
                     children: [
                       DropdownButtonFormField(
                         menuMaxHeight: 260,
-                        hint: normaltext('select category',const  Color.fromARGB(255, 187, 187, 187), 14),
+                        hint: normaltext('select category',
+                            const Color.fromARGB(255, 187, 187, 187), 14),
                         dropdownColor: const Color.fromARGB(255, 77, 77, 77),
                         items: items.map((String items) {
                           return DropdownMenuItem(

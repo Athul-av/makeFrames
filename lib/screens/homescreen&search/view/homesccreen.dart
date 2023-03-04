@@ -51,7 +51,8 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0, left: 5),
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=> UserStageBookings())); 
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const UserStageBookings()));
                 },
                 icon: const Icon(CupertinoIcons.book_fill)),
           ),

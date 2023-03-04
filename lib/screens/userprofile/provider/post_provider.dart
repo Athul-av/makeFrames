@@ -13,7 +13,7 @@ import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-class PostProvidr with ChangeNotifier{
+class PostProvidr with ChangeNotifier {
   bool load = false;
   File? file;
   File? video;
@@ -28,28 +28,26 @@ class PostProvidr with ChangeNotifier{
 
     final tempImg = File(file.path);
 
-   
     this.file = tempImg;
-    
+
     notifyListeners();
   }
 
-  Future getvdo()async{
-    final file = await ImagePicker().pickVideo(source:ImageSource.gallery);
+  Future getvdo() async {
+    final file = await ImagePicker().pickVideo(source: ImageSource.gallery);
 
-    if(file == null ) return;
+    if (file == null) return;
 
-     video = File(file.path);
-     notifyListeners();
-    
-   this.file= null; 
+    video = File(file.path);
+    notifyListeners();
+
+    this.file = null;
     vdothumbnail = await VideoThumbnail.thumbnailData(
-    video: video!.path,   
-    imageFormat: ImageFormat.JPEG,
-    quality: 50,
-  );
-  notifyListeners(); 
-  
+      video: video!.path,
+      imageFormat: ImageFormat.JPEG,
+      quality: 50,
+    );
+    notifyListeners();
   }
 
   //FUCTION TO ADD THE IMAGE TO CLOUDINARY
@@ -71,21 +69,22 @@ class PostProvidr with ChangeNotifier{
 
           await Postservice().addpost(model).then((value) {
             if (value == true) {
-
               Provider.of<AllPostProvider>(context, listen: false).getallpost();
-              
+
               CustomSnackBar()
                   .snackBar(context, 'posted successfully', color1());
-                  comentcontroller.clear(); 
+              comentcontroller.clear();
               log('post success');
             } else {
-              CustomSnackBar().snackBar(context, 'unable to change profile pic',const Color.fromARGB(255, 152, 38, 30));
+              CustomSnackBar().snackBar(context, 'unable to change profile pic',
+                  const Color.fromARGB(255, 152, 38, 30));
               log('post failed');
             }
           });
         } else {
           log('not add');
-           CustomSnackBar().snackBar(context, 'failed', const Color.fromARGB(255, 131, 43, 37)) ; 
+          CustomSnackBar().snackBar(
+              context, 'failed', const Color.fromARGB(255, 131, 43, 37));
         }
       },
     );

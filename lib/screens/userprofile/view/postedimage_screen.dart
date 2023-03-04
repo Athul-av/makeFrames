@@ -6,7 +6,7 @@ class PostedImageorVideoScreen extends StatelessWidget {
       {super.key, required this.image, required this.comment});
 
   String image;
-  String comment; 
+  String comment;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +31,12 @@ class PostedImageorVideoScreen extends StatelessWidget {
           SizedBox(
             height: height(context, 0.02),
             width: MediaQuery.of(context).size.width,
-            child:  Align(
-                alignment: Alignment.topRight, 
+            child: Align(
+                alignment: Alignment.topRight,
                 child: Padding(
-                  padding:const EdgeInsets.only(right: 10.0),
-                  child: normaltext('13-03-2023',const Color.fromARGB(255, 189, 189, 189), 13),
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: normaltext('13-03-2023',
+                      const Color.fromARGB(255, 189, 189, 189), 13),
                 )),
           ),
           SizedBox(

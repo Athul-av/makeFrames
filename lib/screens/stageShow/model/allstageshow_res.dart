@@ -13,7 +13,6 @@ class AllStageShowRes {
         this.bookingCount,
         this.id,
         this.name,
-        this.selectedDaates,
         this.category,
         this.amount,
         this.description,
@@ -25,7 +24,6 @@ class AllStageShowRes {
     int? bookingCount;
     String? id;
     String? name;
-    List<DateTime>? selectedDaates;
     String? category;
     int? amount;
     String? description;
@@ -37,7 +35,6 @@ class AllStageShowRes {
         bookingCount: json["bookingCount"],
         id: json["_id"],
         name: json["name"],
-        selectedDaates: json["selectedDaates"] == null ? [] : List<DateTime>.from(json["selectedDaates"]!.map((x) => DateTime.parse(x))),
         category: json["category"],
         amount: json["amount"],
         description: json["description"],
@@ -50,7 +47,6 @@ class AllStageShowRes {
         "bookingCount": bookingCount,
         "_id": id,
         "name": name,
-        "selectedDaates": selectedDaates == null ? [] : List<dynamic>.from(selectedDaates!.map((x) => x.toIso8601String())),
         "category": category,
         "amount": amount,
         "description": description,

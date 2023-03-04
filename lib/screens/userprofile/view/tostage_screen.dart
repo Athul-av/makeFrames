@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
+import 'package:makeframes/screens/userprofile/provider/artistgotbooking_prvdr.dart';
+import 'package:makeframes/screens/userprofile/view/usergotbooking/artistgotbooking_screen.dart';
 import 'package:makeframes/screens/userprofile/view/createshow_form.dart';
 import 'package:provider/provider.dart';
 import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
@@ -35,10 +37,9 @@ class ToStageScreen extends StatelessWidget {
         body: Consumer<ArtistCreatedShowsProvider>(
           builder: (context, value, child) {
             if (value.data == null || value.data!.isEmpty) {
-               return Center(
+              return Center(
                 child: boldtext('no stage show created!', Colors.white, 13),
               );
-             
             } else {
               return ListView.builder(
                 itemBuilder: (context, index) {
@@ -90,7 +91,20 @@ class ToStageScreen extends StatelessWidget {
                                           '${value.data![index].bookingCount} Booking',
                                           Colors.white,
                                           11),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    ArtistGotBookingScreen(
+                                                      prgrmid:
+                                                          value.data![index].id,
+                                                    ))); 
+                                        Provider.of<ArtistGotBookingProvider>(
+                                                context,
+                                                listen: false) 
+                                            .getartistbookings(
+                                                value.data![index].id!);
+                                      },
                                     ),
                                   )
                                 ],
@@ -150,7 +164,7 @@ class ToStageScreen extends StatelessWidget {
                   );
                 },
                 itemCount: value.data!.length,
-              );  
+              );
             }
           },
         ));

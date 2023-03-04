@@ -37,9 +37,6 @@ class UploadService {
     return null;
   }
 
-
-
-
   Future<String?> uploadvideoCloudinary(File video) async {
     const cloudinaryUrl =
         'https://api.cloudinary.com/v1_1/dyn6m4tou/video/upload';

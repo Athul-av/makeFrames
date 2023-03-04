@@ -18,8 +18,8 @@ class PostVideoScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.of(context).pop();
-          postprovider.video = null;
-          postprovider.vdothumbnail = null;
+            postprovider.video = null;
+            postprovider.vdothumbnail = null;
           },
         ),
       ),
@@ -41,7 +41,7 @@ class PostVideoScreen extends StatelessWidget {
                         child: value.vdothumbnail != null
                             ? Image.memory(value.vdothumbnail!)
                             : const Icon(
-                                Icons.videocam_off_rounded, 
+                                Icons.videocam_off_rounded,
                                 color: Color.fromARGB(255, 115, 115, 115),
                                 size: 80,
                               ));
@@ -52,7 +52,7 @@ class PostVideoScreen extends StatelessWidget {
                     radius: 30.0,
                     backgroundColor: const Color.fromARGB(255, 69, 69, 69),
                     child: IconButton(
-                      icon: const Icon(Icons.videocam_rounded), 
+                      icon: const Icon(Icons.videocam_rounded),
                       onPressed: () {
                         postprovider.getvdo();
                       },
