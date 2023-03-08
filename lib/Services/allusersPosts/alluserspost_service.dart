@@ -9,7 +9,7 @@ class AllPostOfUsers {
 
   Future<List<AllUsersPostsRes>?> getuserpost(String token, String id) async {
     String path = Apiconfig.baseUrl + Apiconfig.userspost;
-    final option = Options(headers: {'cookie': token});
+    final option = Options(headers: {'Authorization':'Bearer $token'}); 
     final payload = {"id": id, "withCredentials": true};
 
     try {

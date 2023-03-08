@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
-import 'package:makeframes/Services/checkUser/artist_check.dart';
+import 'package:makeframes/services/authenticationService/signup_signin_service.dart';
+import 'package:makeframes/services/checkUser/artist_check.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/authentication/signin/view/loginscreen.dart';
@@ -31,7 +31,7 @@ class SplashProvider with ChangeNotifier {
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
           //THE FUNCTION RETURNING THE TOKEN VALID OR NOT AND THE USERNAME
-          if (value!.user == true) {
+          if (value!.user == true) { 
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
 

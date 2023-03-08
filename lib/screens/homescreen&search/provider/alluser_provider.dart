@@ -1,15 +1,14 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/allUserDetails/alluser_service.dart';
+import 'package:makeframes/services/allUserDetails/alluser_service.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
 
 class AllUserProvider with ChangeNotifier{
 
  List<AllUsersDetailsRes>? datas=[];  
  List<AllUsersDetailsRes> artistdata=[];
- List<AllUsersDetailsRes>? searchdata; 
+ List<AllUsersDetailsRes> searchdata=[]; 
  List<AllUsersDetailsRes> producers=[];
  List<AllUsersDetailsRes> actors = [];
  List<AllUsersDetailsRes> directors = [];
@@ -36,19 +35,18 @@ class AllUserProvider with ChangeNotifier{
 
 
     for(AllUsersDetailsRes value in artistdata){    
-      if(value.domain == 'Producer'){
+      if(value.domain == 'PRODUCER'){
         producers.add(value);  
         
-      }else if(value.domain == 'Actor'){
+      }else if(value.domain == 'ACTOR'){
         actors.add(value);
-      }else if(value.domain == 'Actress'){
+      }else if(value.domain == 'ACTRESS'){
         actress.add(value);
-      }else if(value.domain == 'Director'){
+      }else if(value.domain == 'DIRECTOR'){
         directors.add(value); 
       }
       
-    }
-    log(artistdata.length.toString());  
+    } 
     
   }   
  
@@ -60,17 +58,17 @@ class AllUserProvider with ChangeNotifier{
       notifyListeners(); 
     }else{
       searchdata = artistdata.where((element) => 
-      element.domain!.toLowerCase().contains(key.toLowerCase().trim())).toList();
+      element.domain!.toLowerCase().contains(key.toLowerCase().trim())|| element.firstName!.toLowerCase().contains(key.toLowerCase().trim())).toList();  
       notifyListeners();
     }
   }
 
-
+ 
   aristnullonsignout(){
     datas = null; 
     artistdata.clear();
-    searchdata=null; 
-    producers.clear();
+    searchdata.clear();  
+    producers.clear(); 
     actors.clear();
     directors.clear();
     actress.clear();

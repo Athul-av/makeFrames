@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/beArtistService/be_artist_service.dart';
+import 'package:makeframes/services/beArtistService/be_artist_service.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/userprofile/model/be_artist_req.dart';

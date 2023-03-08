@@ -10,14 +10,14 @@ class CreateShowScreen extends StatefulWidget {
 
   @override
   State<CreateShowScreen> createState() => _CreateShowScreenState();
-}
+} 
 
 class _CreateShowScreenState extends State<CreateShowScreen> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   String? category;
-
-  var items = ['Drama', 'Song', 'Dance', 'Mimicry'];
+ 
+  var items = ['DRAMA','SONG','DANCE','MIMICRY','SKIT','OTHER']; 
 
   @override
   Widget build(BuildContext context) {

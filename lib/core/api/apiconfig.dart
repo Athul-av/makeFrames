@@ -1,7 +1,8 @@
 class Apiconfig {
-  static const baseUrl = "http://10.4.3.192:3033";
+  
+  static const baseUrl = "https://makeframes.herewego.shop"; 
   static const loginApi = "/user/login";
-  static const signupApi = "/user/signup";
+  static const signupApi = "/user/signup"; 
   static const otp = "/user/otp";
   static const loginCheck = "/user/loginCheck";
   static const checkartist = "/user/checkArtist"; 
@@ -20,6 +21,9 @@ class Apiconfig {
   static const artistgotbookings ="/user/checkBookingHost";
   static const acceptshow = "/user/acceptProgram";
   static const denyshow = "/user/rejectProgram";
+  static const givehype = "/user/hypeHim";
+  static const hypestatus = "/user/takeHypeStatus";
+
  }
 
 class ApiQueryParameter {

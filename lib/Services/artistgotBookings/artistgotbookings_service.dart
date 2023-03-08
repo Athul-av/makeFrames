@@ -9,10 +9,10 @@ class ArtistGotBookingService {
   Future<ArtistGotBookingRes?> getartistgotbooking(
       String id, String token) async {
     String path = Apiconfig.baseUrl + Apiconfig.artistgotbookings;
-    final option = Options(headers: {'cookie': token});
+    final option = Options(headers: {'Authorization':'Bearer $token'}); 
     try {
       Response response = await dio.post(path,
-          data: {'id': id, 'withCredentials': true}, options: option);
+          data: {'id': id}, options: option);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         // log('hi');

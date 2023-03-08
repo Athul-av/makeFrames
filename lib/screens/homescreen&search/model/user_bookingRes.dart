@@ -17,27 +17,29 @@ class UserBookingsResp {
         this.address,
         this.mob,
         this.mark,
+        this.currentLocation,
         this.userId,
         this.isAccepted,
         this.rejected,
+        this.v,
         this.createdAt,
         this.updatedAt,
-        this.v,
     });
 
     String? id;
     ProgramId? programId;
-    String? date;
+    dynamic date;
     String? time;
     String? address;
     String? mob;
-    Mark? mark;
+    CurrentLocation? mark;
+    CurrentLocation? currentLocation;
     String? userId;
     bool? isAccepted;
     bool? rejected;
+    int? v;
     DateTime? createdAt;
     DateTime? updatedAt;
-    int? v;
 
     factory UserBookingsResp.fromJson(Map<String, dynamic> json) => UserBookingsResp(
         id: json["_id"],
@@ -46,13 +48,14 @@ class UserBookingsResp {
         time: json["time"],
         address: json["address"],
         mob: json["mob"],
-        mark: json["mark"] == null ? null : Mark.fromJson(json["mark"]),
+        mark: json["mark"] == null ? null : CurrentLocation.fromJson(json["mark"]),
+        currentLocation: json["currentLocation"] == null ? null : CurrentLocation.fromJson(json["currentLocation"]),
         userId: json["userID"],
         isAccepted: json["isAccepted"],
         rejected: json["rejected"],
+        v: json["__v"],
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -63,17 +66,18 @@ class UserBookingsResp {
         "address": address,
         "mob": mob,
         "mark": mark?.toJson(),
+        "currentLocation": currentLocation?.toJson(),
         "userID": userId,
         "isAccepted": isAccepted,
         "rejected": rejected,
+        "__v": v,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
     };
 }
 
-class Mark {
-    Mark({
+class CurrentLocation {
+    CurrentLocation({
         this.latitude,
         this.longitude,
         this.zoom,
@@ -81,12 +85,12 @@ class Mark {
 
     double? latitude;
     double? longitude;
-    int? zoom;
+    double? zoom;
 
-    factory Mark.fromJson(Map<String, dynamic> json) => Mark(
+    factory CurrentLocation.fromJson(Map<String, dynamic> json) => CurrentLocation(
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
-        zoom: json["zoom"],
+        zoom: json["zoom"]?.toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -100,7 +104,7 @@ class ProgramId {
     ProgramId({
         this.id,
         this.name,
-        this.selectedDaates,
+      
         this.category,
         this.amount,
         this.description,
@@ -109,14 +113,13 @@ class ProgramId {
         this.booking,
         this.user,
         this.bookingCount,
-        this.v,
-        this.isBloked,
         this.isBlocked,
+        this.v,
     });
 
     String? id;
     String? name;
-    List<String>? selectedDaates;
+    List<DateTime>? selectedDaates;
     String? category;
     int? amount;
     String? description;
@@ -125,14 +128,12 @@ class ProgramId {
     List<dynamic>? booking;
     String? user;
     int? bookingCount;
-    int? v;
-    bool? isBloked;
     bool? isBlocked;
+    int? v;
 
     factory ProgramId.fromJson(Map<String, dynamic> json) => ProgramId(
         id: json["_id"],
         name: json["name"],
-        selectedDaates: json["selectedDaates"] == null ? [] : List<String>.from(json["selectedDaates"]!.map((x) => x)),
         category: json["category"],
         amount: json["amount"],
         description: json["description"],
@@ -141,15 +142,13 @@ class ProgramId {
         booking: json["booking"] == null ? [] : List<dynamic>.from(json["booking"]!.map((x) => x)),
         user: json["user"],
         bookingCount: json["bookingCount"],
-        v: json["__v"],
-        isBloked: json["isBloked"],
         isBlocked: json["isBlocked"],
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
         "name": name,
-        "selectedDaates": selectedDaates == null ? [] : List<dynamic>.from(selectedDaates!.map((x) => x)),
         "category": category,
         "amount": amount,
         "description": description,
@@ -158,8 +157,7 @@ class ProgramId {
         "booking": booking == null ? [] : List<dynamic>.from(booking!.map((x) => x)),
         "user": user,
         "bookingCount": bookingCount,
+        "isBlocked": isBlocked,
         "__v": v,
-        "isBloked": isBloked,
-        "isBlocked": isBlocked, 
     };
 }

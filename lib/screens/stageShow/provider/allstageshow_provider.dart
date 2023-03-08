@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/allStageShows/allstageshow_service.dart';
+import 'package:makeframes/services/allStageShows/allstageshow_service.dart';
 import 'package:makeframes/screens/stageShow/model/allstageshow_res.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';

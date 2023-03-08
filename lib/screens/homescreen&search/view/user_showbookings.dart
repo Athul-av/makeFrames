@@ -8,7 +8,7 @@ class UserStageBookings extends StatelessWidget {
   const UserStageBookings({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       backgroundColor: scaffoldback,
       appBar: AppBar(
@@ -23,7 +23,7 @@ class UserStageBookings extends StatelessWidget {
       ),
       body: Consumer<UserBookingListProvider>(
         builder: (context, value, child) {
-          if (value.userbookings == null) {
+          if (value.userbookings == null || value.userbookings!.isEmpty) {
             return Center(
               child: boldtext("no bookings", Colors.white, 14),
             );
@@ -73,7 +73,7 @@ class UserStageBookings extends StatelessWidget {
                                               255, 187, 187, 187),
                                           13),
                                       normaltext(
-                                          value.userbookings![index].date!, 
+                                          value.userbookings![index].date, 
                                           Colors.white,
                                           13)
                                     ],

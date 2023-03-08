@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
@@ -25,13 +26,14 @@ class SearchScreen extends StatelessWidget {
           ),
         ),
         body: Consumer<AllUserProvider>(builder: (context, value, child) {
+        
           return Column(
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(5, 10, 5, 20),
                 child: CupertinoSearchTextField(
                   backgroundColor: const Color.fromARGB(255, 38, 38, 38),
-                  placeholder: 'search category',
+                  placeholder: 'search category or artist',
                   placeholderStyle: const TextStyle(
                       color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
                   itemColor: const Color.fromARGB(255, 180, 180, 180),
@@ -43,7 +45,8 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: value.searchdata!.isEmpty || value.searchdata == null
+                child: 
+                 value.searchdata.isEmpty  
                     ? Center(
                         child: boldtext('No Artists', Colors.white, 15),
                       )
@@ -68,34 +71,51 @@ class SearchScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    // CircleAvatar(
+                                      
+                                    //     radius: 36,
+                                    //     backgroundColor: const Color.fromARGB(
+                                    //         255, 25, 25, 25),
+                                    //     foregroundColor: const Color.fromARGB(
+                                    //         255, 130, 130, 130),
+                                    //     child: value.searchdata[index]
+                                    //                 .dpimage !=
+                                    //             null
+                                    //         ? ClipOval(
+                                              
+                                    //           child: Image(
+                                    //               image: NetworkImage(value
+                                    //                   .searchdata[index]
+                                    //                   .dpimage!)),
+                                    //         )
+                                    //         : const Icon(
+                                    //             CupertinoIcons
+                                    //                 .person_alt_circle_fill,
+                                    //             size: 77,
+                                    //           )),
+                                    value.searchdata[index].dpimage != null?
                                     CircleAvatar(
-                                        radius: 36,
-                                        backgroundColor: const Color.fromARGB(
+                                      radius: 36,
+                                      backgroundImage: 
+                                      NetworkImage(value.searchdata[index].dpimage!)
+                                    
+                                    ):const CircleAvatar(
+                                      radius: 36,
+                                           backgroundColor:  Color.fromARGB(
                                             255, 25, 25, 25),
-                                        foregroundColor: const Color.fromARGB(
+                                        foregroundColor:  Color.fromARGB(
                                             255, 130, 130, 130),
-                                        child: value.searchdata![index]
-                                                    .dpimage !=
-                                                null
-                                            ? Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 3.0),
-                                                child: ClipOval(
-                                                  child: Image(
-                                                      image: NetworkImage(value
-                                                          .searchdata![index]
-                                                          .dpimage!)),
-                                                ),
-                                              )
-                                            : const Icon(
+                                    child: Icon(
                                                 CupertinoIcons
-                                                    .person_alt_circle_fill,
-                                                size: 77,
-                                              )),
+                                                  .person_alt_circle_fill,
+                                              size: 77,
+                                               ) 
+                                    ),
+
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
-                                        value.searchdata![index].firstName!,
+                                        value.searchdata[index].firstName!,
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -104,7 +124,7 @@ class SearchScreen extends StatelessWidget {
                                       ),
                                     ),
                                     normaltext(
-                                        value.searchdata![index].domain!,
+                                        value.searchdata[index].domain!,
                                         const Color.fromARGB(
                                             255, 140, 140, 140),
                                         11),
@@ -124,7 +144,7 @@ class SearchScreen extends StatelessWidget {
                                                   builder: (_) =>
                                                       ArtistProfileScreen2(
                                                         userdetails: value
-                                                            .searchdata![index],
+                                                            .searchdata[index],
                                                       )));
                                         },
                                         child: const Text(
@@ -139,7 +159,7 @@ class SearchScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: value.searchdata!.length,
+                          itemCount: value.searchdata.length,
                         ),
                       ),
               )

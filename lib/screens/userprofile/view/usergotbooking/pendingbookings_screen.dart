@@ -19,7 +19,7 @@ class PendingBookingScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           leading: IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); 
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
         ),

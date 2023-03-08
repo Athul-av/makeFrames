@@ -7,10 +7,10 @@ import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
 class AllUserService {
   Dio dio = Dio();
 
-  Future<List<AllUsersDetailsRes>?> getalluser(String token) async {
+  Future<List<AllUsersDetailsRes>?>  getalluser(String token) async {
     String path = Apiconfig.baseUrl + Apiconfig.allusers;
 
-    final option = Options(headers: {'cookie': token});
+    final option = Options(headers: {'Authorization': 'Bearer $token'}); 
     final queryparams = {'withCredentials': true};
 
     try {

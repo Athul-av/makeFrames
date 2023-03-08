@@ -9,8 +9,9 @@ class RejectBookingService {
   Future<bool?>rejectshow(String id, String token)async {
 
     String path = Apiconfig.baseUrl +Apiconfig.denyshow; 
-    final option = Options(headers: {'cookie':token}); 
-
+    final option = Options(headers: {'Authorization':'Bearer $token'});
+     
+ 
     try {
 
       Response response = await dio.post(path,data:{'id':id,'withCredentials':true},options: option); 

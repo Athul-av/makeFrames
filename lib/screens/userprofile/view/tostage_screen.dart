@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/provider/artistcreated_shows_prvdr.dart';
@@ -37,6 +39,7 @@ class ToStageScreen extends StatelessWidget {
         body: Consumer<ArtistCreatedShowsProvider>(
           builder: (context, value, child) {
             if (value.data == null || value.data!.isEmpty) {
+            
               return Center(
                 child: boldtext('no stage show created!', Colors.white, 13),
               );
@@ -46,7 +49,7 @@ class ToStageScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: height(context, 0.214),
+                      height: height(context, 0.216),
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 23, 23, 23),
@@ -75,7 +78,7 @@ class ToStageScreen extends StatelessWidget {
                                   ),
                                   SizedBox(
                                     height: height(context, 0.035),
-                                    width: width(context, 0.24),
+                                    width: width(context, 0.28),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color.fromARGB(
@@ -88,9 +91,9 @@ class ToStageScreen extends StatelessWidget {
                                         ),
                                       ),
                                       child: normaltext(
-                                          '${value.data![index].bookingCount} Booking',
+                                          'Check Bookings',
                                           Colors.white,
-                                          11),
+                                          10),
                                       onPressed: () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
@@ -103,7 +106,7 @@ class ToStageScreen extends StatelessWidget {
                                                 context,
                                                 listen: false) 
                                             .getartistbookings(
-                                                value.data![index].id!);
+                                                value.data![index].id!); 
                                       },
                                     ),
                                   )
@@ -116,7 +119,7 @@ class ToStageScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                      height: height(context, 0.08),
+                                      height: height(context, 0.082),
                                       width: width(context, 0.6),
                                       child: Center(
                                         child: normaltext(
@@ -126,13 +129,13 @@ class ToStageScreen extends StatelessWidget {
                                             13),
                                       )),
                                   SizedBox(
-                                    height: height(context, 0.08),
-                                    width: width(context, 0.24),
+                                    height: height(context, 0.082),
+                                    width: width(context, 0.27),
                                     child: Image(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
                                             value.data![index].imageArray![0])),
-                                  )
+                                  ) 
                                 ],
                               ),
                               const SizedBox(

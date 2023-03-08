@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/provider/artistgotbooking_prvdr.dart';
 import 'package:provider/provider.dart';

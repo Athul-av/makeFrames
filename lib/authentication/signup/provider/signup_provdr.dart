@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:makeframes/Services/authenticationService/signup_signin_service.dart';
+import 'package:makeframes/services/authenticationService/signup_signin_service.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/authentication/signup/model/signup_request_model.dart';
 import 'package:makeframes/authentication/signup/view/otp_popup.dart';

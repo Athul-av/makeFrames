@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:makeframes/Services/bookstageshow/bookshow_service.dart';
+import 'package:makeframes/services/bookstageshow/bookshow_service.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/core/snackbar.dart';
 import 'package:makeframes/screens/homescreen&search/provider/userbookinglist_provider.dart';
@@ -73,9 +73,9 @@ class BookStageProvider with ChangeNotifier {
 
     BookStageReqst model = BookStageReqst(
         address: address,
-        date: pickeddate.toString(),
-        time: picktime.toString(), 
-        mark: mark,
+        date: spliteddate.toString(),
+        time: splitedtime.toString(), 
+        mark: mark, 
         mob: number,
         program_id: id,
         token: token);

@@ -9,7 +9,7 @@ class AcceptBookingService {
   Future<bool?>acceptshow(String id, String token)async {
 
     String path = Apiconfig.baseUrl +Apiconfig.acceptshow;
-    final option = Options(headers: {'cookie':token});
+    final option = Options(headers: {'Authorization':'Bearer $token'});
 
     try {
 

@@ -21,13 +21,18 @@ class _BeAnartistFormState extends State<BeAnartistForm> {
   String? dropdownvalue;
 
   var items = [
-    'Actor',
-    'Actress',
-    'Director',
-    'Producer',
-    'Singer',
-    'Cinematographer',
-    'Editor'
+    'ACTOR',
+    'ACTRESS',
+    'DIRECTOR',
+    'PRODUCER',
+    'SINGER',
+    'CINEMATOGRAPHER',
+    'EDITOR',
+    'MUSICIAN',
+    'TECHNICIAN',
+    'MAKE-UP',
+    'DANCER',
+    'OTHER'
   ];
 
   @override

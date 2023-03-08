@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:makeframes/core/api/apiconfig.dart';
 import 'package:makeframes/screens/homescreen&search/model/user_bookingres.dart';
@@ -15,10 +14,10 @@ class UserBookedShowListService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> json = response.data;
-         log('hellwsdf');
+       log(json.toString()); 
         final  res =
             json.map((e) => UserBookingsResp.fromJson(e)).toList();
- log('hell'); 
+  
         return res;
       }
     } on DioError catch (e) {

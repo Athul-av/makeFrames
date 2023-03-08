@@ -4,7 +4,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
+import 'package:makeframes/screens/settingsscreen/aboutus_screen.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
+import 'package:makeframes/screens/settingsscreen/privacypolicy_screen.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
 import 'package:provider/provider.dart';
 
@@ -46,9 +48,11 @@ class SettingsScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const PrivacyPolicyScreen()));
+                            },
                             child: normaltext(
-                                "Terms & condition", Colors.white, 15)),
+                                "Privacy & Policy", Colors.white, 15)),
                       ],
                     ),
                   ),
@@ -62,7 +66,9 @@ class SettingsScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const AboutusScreen()));
+                          },
                           child: normaltext("About Us", Colors.white, 15),
                         ),
                       ],

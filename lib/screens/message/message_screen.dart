@@ -1,8 +1,42 @@
+// ignore_for_file: library_prefixes
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class MessageScreen extends StatelessWidget {
-  const MessageScreen({super.key});
+class MessageScreen extends StatefulWidget {
+   MessageScreen({super.key,this.dpimage});
+ 
+  String? dpimage;
+
+  @override
+  State<MessageScreen> createState() => _MessageScreenState();
+}
+
+class _MessageScreenState extends State<MessageScreen> {
+  
+  IO.Socket? socket; 
+
+
+  @override
+  void initState() {
+    super.initState();
+    connect();
+  }
+
+
+  void connect(){
+    socket = IO.io("http://10.4.3.192:3033",<String,dynamic>{
+      "transports":["websocket"],
+      "autoConnect":false,
+    });
+    socket!.connect(); 
+    socket!.onconnect((data)=> log("connected"));     
+  }
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +54,17 @@ class MessageScreen extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: const [
+        actions:  [
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
+            padding:const EdgeInsets.only(right: 16.0),
+            child: 
+            widget.dpimage != null?
+             CircleAvatar( 
+              radius: 23,
+              backgroundColor: Colors.transparent,
+              backgroundImage: NetworkImage(widget.dpimage!),
+            ):
+           const CircleAvatar(
               radius: 23,
               backgroundColor: Colors.transparent,
               backgroundImage: AssetImage('assets/images/user2.png'),

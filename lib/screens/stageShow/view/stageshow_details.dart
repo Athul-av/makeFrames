@@ -82,7 +82,7 @@ class StageShowDetails extends StatelessWidget {
           Consumer<AllStageShowProvider>(
             builder: (context, value, child) { 
               return  SizedBox(
-              height: 300, 
+              height: 350, 
               width: MediaQuery.of(context).size.width, 
               child:Stack(
               alignment: Alignment.center,

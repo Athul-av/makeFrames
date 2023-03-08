@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makeframes/Services/allusersPosts/alluserspost_service.dart';
+import 'package:makeframes/screens/homescreen&search/provider/hype_provider.dart';
+import 'package:makeframes/services/allusersPosts/alluserspost_service.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
 import 'package:makeframes/screens/message/message_screen.dart';
@@ -14,9 +17,10 @@ class ArtistProfileScreen2 extends StatelessWidget {
   AllUsersDetailsRes userdetails;
   @override
   Widget build(BuildContext context) {
-    String? token =
-        Provider.of<SplashProvider>(context, listen: false).logincheck;
+    log(userdetails.id.toString()); 
 
+    String? token = Provider.of<SplashProvider>(context, listen: false).logincheck;
+  final providerhype = Provider.of<HypeProvider>(context,listen: false);
     return Scaffold(
         backgroundColor: scaffoldback,
         appBar: AppBar(
@@ -35,6 +39,7 @@ class ArtistProfileScreen2 extends StatelessWidget {
             height: height(context, 0.365),
             child: Column(
               children: [
+                
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Stack(alignment: Alignment.topRight, children: [
@@ -83,7 +88,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   const Color.fromARGB(255, 155, 35, 27))),
-                          onPressed: () {},
+                          onPressed: () async{
+                            await providerhype.givehype(userdetails.id!,context);   
+                          },
                           child: Padding(
                               padding: const EdgeInsets.only(
                                   left: 30.0, right: 30, top: 11, bottom: 11),
@@ -94,7 +101,7 @@ class ArtistProfileScreen2 extends StatelessWidget {
                                   MaterialStateProperty.all(color1())),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => const MessageScreen()));
+                                builder: (_) =>  MessageScreen(dpimage: userdetails.dpimage,)));
                           },
                           child: Padding(
                               padding: const EdgeInsets.only(
@@ -110,7 +117,7 @@ class ArtistProfileScreen2 extends StatelessWidget {
               child: FutureBuilder(
             future: AllPostOfUsers().getuserpost(token!, userdetails.id!), 
             builder: (context, snapshot) {
-              if (snapshot.hasData || snapshot.data != null) {
+              if (snapshot.hasData || snapshot.data != null) { 
                 return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
