@@ -24,24 +24,17 @@ class TopArtistsContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            dpimage != null?
-            CircleAvatar(
-                                      radius: 36,
-                                      backgroundImage: 
-                                      NetworkImage(dpimage!) 
-                                    
-                                    ):const CircleAvatar(
-                                      radius: 36,
-                                           backgroundColor:  Color.fromARGB(
-                                            255, 25, 25, 25),
-                                        foregroundColor:  Color.fromARGB(
-                                            255, 130, 130, 130),
-                                    child: Icon(
-                                                CupertinoIcons
-                                                  .person_alt_circle_fill,
-                                              size: 77,
-                                               ) 
-                                    ),
+            dpimage != null
+                ? CircleAvatar(
+                    radius: 36, backgroundImage: NetworkImage(dpimage!))
+                : const CircleAvatar(
+                    radius: 36,
+                    backgroundColor: Color.fromARGB(255, 25, 25, 25),
+                    foregroundColor: Color.fromARGB(255, 130, 130, 130),
+                    child: Icon(
+                      CupertinoIcons.person_alt_circle_fill,
+                      size: 77,
+                    )),
             Text(
               name,
               style: const TextStyle(

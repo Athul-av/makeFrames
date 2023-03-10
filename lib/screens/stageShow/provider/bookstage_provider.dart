@@ -18,7 +18,7 @@ class BookStageProvider with ChangeNotifier {
   DateTime? pickeddate;
   TimeOfDay? picktime;
   String? spliteddate;
-   String? splitedtime;
+  String? splitedtime;
   TextEditingController addresscontroller = TextEditingController();
   TextEditingController numbercontroller = TextEditingController();
   FlutterSecureStorage storage = const FlutterSecureStorage();
@@ -48,7 +48,7 @@ class BookStageProvider with ChangeNotifier {
   selectTime(BuildContext context) async {
     picktime =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-        splitedtime =picktime!.format(context);
+    splitedtime = picktime!.format(context);
     notifyListeners();
   }
 
@@ -74,8 +74,8 @@ class BookStageProvider with ChangeNotifier {
     BookStageReqst model = BookStageReqst(
         address: address,
         date: spliteddate.toString(),
-        time: splitedtime.toString(), 
-        mark: mark, 
+        time: splitedtime.toString(),
+        mark: mark,
         mob: number,
         program_id: id,
         token: token);
@@ -88,7 +88,7 @@ class BookStageProvider with ChangeNotifier {
         disposeallfield();
         Provider.of<UserBookingListProvider>(context, listen: false)
             .getuserbookingdetails();
-            notifyListeners(); 
+        notifyListeners();
       } else {
         CustomSnackBar().snackBar(context, "couldn't book the show",
             const Color.fromARGB(255, 150, 41, 33));
@@ -106,5 +106,4 @@ class BookStageProvider with ChangeNotifier {
     picktime = null;
     spliteddate = null;
   }
-
 }

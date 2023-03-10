@@ -8,10 +8,9 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) =>  Provider.of<SplashProvider>(context, listen: false).timer(context)); 
-   
-   
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Provider.of<SplashProvider>(context, listen: false).timer(context));
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(

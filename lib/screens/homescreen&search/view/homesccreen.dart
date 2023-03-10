@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                                   name: value.actors[index].firstName!,
                                   dpimage: value.actors[index].dpimage,
                                   userdata: value.actors[index],
-                                ), 
+                                ),
                                 const SizedBox(
                                   width: 7,
                                 )

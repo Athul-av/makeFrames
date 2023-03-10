@@ -69,7 +69,8 @@ class Showcontainer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.0)))),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => BookstageShowScreen(progrmid:value.id))); 
+                        builder: (_) =>
+                            BookstageShowScreen(progrmid: value.id)));
                   },
                   child: normaltext('Book Now',
                       const Color.fromARGB(255, 231, 231, 231), 11)),

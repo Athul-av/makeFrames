@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
@@ -26,7 +25,6 @@ class SearchScreen extends StatelessWidget {
           ),
         ),
         body: Consumer<AllUserProvider>(builder: (context, value, child) {
-        
           return Column(
             children: [
               Padding(
@@ -45,8 +43,7 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: 
-                 value.searchdata.isEmpty  
+                child: value.searchdata.isEmpty
                     ? Center(
                         child: boldtext('No Artists', Colors.white, 15),
                       )
@@ -72,7 +69,7 @@ class SearchScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     // CircleAvatar(
-                                      
+
                                     //     radius: 36,
                                     //     backgroundColor: const Color.fromARGB(
                                     //         255, 25, 25, 25),
@@ -82,7 +79,7 @@ class SearchScreen extends StatelessWidget {
                                     //                 .dpimage !=
                                     //             null
                                     //         ? ClipOval(
-                                              
+
                                     //           child: Image(
                                     //               image: NetworkImage(value
                                     //                   .searchdata[index]
@@ -93,24 +90,22 @@ class SearchScreen extends StatelessWidget {
                                     //                 .person_alt_circle_fill,
                                     //             size: 77,
                                     //           )),
-                                    value.searchdata[index].dpimage != null?
-                                    CircleAvatar(
-                                      radius: 36,
-                                      backgroundImage: 
-                                      NetworkImage(value.searchdata[index].dpimage!)
-                                    
-                                    ):const CircleAvatar(
-                                      radius: 36,
-                                           backgroundColor:  Color.fromARGB(
-                                            255, 25, 25, 25),
-                                        foregroundColor:  Color.fromARGB(
-                                            255, 130, 130, 130),
-                                    child: Icon(
-                                                CupertinoIcons
+                                    value.searchdata[index].dpimage != null
+                                        ? CircleAvatar(
+                                            radius: 36,
+                                            backgroundImage: NetworkImage(value
+                                                .searchdata[index].dpimage!))
+                                        : const CircleAvatar(
+                                            radius: 36,
+                                            backgroundColor:
+                                                Color.fromARGB(255, 25, 25, 25),
+                                            foregroundColor: Color.fromARGB(
+                                                255, 130, 130, 130),
+                                            child: Icon(
+                                              CupertinoIcons
                                                   .person_alt_circle_fill,
                                               size: 77,
-                                               ) 
-                                    ),
+                                            )),
 
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),

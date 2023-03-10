@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/screens/homescreen&search/provider/hype_provider.dart';
 import 'package:makeframes/services/allusersPosts/alluserspost_service.dart';
@@ -17,10 +16,11 @@ class ArtistProfileScreen2 extends StatelessWidget {
   AllUsersDetailsRes userdetails;
   @override
   Widget build(BuildContext context) {
-    log(userdetails.id.toString()); 
-
+    // log(userdetails.id.toString());
+Provider.of<HypeProvider>(context,listen: false).updatehype(userdetails.id!); 
     String? token = Provider.of<SplashProvider>(context, listen: false).logincheck;
-  final providerhype = Provider.of<HypeProvider>(context,listen: false);
+    final providerhype = Provider.of<HypeProvider>(context, listen: false);
+ 
     return Scaffold(
         backgroundColor: scaffoldback,
         appBar: AppBar(
@@ -31,7 +31,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded)),
         ),
-        body: Column(children: [
+        body: Column(
+          children: [
+          
           Container(
             decoration: const BoxDecoration(
               color: Colors.black,
@@ -39,37 +41,36 @@ class ArtistProfileScreen2 extends StatelessWidget {
             height: height(context, 0.365),
             child: Column(
               children: [
-                
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Stack(alignment: Alignment.topRight, children: [
-                    CircleAvatar(
-                        radius: 67,
-                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor:
-                            const Color.fromARGB(255, 130, 130, 130),
-                        child: userdetails.dpimage != null
-                            ? Padding(
-                                padding: const EdgeInsets.only(top: 3.0),
-                                child: ClipOval(
-                                  child: Image(
-                                      image:
-                                          NetworkImage(userdetails.dpimage!)),
-                                ),
-                              )
-                            : const Icon(
-                                CupertinoIcons.person_alt_circle_fill,
-                                size: 145,
-                              )),
+                  
+                    userdetails.dpimage == null
+                        ? const CircleAvatar(
+                            radius: 64,
+                            backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                            backgroundImage:
+                                AssetImage('assets/images/user2.png'))
+                        : CircleAvatar(
+                            radius: 64,
+                            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                            backgroundImage: NetworkImage(userdetails.dpimage!),
+                            
+                          ),
                     InkWell(
                       onTap: () {},
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: const Color.fromARGB(255, 155, 35, 27),
-                        child: Text(
-                          userdetails.hypeCount.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                      child: Consumer<HypeProvider>(
+                        builder: (context, value, child) {
+                          return  CircleAvatar(
+                          radius: 20,
+                          backgroundColor: const Color.fromARGB(255, 155, 35, 27),
+                          child: Text(
+                           value.hype!.length.toString(),  
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ); 
+                        },
+                      
                       ),
                     )
                   ]),
@@ -88,8 +89,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   const Color.fromARGB(255, 155, 35, 27))),
-                          onPressed: () async{
-                            await providerhype.givehype(userdetails.id!,context);   
+                          onPressed: () async {
+                            await providerhype.givehype(
+                                userdetails.id!, context); 
                           },
                           child: Padding(
                               padding: const EdgeInsets.only(
@@ -101,7 +103,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
                                   MaterialStateProperty.all(color1())),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) =>  MessageScreen(dpimage: userdetails.dpimage,)));
+                                builder: (_) => MessageScreen(
+                                      dpimage: userdetails.dpimage,
+                                    )));
                           },
                           child: Padding(
                               padding: const EdgeInsets.only(
@@ -115,9 +119,9 @@ class ArtistProfileScreen2 extends StatelessWidget {
           ),
           Expanded(
               child: FutureBuilder(
-            future: AllPostOfUsers().getuserpost(token!, userdetails.id!), 
+            future: AllPostOfUsers().getuserpost(token!, userdetails.id!),
             builder: (context, snapshot) {
-              if (snapshot.hasData || snapshot.data != null) { 
+              if (snapshot.hasData || snapshot.data != null) {
                 return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(

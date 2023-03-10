@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/core/const.dart';
@@ -49,7 +48,8 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const PrivacyPolicyScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => const PrivacyPolicyScreen()));
                             },
                             child: normaltext(
                                 "Privacy & Policy", Colors.white, 15)),
@@ -67,7 +67,8 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const AboutusScreen()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const AboutusScreen()));
                           },
                           child: normaltext("About Us", Colors.white, 15),
                         ),
@@ -118,18 +119,22 @@ class SettingsScreen extends StatelessWidget {
                                       onPressed: () async {
                                         //DELETING THE TOKEN
                                         await storage.deleteAll();
-                                        Provider.of<AllUserProvider>(context,listen: false).aristnullonsignout();
-                                        
+                                        Provider.of<AllUserProvider>(context,
+                                                listen: false)
+                                            .aristnullonsignout();
 
                                         //NAVIGATING TO SIGN IN
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
-                                                    builder: (_) =>const Splash()),
+                                                    builder: (_) =>
+                                                        const Splash()),
                                                 (route) => false);
 
                                         //BOTTOMNAV CHANGING TO HOMESCREEN
-                                        Provider.of<BottomNavProvider>(context, listen: false).currentIndex = 0;
+                                        Provider.of<BottomNavProvider>(context,
+                                                listen: false)
+                                            .currentIndex = 0;
                                       },
                                       child: normaltext(
                                           'continue',

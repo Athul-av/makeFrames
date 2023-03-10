@@ -7,8 +7,8 @@ import 'package:makeframes/core/const.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class MessageScreen extends StatefulWidget {
-   MessageScreen({super.key,this.dpimage});
- 
+  MessageScreen({super.key, this.dpimage});
+
   String? dpimage;
 
   @override
@@ -16,9 +16,7 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
-  
-  IO.Socket? socket; 
-
+  IO.Socket? socket;
 
   @override
   void initState() {
@@ -26,17 +24,14 @@ class _MessageScreenState extends State<MessageScreen> {
     connect();
   }
 
-
-  void connect(){
-    socket = IO.io("http://10.4.3.192:3033",<String,dynamic>{
-      "transports":["websocket"],
-      "autoConnect":false,
+  void connect() {
+    socket = IO.io("http://10.4.3.192:3033", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
     });
-    socket!.connect(); 
-    socket!.onconnect((data)=> log("connected"));     
+    socket!.connect();
+    socket!.onconnect((data) => log("connected"));
   }
-
-   
 
   @override
   Widget build(BuildContext context) {
@@ -54,21 +49,20 @@ class _MessageScreenState extends State<MessageScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions:  [
+        actions: [
           Padding(
-            padding:const EdgeInsets.only(right: 16.0),
-            child: 
-            widget.dpimage != null?
-             CircleAvatar( 
-              radius: 23,
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(widget.dpimage!),
-            ):
-           const CircleAvatar(
-              radius: 23,
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('assets/images/user2.png'),
-            ),
+            padding: const EdgeInsets.only(right: 16.0),
+            child: widget.dpimage != null
+                ? CircleAvatar(
+                    radius: 23,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: NetworkImage(widget.dpimage!),
+                  )
+                : const CircleAvatar(
+                    radius: 23,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: AssetImage('assets/images/user2.png'),
+                  ),
           ),
         ],
       ),

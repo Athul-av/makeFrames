@@ -8,7 +8,7 @@ import 'package:makeframes/screens/stageShow/provider/bookstage_provider.dart';
 import 'package:provider/provider.dart';
 
 class BookstageShowScreen extends StatelessWidget {
-  BookstageShowScreen({super.key,required this.progrmid});
+  BookstageShowScreen({super.key, required this.progrmid});
 
   String? progrmid;
 
@@ -27,7 +27,8 @@ class BookstageShowScreen extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
-              Provider.of<BookStageProvider>(context,listen: false).disposeallfield(); 
+              Provider.of<BookStageProvider>(context, listen: false)
+                  .disposeallfield();
             },
             icon: const Icon(Icons.arrow_back_ios_new_rounded)),
       ),
@@ -231,16 +232,27 @@ class BookstageShowScreen extends StatelessWidget {
                           ),
                           ElevatedButton(
                               onPressed: () {
-                                if(formkey.currentState!.validate()&& value.pickeddate != null && value.picktime != null && progrmid != null){
-                                   value.bookstageshow(progrmid, context); 
-
-                                }else if(value.pickeddate == null){
-                                  CustomSnackBar().snackBar(context, 'pick a date',const Color.fromARGB(255, 138, 36, 29));
-                                }else if(value.picktime == null){
-                                  CustomSnackBar().snackBar(context, 'pick a time',const Color.fromARGB(255, 138, 36, 29));
-                                }else{
-                                  CustomSnackBar().snackBar(context, "couldn't book",const Color.fromARGB(255, 138, 36, 29));
-                                } 
+                                if (formkey.currentState!.validate() &&
+                                    value.pickeddate != null &&
+                                    value.picktime != null &&
+                                    progrmid != null) {
+                                  value.bookstageshow(progrmid, context);
+                                } else if (value.pickeddate == null) {
+                                  CustomSnackBar().snackBar(
+                                      context,
+                                      'pick a date',
+                                      const Color.fromARGB(255, 138, 36, 29));
+                                } else if (value.picktime == null) {
+                                  CustomSnackBar().snackBar(
+                                      context,
+                                      'pick a time',
+                                      const Color.fromARGB(255, 138, 36, 29));
+                                } else {
+                                  CustomSnackBar().snackBar(
+                                      context,
+                                      "couldn't book",
+                                      const Color.fromARGB(255, 138, 36, 29));
+                                }
                               },
                               style: ButtonStyle(
                                   backgroundColor:
@@ -255,10 +267,12 @@ class BookstageShowScreen extends StatelessWidget {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)))),
-                              child:
-                              value.isload ?
-                             const CircularProgressIndicator(color: Colors.white,strokeWidth: 3,): 
-                               const Text('Submit')),
+                              child: value.isload
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 3,
+                                    )
+                                  : const Text('Submit')),
                         ],
                       ),
                     ),

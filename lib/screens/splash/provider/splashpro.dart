@@ -31,7 +31,7 @@ class SplashProvider with ChangeNotifier {
       if (logincheck != null) {
         AuthApiService().checktoken(logincheck!).then((value) {
           //THE FUNCTION RETURNING THE TOKEN VALID OR NOT AND THE USERNAME
-          if (value!.user == true) { 
+          if (value!.user == true) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
 
@@ -63,7 +63,7 @@ class SplashProvider with ChangeNotifier {
             Provider.of<AllUserProvider>(context, listen: false).getusers();
             //to get user booked StageshowList
             Provider.of<UserBookingListProvider>(context, listen: false)
-                .getuserbookingdetails(); 
+                .getuserbookingdetails();
             //  //to get artist got bookings list
             //  Provider.of<ArtistGotBookingProvider>(context,listen: false).getartistbookings();
 

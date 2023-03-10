@@ -17,10 +17,9 @@ class ArtistProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     final providerPicker =
         Provider.of<ProfilePicProvidr>(context, listen: false);
-   final provideralldata = Provider.of<DpGetProvider>(context,listen: false);
+    final provideralldata = Provider.of<DpGetProvider>(context, listen: false);
 
     return WillPopScope(
       onWillPop: () async {
@@ -96,28 +95,29 @@ class ArtistProfileScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              height: height(context, 0.376 ),
+              height: height(context, 0.376),
               child: Column(
                 children: [
                   Consumer<DpGetProvider>(
                     builder: (context, value, child) {
-                     return  Padding(
+                      return Padding(
                         padding: const EdgeInsets.only(top: 2),
-                        child: Stack(alignment: Alignment.bottomRight, children: [
-                        value.data!.dpimage ==null
-                              ? 
-                               const CircleAvatar(
+                        child:
+                            Stack(alignment: Alignment.bottomRight, children: [
+                          value.data!.dpimage == null
+                              ? const CircleAvatar(
                                   radius: 62,
                                   backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                                  backgroundImage: 
-                                      AssetImage('assets/images/user2.png')):
-                                      CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/images/user2.png'))
+                              : CircleAvatar(
                                   radius: 62,
                                   backgroundColor:
                                       const Color.fromARGB(255, 0, 0, 0),
-                                  backgroundImage: NetworkImage(value.data!.dpimage!),  
-                                  //  AssetImage('assets/images/user2.png') 
-                                ), 
+                                  backgroundImage:
+                                      NetworkImage(value.data!.dpimage!),
+                                  //  AssetImage('assets/images/user2.png')
+                                ),
                           InkWell(
                             onTap: () async {
                               providerPicker.getImage(context);
@@ -132,17 +132,17 @@ class ArtistProfileScreen extends StatelessWidget {
                         ]),
                       );
                     },
-                   
                   ),
-               
                   Padding(
                     padding: const EdgeInsets.only(top: 13.0),
-                    child: boldtext(provideralldata.data!.firstName!, Colors.white, 23), 
+                    child: boldtext(
+                        provideralldata.data!.firstName!, Colors.white, 23),
                   ),
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.only(top: 2.0, bottom: 10),
-                    child: normaltext(provideralldata.data!.domain!,const Color.fromARGB(255, 186, 186, 186), 10),   
-                  ),  
+                    child: normaltext(provideralldata.data!.domain!,
+                        const Color.fromARGB(255, 186, 186, 186), 10),
+                  ),
                   Consumer<AllPostProvider>(
                     builder: (context, value, child) {
                       return Row(
@@ -151,17 +151,19 @@ class ArtistProfileScreen extends StatelessWidget {
                           Column(
                             children: [
                               normaltext(value.data!.length.toString(),
-                                  Colors.white, 14), 
+                                  Colors.white, 14),
                               hsizedbox(context, 0.003),
                               boldtext('Posts', Colors.white, 14)
                             ],
                           ),
                           Column(
                             children: [
-                              
-                              normaltext(provideralldata.data!.hype!.length.toString(), Colors.white, 14), 
+                              normaltext(
+                                  provideralldata.data!.hype!.length.toString(),
+                                  Colors.white,
+                                  14),
                               hsizedbox(context, 0.003),
-                              boldtext('Hype', Colors.white,14)
+                              boldtext('Hype', Colors.white, 14)
                             ],
                           )
                         ],

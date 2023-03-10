@@ -15,7 +15,8 @@ class Apiconfig {
   static const artistcreatedshow = "/user/viewPrograms"; 
   static const allstageshow = "/user/bringAllpost";
   static const allusers = "/user/allUsers"; 
-  static const userspost = "/user/fetchPostsOfUser";
+  static const singleuser ="/user/fetchUserData";
+  static const userspost = "/user/fetchPostsOfUser"; 
   static const bookshow ="/user/bookProgram"; 
   static const userbookedshows = "/user/fetchBookedPg";
   static const artistgotbookings ="/user/checkBookingHost";
