@@ -90,7 +90,7 @@ class ProducerScreen extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => ArtistProfileScreen2(
-                                          userdetails: value.producers[index],
+                                          userdetails: value.producers[index],artistid:value.producers[index].id
                                         )));
                               },
                               child: const Text(

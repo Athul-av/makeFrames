@@ -14,7 +14,7 @@ class UserBookedShowListService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> json = response.data;
-       log(json.toString()); 
+      
         final  res =
             json.map((e) => UserBookingsResp.fromJson(e)).toList();
   

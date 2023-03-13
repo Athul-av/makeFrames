@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:makeframes/screens/homescreen&search/provider/hype_provider.dart';
+import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/services/allusersPosts/alluserspost_service.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluser_resp.dart';
@@ -11,16 +10,17 @@ import 'package:makeframes/screens/userprofile/view/postedimage_screen.dart';
 import 'package:provider/provider.dart';
 
 class ArtistProfileScreen2 extends StatelessWidget {
-  ArtistProfileScreen2({super.key, required this.userdetails});
+  ArtistProfileScreen2({super.key, required this.userdetails, this.artistid});
 
   AllUsersDetailsRes userdetails;
+  String? artistid;
   @override
   Widget build(BuildContext context) {
     // log(userdetails.id.toString());
 Provider.of<HypeProvider>(context,listen: false).updatehype(userdetails.id!); 
     String? token = Provider.of<SplashProvider>(context, listen: false).logincheck;
     final providerhype = Provider.of<HypeProvider>(context, listen: false);
- 
+ String? userid = Provider.of<DpGetProvider>(context,listen: false).data!.id;
     return Scaffold(
         backgroundColor: scaffoldback,
         appBar: AppBar(
@@ -104,7 +104,7 @@ Provider.of<HypeProvider>(context,listen: false).updatehype(userdetails.id!);
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => MessageScreen(
-                                      dpimage: userdetails.dpimage,
+                                      dpimage: userdetails.dpimage,artistid: artistid, userid:userid
                                     )));
                           },
                           child: Padding(

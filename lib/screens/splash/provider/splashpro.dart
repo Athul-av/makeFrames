@@ -48,12 +48,12 @@ class SplashProvider with ChangeNotifier {
                 notifyListeners();
               }
             });
-
+  
             //to get the posted images in profile
             Provider.of<AllPostProvider>(context, listen: false).getallpost();
             //to get dp image in profile
             Provider.of<DpGetProvider>(context, listen: false).getdp();
-            //to get artist created shows in artist profile
+            //to get artist created shows in artist profile 
             Provider.of<ArtistCreatedShowsProvider>(context, listen: false)
                 .artistshows();
             //to get all stage shows
@@ -66,6 +66,8 @@ class SplashProvider with ChangeNotifier {
                 .getuserbookingdetails();
             //  //to get artist got bookings list
             //  Provider.of<ArtistGotBookingProvider>(context,listen: false).getartistbookings();
+             
+       
 
           } else {
             Navigator.of(context).pushReplacement(

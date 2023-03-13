@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
-import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/screens/userprofile/view/beartist_form.dart';
+import 'package:makeframes/screens/userprofile/view/messagelist.dart';
 import 'package:provider/provider.dart';
+
 
 class NormalUserProfile extends StatelessWidget {
   const NormalUserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final providerSplash = Provider.of<SplashProvider>(context, listen: false);
+  final alldata = Provider.of<DpGetProvider>(context,listen: false).data;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldback,
@@ -39,7 +41,7 @@ class NormalUserProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0, bottom: 25),
                       child: Text(
-                        providerSplash.username,
+                        alldata!.firstName!, 
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 21,
@@ -50,7 +52,9 @@ class NormalUserProfile extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(color1())),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> MessageListScreen()));
+                        },
                         child: const Padding(
                           padding: EdgeInsets.only(
                               left: 30.0, right: 30, top: 14, bottom: 14),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
-import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/userprofile/provider/all_post_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
+import 'package:makeframes/screens/userprofile/view/messagelist.dart';
 import 'package:makeframes/screens/userprofile/view/post_screen.dart';
 import 'package:makeframes/screens/userprofile/view/postedimage_screen.dart';
 import 'package:makeframes/screens/userprofile/view/postvideo_screen.dart';
@@ -191,7 +191,9 @@ class ArtistProfileScreen extends StatelessWidget {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(color1())),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const MessageListScreen())); 
+                            },
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 30.0, right: 30, top: 9, bottom: 9),

@@ -68,28 +68,6 @@ class SearchScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // CircleAvatar(
-
-                                    //     radius: 36,
-                                    //     backgroundColor: const Color.fromARGB(
-                                    //         255, 25, 25, 25),
-                                    //     foregroundColor: const Color.fromARGB(
-                                    //         255, 130, 130, 130),
-                                    //     child: value.searchdata[index]
-                                    //                 .dpimage !=
-                                    //             null
-                                    //         ? ClipOval(
-
-                                    //           child: Image(
-                                    //               image: NetworkImage(value
-                                    //                   .searchdata[index]
-                                    //                   .dpimage!)),
-                                    //         )
-                                    //         : const Icon(
-                                    //             CupertinoIcons
-                                    //                 .person_alt_circle_fill,
-                                    //             size: 77,
-                                    //           )),
                                     value.searchdata[index].dpimage != null
                                         ? CircleAvatar(
                                             radius: 36,
@@ -139,7 +117,7 @@ class SearchScreen extends StatelessWidget {
                                                   builder: (_) =>
                                                       ArtistProfileScreen2(
                                                         userdetails: value
-                                                            .searchdata[index],
+                                                            .searchdata[index],artistid:value.searchdata[index].id 
                                                       )));
                                         },
                                         child: const Text(
