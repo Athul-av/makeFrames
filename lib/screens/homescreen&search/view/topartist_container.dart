@@ -50,7 +50,7 @@ class TopArtistsContainer extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) =>
-                          ArtistProfileScreen2(userdetails: userdata)));
+                          ArtistProfileScreen2(userdetails: userdata,artistid: userdata.id,)));
                 },
                 child: const Text(
                   'Show profile',

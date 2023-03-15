@@ -12,7 +12,7 @@ Widget sendcard(context,String mssg){
             child: Container( 
               decoration:const BoxDecoration(
                 color: Color.fromARGB(255, 11, 71, 51),
-                borderRadius:const BorderRadius.all(Radius.circular(5 ))
+                borderRadius: BorderRadius.all(Radius.circular(5 ))
               ), 
               child: Padding(
                 padding: const EdgeInsets.all(12),

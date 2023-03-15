@@ -9,6 +9,7 @@ import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/userprofile/view/postedimage_screen.dart';
 import 'package:provider/provider.dart';
 
+
 class ArtistProfileScreen2 extends StatelessWidget {
   ArtistProfileScreen2({super.key, required this.userdetails, this.artistid});
 

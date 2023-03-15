@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
                   backgroundColor: const Color.fromARGB(255, 38, 38, 38),
                   placeholder: 'search category or artist',
                   placeholderStyle: const TextStyle(
-                      color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
+                  color: Color.fromARGB(255, 172, 172, 172), fontSize: 15),
                   itemColor: const Color.fromARGB(255, 180, 180, 180),
                   padding: const EdgeInsets.all(13),
                   style: const TextStyle(color: Colors.white),
@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: value.searchdata.isEmpty
                     ? Center(
-                        child: boldtext('No Artists', Colors.white, 15),
+                        child: boldtext('No Artists', Colors.white, 15), 
                       )
                     : Padding(
                         padding: const EdgeInsets.all(5.0),
@@ -84,7 +84,6 @@ class SearchScreen extends StatelessWidget {
                                                   .person_alt_circle_fill,
                                               size: 77,
                                             )),
-
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
@@ -96,11 +95,9 @@ class SearchScreen extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis),
                                       ),
                                     ),
-                                    normaltext(
-                                        value.searchdata[index].domain!,
-                                        const Color.fromARGB(
-                                            255, 140, 140, 140),
-                                        11),
+                                    Text(value.searchdata[index].domain!,
+                                    style:const TextStyle(color:  Color.fromARGB( 255, 140, 140, 140), fontSize: 11),
+                                    overflow: TextOverflow.ellipsis,), 
                                     ElevatedButton(
                                         style: ButtonStyle(
                                             backgroundColor:

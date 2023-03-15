@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:makeframes/screens/bottomnav/view/bottomnavscreen.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/authentication/signin/provider/loginprovider.dart';
 import 'package:makeframes/authentication/signup/provider/signup_provdr.dart';
 import 'package:makeframes/screens/homescreen&search/provider/hype_provider.dart';
 import 'package:makeframes/screens/homescreen&search/provider/userbookinglist_provider.dart';
-import 'package:makeframes/screens/settingsscreen/aboutus_screen.dart';
-import 'package:makeframes/screens/settingsscreen/privacypolicy_screen.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
 import 'package:makeframes/screens/stageShow/provider/allstageshow_provider.dart';
@@ -54,7 +51,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BookStageProvider()),
         ChangeNotifierProvider(create: (context) => UserBookingListProvider()),
         ChangeNotifierProvider(create: (context) => ArtistGotBookingProvider()),
-        ChangeNotifierProvider(create: (context) => HypeProvider()) 
+        ChangeNotifierProvider(create: (context) => HypeProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

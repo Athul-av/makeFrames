@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
@@ -110,26 +109,28 @@ class ToStageScreen extends StatelessWidget {
                                       },
                                     ),
                                   )
-                                ],
+                                ], 
                               ),
-                              hsizedbox(context, 0.019),
+                              hsizedbox(context, 0.019 ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                      height: height(context, 0.082),
+                                      height: height(context, 0.077),
                                       width: width(context, 0.6),
                                       child: Center(
-                                        child: normaltext(
-                                            value.data![index].description!,
-                                            const Color.fromARGB(
-                                                255, 211, 211, 211),
-                                            13),
+                                        child: SingleChildScrollView( 
+                                          child: normaltext(
+                                              value.data![index].description!,
+                                              const Color.fromARGB(
+                                                  255, 211, 211, 211),
+                                              13),
+                                        ),
                                       )),
                                   SizedBox(
-                                    height: height(context, 0.082),
+                                    height: height(context, 0.08),
                                     width: width(context, 0.27),
                                     child: Image(
                                         fit: BoxFit.cover,
@@ -139,7 +140,7 @@ class ToStageScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                                height: 4,
+                                height: 5,
                               ),
                               ShapeOfView(
                                 height: 24,

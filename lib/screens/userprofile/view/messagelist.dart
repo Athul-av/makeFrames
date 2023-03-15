@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
@@ -9,7 +10,7 @@ class MessageListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   Provider.of<DpGetProvider>(context,listen: false).chatlist();  
+  
     
     return Scaffold(
       backgroundColor: scaffoldback,
@@ -23,9 +24,9 @@ class MessageListScreen extends StatelessWidget {
 
       ),
 
-      body: Consumer<DpGetProvider>(
+      body: Consumer<DpGetProvider>( 
         builder: (context, value, child) {
-          
+           
           if(value.messagepeopledetais.isEmpty){
             return Center(child: boldtext("no chats", Colors.white, 15));
           }else{
@@ -41,12 +42,15 @@ class MessageListScreen extends StatelessWidget {
                       value.messagepeopledetais[index].dpimage == null?
                      const CircleAvatar(
                         radius: 30,
+                        backgroundColor: Color.fromARGB(255, 25, 25, 25),
+                        foregroundColor: Color.fromARGB( 255, 130, 130, 130),
+                        child: Icon( CupertinoIcons .person_alt_circle_fill,size: 65,), 
                       ):  CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(value.messagepeopledetais[index].dpimage), 
                       ), 
                       title: boldtext(value.messagepeopledetais[index].firstName!, Colors.white, 17),
-                      trailing: Icon(Icons.message, color: Colors.white,),
+                      trailing:const Icon(Icons.message, color: Colors.white,),
                     ), 
                   ),
                 ),

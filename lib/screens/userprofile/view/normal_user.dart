@@ -53,7 +53,7 @@ class NormalUserProfile extends StatelessWidget {
                             backgroundColor:
                                 MaterialStateProperty.all(color1())),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> MessageListScreen()));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const MessageListScreen()));
                         },
                         child: const Padding(
                           padding: EdgeInsets.only(

@@ -1,6 +1,5 @@
 // ignore_for_file: library_prefixes
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/homescreen&search/view/message_model.dart';
@@ -14,7 +13,7 @@ class MessageScreen extends StatefulWidget {
   String? dpimage;
   String?  artistid;
   String?  userid;
-List<mssgmodel> msg =[];
+List<Mssgmodel> msg =[];
 
 
   @override
@@ -31,7 +30,7 @@ class _MessageScreenState extends State<MessageScreen> {
     super.dispose();
     socket.disconnect();
     socket.emit("disconnect",widget.userid);  
-    socket.close();  
+    // socket.close();
   }
   @override
   void initState() {
@@ -40,7 +39,7 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   void connect() { 
-    socket = IO.io("http://10.4.3.192:3033", <String, dynamic>{
+    socket = IO.io("https://makeframes.herewego.shop", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     }); 
@@ -48,12 +47,17 @@ class _MessageScreenState extends State<MessageScreen> {
     socket.connect();
     socket.emit("addUser",widget.userid); 
     socket.on("receive", (data) {
-      setmssg("getmessg", data["message"]); 
+      Mssgmodel model = Mssgmodel(message: data["message"],type: "getmessg");
+      setState(() {
+        setState(() {
+           widget.msg.add(model);
+        });
+       
+      });
       setState(() {
          
       });
     }); 
-    
   }
 
   @override
@@ -155,21 +159,16 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  void sendmessage (String mssg){
-setmssg("sendmssg", mssg);
+  void sendmessage (String mssg){     
+Mssgmodel model = Mssgmodel(message: mssg,type: "sendmssg");
+setState(() {
+     widget.msg.add(model);
+  
+
+});
  socket.emit("send-msg",{"to":widget.artistid,"from":widget.userid,"message":mssg});
  log('messaged'); 
 
  
-  }
-
-  void setmssg (String type,String message){
-mssgmodel model = mssgmodel(message: message,type: type);
-setState(() {
-  setState(() {
-     widget.msg.add(model);
-  });
- 
-});
   }
 }

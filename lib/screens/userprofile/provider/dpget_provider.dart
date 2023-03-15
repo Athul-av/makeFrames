@@ -10,7 +10,7 @@ import 'package:makeframes/services/singleuserService/singleuser_service.dart';
 
 class DpGetProvider with ChangeNotifier {
   UserDetailsRes? data;
-  List<SingleUserDetailsRes> messagepeopledetais=[]; 
+List<SingleUserDetailsRes> messagepeopledetais=[]; 
   List<dynamic>? messagedpeople = [];
   FlutterSecureStorage storage = const FlutterSecureStorage();
 
@@ -20,18 +20,20 @@ class DpGetProvider with ChangeNotifier {
     await BringProfilePicService().bringDP(token!).then((value) {
       data = value;
       if(data!.messagedPeople != null){
-        messagedpeople = data!.messagedPeople; 
+        messagedpeople = data!.messagedPeople;  
       }
       log(value!.id.toString());
     },);  
     notifyListeners();
   }
 
+
+
   Future<void>chatlist()async{
 
     String? token = await storage.read(key: 'token'); 
- 
-    if(messagedpeople!.isNotEmpty){
+ Future.delayed(const Duration(seconds: 3),()async{ 
+   if(messagedpeople!.isNotEmpty){
     
       for(var value in messagedpeople!){
        
@@ -41,8 +43,11 @@ class DpGetProvider with ChangeNotifier {
       });
   
     } 
-    log("message"); 
+    log("messaged");  
     notifyListeners(); 
       }
+
+ });
+    
 }
 }

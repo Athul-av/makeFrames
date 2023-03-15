@@ -169,7 +169,7 @@ class SignupScreen extends StatelessWidget {
                             provider.getotp(context);
                             FocusManager.instance.primaryFocus?.unfocus();
                           }
-                          FocusManager.instance.primaryFocus?.unfocus();
+                            FocusManager.instance.primaryFocus?.unfocus();
                         },
                         style: ButtonStyle(
                             backgroundColor:

@@ -1,5 +1,5 @@
-class mssgmodel {
+class Mssgmodel {
   String? type;
   String? message;
-  mssgmodel({this.type,this.message});
+  Mssgmodel({this.type,this.message});
 }

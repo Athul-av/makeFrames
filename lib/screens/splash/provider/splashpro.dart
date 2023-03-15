@@ -64,9 +64,7 @@ class SplashProvider with ChangeNotifier {
             //to get user booked StageshowList
             Provider.of<UserBookingListProvider>(context, listen: false)
                 .getuserbookingdetails();
-            //  //to get artist got bookings list
-            //  Provider.of<ArtistGotBookingProvider>(context,listen: false).getartistbookings();
-             
+             Provider.of<DpGetProvider>(context, listen: false).chatlist() ;
        
 
           } else {

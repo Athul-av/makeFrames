@@ -11,7 +11,7 @@ Widget replaycard(context,String mssg){
             child: Container( 
               decoration:const BoxDecoration(
                 color: Color.fromARGB(255, 51, 78, 69),
-                borderRadius:const BorderRadius.all(Radius.circular(5 ))
+                borderRadius: BorderRadius.all(Radius.circular(5 ))
               ), 
               child: Padding(
                 padding: const EdgeInsets.all(12),

@@ -1,6 +1,6 @@
 class Apiconfig {
   
-  static const baseUrl = "http://10.4.3.192:3033"; 
+  static const baseUrl = "https://makeframes.herewego.shop";  
   static const loginApi = "/user/login";
   static const signupApi = "/user/signup"; 
   static const otp = "/user/otp";
@@ -12,7 +12,7 @@ class Apiconfig {
   static const addpost = "/user/addPost";
   static const allpost = "/user/pickPosts";
   static const createshow = "/user/submitProgram";
-  static const artistcreatedshow = "/user/viewPrograms"; 
+  static const artistcreatedshow = "/user/viewPrograms";
   static const allstageshow = "/user/bringAllpost";
   static const allusers = "/user/allUsers"; 
   static const singleuser ="/user/fetchUserData";
