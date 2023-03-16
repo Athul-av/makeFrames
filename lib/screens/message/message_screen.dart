@@ -2,9 +2,14 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
-import 'package:makeframes/screens/homescreen&search/view/message_model.dart';
+import 'package:makeframes/screens/message/model/getmssg_res.dart';
+import 'package:makeframes/screens/message/model/sendmssg_model.dart';
 import 'package:makeframes/screens/message/replaycard.dart';
 import 'package:makeframes/screens/message/sendcard.dart';
+import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/services/messageservice/getmssg_service.dart';
+import 'package:makeframes/services/messageservice/sendmssg_service.dart';
+import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class MessageScreen extends StatefulWidget {
@@ -13,7 +18,8 @@ class MessageScreen extends StatefulWidget {
   String? dpimage;
   String?  artistid;
   String?  userid;
-List<Mssgmodel> msg =[];
+List<GetMessgRes>? msg =[];
+
 
 
   @override
@@ -22,7 +28,8 @@ List<Mssgmodel> msg =[];
 
 class _MessageScreenState extends State<MessageScreen> {
   TextEditingController mssgcontroller = TextEditingController();
-  late IO.Socket socket; 
+ final ScrollController scrollController = ScrollController();
+  late IO.Socket socket;  
 
 @override
   void dispose() {
@@ -30,16 +37,22 @@ class _MessageScreenState extends State<MessageScreen> {
     super.dispose();
     socket.disconnect();
     socket.emit("disconnect",widget.userid);  
-    // socket.close();
   }
+
   @override
   void initState() {
     super.initState();
     connect();
+    getmssg();
+   WidgetsBinding.instance.addPostFrameCallback((_) {
+scrollController.animateTo(scrollController.position.maxScrollExtent, duration:const Duration(seconds: 1), curve: Curves.ease);  
+    }); 
+
+       
   }
 
   void connect() { 
-    socket = IO.io("https://makeframes.herewego.shop", <String, dynamic>{
+    socket = IO.io("http://10.4.2.193:3033", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     }); 
@@ -47,10 +60,10 @@ class _MessageScreenState extends State<MessageScreen> {
     socket.connect();
     socket.emit("addUser",widget.userid); 
     socket.on("receive", (data) {
-      Mssgmodel model = Mssgmodel(message: data["message"],type: "getmessg");
+      GetMessgRes model = GetMessgRes(message: data["message"],myself: false);
       setState(() {
         setState(() {
-           widget.msg.add(model);
+           widget.msg!.add(model);
         });
        
       });
@@ -58,6 +71,18 @@ class _MessageScreenState extends State<MessageScreen> {
          
       });
     }); 
+  }
+
+
+  getmssg()async{
+
+    await GetMessageService().getallmssg(Provider.of<SplashProvider>(context,listen: false).logincheck!, widget.userid!, widget.artistid!).then((value){
+setState(() {
+  widget.msg = value; 
+});
+      
+    });
+
   }
 
   @override
@@ -101,19 +126,20 @@ class _MessageScreenState extends State<MessageScreen> {
 
           Expanded(
             child:
-            widget.msg.isEmpty?
+            widget.msg!.isEmpty?
             Center(child: normaltext('no chat', Colors.white, 15),):
              Padding(
-              padding: const EdgeInsets.all(15),  
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 2,bottom: 2),    
               child: ListView.builder(
+                controller: scrollController,
                 itemBuilder: (context, index) {
-                  if(widget.msg[index].type == "sendmssg"){
-                    return sendcard(context, widget.msg[index].message!);
+                  if(widget.msg![index].myself == true){
+                    return sendcard(context, widget.msg![index].message!);
                   }else{
-                    return replaycard(context,  widget.msg[index].message!);  
+                    return replaycard(context,  widget.msg![index].message!);  
                   } 
                 },    
-              itemCount: widget.msg.length, 
+              itemCount: widget.msg!.length, 
               ), 
             ),
           ),
@@ -126,7 +152,7 @@ class _MessageScreenState extends State<MessageScreen> {
                 contentPadding: const EdgeInsets.all(17),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide.none,
+                  borderSide: BorderSide.none, 
                 ),
                 labelText: 'Type message',
                 floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -142,7 +168,8 @@ class _MessageScreenState extends State<MessageScreen> {
                         return ; 
                       }else{
                         sendmessage(mssgcontroller.text.trim());
-                        mssgcontroller.clear();   
+                        mssgcontroller.clear();  
+                        scrollController.animateTo(scrollController.position.maxScrollExtent, duration:const Duration(seconds: 1), curve: Curves.ease);  
                       }
                     },
                     icon: const Icon(
@@ -159,16 +186,19 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  void sendmessage (String mssg){     
-Mssgmodel model = Mssgmodel(message: mssg,type: "sendmssg");
-setState(() {
-     widget.msg.add(model);
-  
+ void sendmessage (String mssg)async{     
+ GetMessgRes model = GetMessgRes(message: mssg,myself: true);
+  SendMssg payload = SendMssg(from:widget.userid,to: widget.artistid,message: mssg ); 
 
-});
+ setState(() {
+     widget.msg!.add(model);
+ });
+
  socket.emit("send-msg",{"to":widget.artistid,"from":widget.userid,"message":mssg});
  log('messaged'); 
 
- 
-  }
+ await SendMessageService().sendmssg(Provider.of<SplashProvider>(context,listen: false).logincheck!, payload); 
+
+ }
+
 }
