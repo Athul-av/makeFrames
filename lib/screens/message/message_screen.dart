@@ -7,36 +7,36 @@ import 'package:makeframes/screens/message/model/sendmssg_model.dart';
 import 'package:makeframes/screens/message/replaycard.dart';
 import 'package:makeframes/screens/message/sendcard.dart';
 import 'package:makeframes/screens/splash/provider/splashpro.dart';
+import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/services/messageservice/getmssg_service.dart';
 import 'package:makeframes/services/messageservice/sendmssg_service.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class MessageScreen extends StatefulWidget {
-  MessageScreen({super.key, this.dpimage,this.artistid,this.userid});
+  MessageScreen({super.key, this.dpimage, this.artistid, this.userid});
 
   String? dpimage;
-  String?  artistid;
-  String?  userid;
-List<GetMessgRes>? msg =[];
-
-
+  String? artistid;
+  String? userid;
+  List<GetMessgRes>? msg = [];
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState(); 
+  State<MessageScreen> createState() => _MessageScreenState();
 }
 
 class _MessageScreenState extends State<MessageScreen> {
   TextEditingController mssgcontroller = TextEditingController();
- final ScrollController scrollController = ScrollController();
-  late IO.Socket socket;  
+  final ScrollController scrollController = ScrollController();
+  
+  late IO.Socket socket;
 
-@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     socket.disconnect();
-    socket.emit("disconnect",widget.userid);  
+    socket.emit("disconnect", widget.userid);
   }
 
   @override
@@ -44,50 +44,47 @@ class _MessageScreenState extends State<MessageScreen> {
     super.initState();
     connect();
     getmssg();
-   WidgetsBinding.instance.addPostFrameCallback((_) {
-scrollController.animateTo(scrollController.position.maxScrollExtent, duration:const Duration(seconds: 1), curve: Curves.ease);  
-    }); 
-
-       
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+// scrollController.animateTo(scrollController.position.maxScrollExtent, duration:const Duration(seconds: 1), curve: Curves.ease); 
+//     }); 
   }
 
-  void connect() { 
-    socket = IO.io("http://10.4.2.193:3033", <String, dynamic>{
+  void connect() {
+    socket = IO.io("https://makeframes.herewego.shop", <String, dynamic>{ 
       "transports": ["websocket"],
       "autoConnect": false,
-    }); 
-   
-    socket.connect();
-    socket.emit("addUser",widget.userid); 
-    socket.on("receive", (data) {
-      GetMessgRes model = GetMessgRes(message: data["message"],myself: false);
-      setState(() {
-        setState(() {
-           widget.msg!.add(model);
-        });
-       
-      });
-      setState(() {
-         
-      });
-    }); 
-  }
-
-
-  getmssg()async{
-
-    await GetMessageService().getallmssg(Provider.of<SplashProvider>(context,listen: false).logincheck!, widget.userid!, widget.artistid!).then((value){
-setState(() {
-  widget.msg = value; 
-});
-      
     });
 
+    socket.connect();
+    socket.emit("addUser", widget.userid);
+    socket.on("receive", (data) {
+      GetMessgRes model = GetMessgRes(message: data["message"], myself: false);
+      setState(() {
+        
+          widget.msg!.add(model);
+      
+      });
+      setState(() {});
+    });
+  }
+
+  getmssg() async {
+    await GetMessageService()
+        .getallmssg(
+            Provider.of<SplashProvider>(context, listen: false).logincheck!,
+            widget.userid!,
+            widget.artistid!)
+        .then((value) {
+      setState(() {
+        widget.msg = value;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-   log(widget.artistid.toString()); 
+    log(widget.artistid.toString());
+   final  provider = Provider.of<DpGetProvider>(context,listen: false);
     return Scaffold(
       backgroundColor: scaffoldback,
       appBar: AppBar(
@@ -120,28 +117,29 @@ setState(() {
         ],
       ),
       body: Column(
-        
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,  
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           Expanded(
-            child:
-            widget.msg!.isEmpty?
-            Center(child: normaltext('no chat', Colors.white, 15),):
-             Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15,top: 2,bottom: 2),    
-              child: ListView.builder(
-                controller: scrollController,
-                itemBuilder: (context, index) {
-                  if(widget.msg![index].myself == true){
-                    return sendcard(context, widget.msg![index].message!);
-                  }else{
-                    return replaycard(context,  widget.msg![index].message!);  
-                  } 
-                },    
-              itemCount: widget.msg!.length, 
-              ), 
-            ),
+            child: widget.msg!.isEmpty
+                ? Center(
+                    child: normaltext('no chat', Colors.white, 15),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 2, bottom: 2),
+                    child: ListView.builder(
+                      controller: scrollController,
+                      itemBuilder: (context, index) {
+                        if (widget.msg![index].myself == true) {
+                          return sendcard(context, widget.msg![index].message!);
+                        } else {
+                          return replaycard(
+                          context, widget.msg![index].message!);
+                        }
+                      },
+                      itemCount: widget.msg!.length,
+                    ),
+                  ),
           ),
           TextField(
             controller: mssgcontroller,
@@ -152,7 +150,7 @@ setState(() {
                 contentPadding: const EdgeInsets.all(17),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide.none, 
+                  borderSide: BorderSide.none,
                 ),
                 labelText: 'Type message',
                 floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -164,12 +162,17 @@ setState(() {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: IconButton(
                     onPressed: () {
-                      if(mssgcontroller.text.isEmpty){
-                        return ; 
-                      }else{
+                      if (mssgcontroller.text.isEmpty) {
+                        return;
+                      } else {
                         sendmessage(mssgcontroller.text.trim());
-                        mssgcontroller.clear();  
-                        scrollController.animateTo(scrollController.position.maxScrollExtent, duration:const Duration(seconds: 1), curve: Curves.ease);  
+                        mssgcontroller.clear();
+                        scrollController.animateTo(
+                            scrollController.position.maxScrollExtent,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeOut); 
+                    provider.getdp();
+                    provider.chatlist(); 
                       }
                     },
                     icon: const Icon(
@@ -186,19 +189,21 @@ setState(() {
     );
   }
 
- void sendmessage (String mssg)async{     
- GetMessgRes model = GetMessgRes(message: mssg,myself: true);
-  SendMssg payload = SendMssg(from:widget.userid,to: widget.artistid,message: mssg ); 
+  void sendmessage(String mssg) async {
+    GetMessgRes model = GetMessgRes(message: mssg, myself: true);
+    SendMssg payload = SendMssg(from: widget.userid, to: widget.artistid, message: mssg);
 
- setState(() {
-     widget.msg!.add(model);
- });
+    setState(() {
+      widget.msg!.add(model);
+    });
 
- socket.emit("send-msg",{"to":widget.artistid,"from":widget.userid,"message":mssg});
- log('messaged'); 
+    socket.emit("send-msg",
+        {"to": widget.artistid, "from": widget.userid, "message": mssg});
+  
 
- await SendMessageService().sendmssg(Provider.of<SplashProvider>(context,listen: false).logincheck!, payload); 
-
- }
-
+    await SendMessageService().sendmssg(
+        Provider.of<SplashProvider>(context, listen: false).logincheck!,
+        payload);
+  }
+  
 }

@@ -119,8 +119,10 @@ class SignupScreen extends StatelessWidget {
                           validator: ((value) {
                             if (value!.isEmpty) {
                               return "re-enter your password";
-                            } else {
-                              return null;
+                            } else if(value != provider.passwordController.text){
+                              return "password is not matching";
+                            }else{
+                              return null; 
                             }
                           }),
                           style: const TextStyle(color: Colors.white),

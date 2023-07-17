@@ -18,6 +18,8 @@ class UploadService {
       "upload_preset": 'nefiqdoa'
     });
 
+    
+
     try {
       final response = await dio.post(cloudinaryUrl, data: formData,
           options: Options(validateStatus: ((status) {
@@ -51,6 +53,7 @@ class UploadService {
       'file': await MultipartFile.fromFile(video.path),
       "upload_preset": 'nefiqdoa'
     });
+    
 
     try {
       final response = await dio.post(cloudinaryUrl, data: formData,

@@ -48,7 +48,7 @@ class ToStageScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: height(context, 0.216),
+                      height: height(context, 0.226),
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 23, 23, 23),

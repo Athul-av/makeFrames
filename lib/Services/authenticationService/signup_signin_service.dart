@@ -20,8 +20,7 @@ class AuthApiService {
           data: jsonEncode(model.toJson()),
           queryParameters: ApiQueryParameter.queryParameter);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // log(response.data.toString());
-        final LoginResp loginmodl = LoginResp.fromJson(response.data);
+        final LoginResp loginmodl = LoginResp.fromJson(response.data);  
         return loginmodl;
       }
     } on DioError catch (e) {
@@ -42,7 +41,6 @@ class AuthApiService {
         ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // log(response.data.toString());
         final signupmodl = SignupRes.fromJson(response.data);
         return signupmodl;
       }
@@ -54,16 +52,20 @@ class AuthApiService {
 
 // API SERVICE FOR OTP TO THE EMAIL
   Future<bool?> otpGet(String email) async {
+
     try {
       final Response response =
           await dio.post(Apiconfig.baseUrl + Apiconfig.otp, data: {
         "email": email,
       });
+      
       if (response.statusCode == 200 || response.statusCode == 201) {
+        log(response.data);   
         if (response.data['messaged'] == true) {
           return true;
         } else {
           return false;
+          
         }
       }
     } on DioError catch (e) {
@@ -73,13 +75,12 @@ class AuthApiService {
   }
 
 // CHECKING TOKEN VALID OR NOT API SERVICE
-  Future<LoginCheckResp?> checktoken(String token) async {
+  Future<LoginCheckResp?>checktoken(String token) async {
     try {
       final response = await dio.post(Apiconfig.baseUrl + Apiconfig.loginCheck,
           data: {"token": token});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // log(response.data.toString());
 
         final tokencheck = LoginCheckResp.fromJson(response.data);
         return tokencheck;
@@ -90,3 +91,5 @@ class AuthApiService {
     return null;
   }
 }
+
+

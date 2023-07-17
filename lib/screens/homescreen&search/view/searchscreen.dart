@@ -63,7 +63,7 @@ class SearchScreen extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8))),
                               child: Padding(
-                                padding: const EdgeInsets.all(6.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

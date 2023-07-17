@@ -95,7 +95,7 @@ class ArtistProfileScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              height: height(context, 0.376),
+              height: height(context, 0.390  ),
               child: Column(
                 children: [
                   Consumer<DpGetProvider>(

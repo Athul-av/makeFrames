@@ -1,5 +1,4 @@
 
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,10 +21,10 @@ List<SingleUserDetailsRes> messagepeopledetais=[];
       if(data!.messagedPeople != null){
         messagedpeople = data!.messagedPeople;  
       }
-      log(value!.id.toString());
+   
     },);  
     notifyListeners();
-  }
+  } 
 
 
 
@@ -43,7 +42,6 @@ List<SingleUserDetailsRes> messagepeopledetais=[];
       });
   
     } 
-    log("messaged");  
     notifyListeners(); 
       }
 

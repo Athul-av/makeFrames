@@ -14,7 +14,6 @@ class ArtistCheck {
       Response response = await dio.post(path, data: {"token": token});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // log(response.data.toString());
         final CheckartistRes res = CheckartistRes.fromJson(response.data);
         return res;
       }

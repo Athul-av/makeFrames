@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:makeframes/core/api/apiconfig.dart';
 import 'package:makeframes/screens/homescreen&search/model/alluserpost_res.dart';
 
 class AllPostOfUsers {
   Dio dio = Dio();
-
   Future<List<AllUsersPostsRes>?> getuserpost(String token, String id) async {
     String path = Apiconfig.baseUrl + Apiconfig.userspost;
     final option = Options(headers: {'Authorization':'Bearer $token'}); 
@@ -19,7 +17,7 @@ class AllPostOfUsers {
         final data = json.map((e) => AllUsersPostsRes.fromJson(e)).toList();
         return data;
       } else {
-        return null;
+        return null; 
       }
     } on DioError catch (e) {
       log(e.message);

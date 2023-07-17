@@ -1,3 +1,6 @@
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:makeframes/services/authenticationService/signup_signin_service.dart';
@@ -22,23 +25,26 @@ class SignUpProvdr with ChangeNotifier {
     notifyListeners();
 
     final email = emailController.text.trim();
-    final password = passwordController.text.trim();
-    final repassword = repasswordController.text.trim();
+    // final password = passwordController.text.trim();
+    // final repassword = repasswordController.text.trim();
 
-    await AuthApiService().otpGet(email).then((value) {
-      if (value != null && value == true && password == repassword) {
-        displayTextInputDialog(context);
-      } else if (password != repassword) {
-        CustomSnackBar().snackBar(context, 'password is not match',
-            const Color.fromARGB(255, 171, 42, 33));
-      } else if (value == false) {
-        CustomSnackBar().snackBar(context, 'enter valid email',
-            const Color.fromARGB(255, 160, 45, 37));
-      } else {
-        CustomSnackBar().snackBar(context, 'something went wrong',
-            const Color.fromARGB(255, 160, 45, 37));
-      }
-    });
+    log(email);
+
+    // await AuthApiService().otpGet(email).then((value) {
+    //   log("sdfa"); 
+    //   if (value != null && value == true && password == repassword) {
+    //     displayTextInputDialog(context);
+    //   } else if (value == false) {
+    //     CustomSnackBar().snackBar(context, 'enter valid email',
+    //         const Color.fromARGB(255, 160, 45, 37));
+    //   } else {
+    //     CustomSnackBar().snackBar(context, 'something went wrong',
+    //         const Color.fromARGB(255, 160, 45, 37));
+    //   }
+    // });
+     AuthApiService().otpGet(email);
+     displayTextInputDialog(context);  
+     log("complete"); 
     isLoading = false;
     notifyListeners();
   }

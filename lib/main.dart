@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
@@ -17,10 +18,14 @@ import 'package:makeframes/screens/userprofile/provider/be_artistprovider.dart';
 import 'package:makeframes/screens/userprofile/provider/createshow_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/dpget_provider.dart';
 import 'package:makeframes/screens/userprofile/provider/post_provider.dart';
-import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';
+import 'package:makeframes/screens/userprofile/provider/profile_photo.dart';    
 import 'package:provider/provider.dart';
 
-void main() {
+
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized(); 
+
+  
   runApp(const MyApp());
 }
 
@@ -35,10 +40,10 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ((context) => SplashProvider())),
-        ChangeNotifierProvider(create: ((context) => SignUpProvdr())),
-        ChangeNotifierProvider(create: ((context) => LoginProvider())),
-        ChangeNotifierProvider(create: ((context) => BottomNavProvider())),
+        ChangeNotifierProvider(create: ((context)=> SplashProvider())),
+        ChangeNotifierProvider(create: ((context)=> SignUpProvdr())),
+        ChangeNotifierProvider(create: ((context)=> LoginProvider())),
+        ChangeNotifierProvider(create: ((context)=> BottomNavProvider())),
         ChangeNotifierProvider(create: (context) => BeArtistProvider()),
         ChangeNotifierProvider(create: (context) => ProfilePicProvidr()),
         ChangeNotifierProvider(create: (context) => PostProvidr()),

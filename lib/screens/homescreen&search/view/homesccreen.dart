@@ -11,8 +11,14 @@ import 'package:makeframes/screens/userprofile/view/artist_profile.dart';
 import 'package:makeframes/screens/userprofile/view/normal_user.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 caroselitems2(
                     'assets/images/86b381580415673fd91936784a9cfd00.jpg',
                     context),
-                caroselitems('assets/images/producer.jpg', context)
+                caroselitems('assets/images/producer.jpg', context) 
               ],
               options: CarouselOptions(
                 height: 250.0,

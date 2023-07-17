@@ -29,6 +29,7 @@ Widget caroselitems(String image, context) {
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const ProducerScreen()));
+                 
                 },
                 child: Padding(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 10),
@@ -37,7 +38,7 @@ Widget caroselitems(String image, context) {
   ]);
 }
 
-Widget caroselitems2(String image, context) {
+Widget caroselitems2(String image, context) { 
   return Stack(children: [
     Container(
       width: double.infinity,
@@ -60,9 +61,10 @@ Widget caroselitems2(String image, context) {
                     backgroundColor: MaterialStateProperty.all(color1()),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)))),
-                onPressed: () {
+                onPressed: () async{
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => const StageshowList()));
+                    // FirebaseCrashlytics.instance.crash(); 
                 },
                 child: Padding(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 10),

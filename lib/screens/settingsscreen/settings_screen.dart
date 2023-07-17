@@ -4,6 +4,7 @@ import 'package:makeframes/core/const.dart';
 import 'package:makeframes/screens/bottomnav/provider/bottomnav_provdr.dart';
 import 'package:makeframes/screens/homescreen&search/provider/alluser_provider.dart';
 import 'package:makeframes/screens/settingsscreen/aboutus_screen.dart';
+import 'package:makeframes/screens/settingsscreen/shareapp.dart';
 import 'package:makeframes/screens/settingsscreen/signoutdialog.dart';
 import 'package:makeframes/screens/settingsscreen/privacypolicy_screen.dart';
 import 'package:makeframes/screens/splash/view/splash.dart';
@@ -85,7 +86,9 @@ class SettingsScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              shareAppFile(context);
+                            },
                             child: normaltext("Share App", Colors.white, 15)),
                       ],
                     ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makeframes/core/const.dart';
@@ -29,7 +28,7 @@ class MessageListScreen extends StatelessWidget {
         builder: (context, value, child) {
            
           if(value.messagepeopledetais.isEmpty){
-            return Center(child: boldtext("no chats", Colors.white, 15));
+            return Center(child: boldtext("No chats", Colors.white, 15));
           }else{
             return ListView.builder(itemBuilder: (context, index) {
               return Padding(
@@ -59,7 +58,7 @@ class MessageListScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             boldtext(value.messagepeopledetais[index].firstName!, Colors.white, 18),
-                            normaltext(value.messagepeopledetais[index].domain!, Color.fromARGB(255, 151, 151, 151), 9)
+                            normaltext(value.messagepeopledetais[index].domain!,const Color.fromARGB(255, 151, 151, 151), 9)
                           ],
                         ),
                         trailing:const Icon(Icons.message, color: Colors.white,),

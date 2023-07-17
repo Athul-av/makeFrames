@@ -178,7 +178,9 @@ class LoginScreen extends StatelessWidget {
                                         AssetImage('assets/images/google.png')),
                               ),
                               normaltext(
-                                  'Sign In with Google', Colors.black, 15)
+                                  'Sign In with Google', Colors.black, 15),
+                                  normaltext(
+                                  '   (soon)', Colors.black, 10)
                             ],
                           )),
                       Align(

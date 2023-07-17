@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1028064849889",
+    "project_id": "makeframes-23",
+    "storage_bucket": "makeframes-23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028064849889:android:190868effdaff8781daca0",
+        "android_client_info": {
+          "package_name": "in.app.makeframes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028064849889-hqt883sd2u60ekik9tf4h632p4j634ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc2QkUUYvyX6ry1EN2lnJu92spbZ8Z5Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028064849889-hqt883sd2u60ekik9tf4h632p4j634ks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028064849889-jiotpq9bus245sk2m1ocrk8n80rs8rgk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.makeframes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

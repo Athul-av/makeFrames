@@ -83,7 +83,7 @@ class BookStageProvider with ChangeNotifier {
     await BookStageShowService().bookshow(model).then((value) {
       if (value == true) {
         CustomSnackBar().snackBar(context, 'successfully booked', color1());
-        log('suceess');
+        
         Navigator.of(context).pop();
         disposeallfield();
         Provider.of<UserBookingListProvider>(context, listen: false)

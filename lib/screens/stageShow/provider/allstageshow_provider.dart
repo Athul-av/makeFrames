@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,7 +21,7 @@ class AllStageShowProvider with ChangeNotifier {
       alldata = value;
       notifyListeners();
     });
-    log(data!.length.toString());
+   
   }
 
 //all show search

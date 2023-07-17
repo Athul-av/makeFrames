@@ -10,7 +10,6 @@ class AllPostProvider with ChangeNotifier {
 //function for getting the posts in artist profile which the artist posted
   Future<void> getallpost() async {
     String? token = await storage.read(key: 'token');
-    // log(token.toString());
     data = await AllPostService().getallpost(token!);
     notifyListeners();
   }
