@@ -34,7 +34,6 @@ Provider.of<HypeProvider>(context,listen: false).updatehype(userdetails.id!);
         ),
         body: Column(
           children: [
-          
           Container(
             decoration: const BoxDecoration(
               color: Colors.black,
